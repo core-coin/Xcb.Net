@@ -14,8 +14,12 @@ namespace Xcb.Net.Signer
         byte[] _privateKeyBytes = null;
         byte[] _publicKeyBytes = null;
 
+        byte[] _addressBytes = null;
+
         string _privateKeyHex = null;
         string _publicKeyHex = null;
+
+        string _addressHex = null;
 
         public XcbECKey(string privateKey) : this(privateKey.HexToByteArray())
         { }
@@ -45,6 +49,18 @@ namespace Xcb.Net.Signer
             return _publicKeyHex ?? (_publicKeyHex = GetPublicKeyBytes().ToHex());
         }
 
+        // private byte[] GetAddressBytes()
+        // {
+        //     var pubBytes = GetPublicKeyBytes();
+
+        // }
+
+        private byte[] Sha3Hash(byte[] input){
+            var sha3 = SHA3.Net.Sha3.Sha3256();
+            var result = sha3.ComputeHash(input);
+            return result;
+        }
+
         public static XcbECKey GenerateKey(byte[] seed = null)
         {
             var secureRandom = _secureRandom;
@@ -62,8 +78,5 @@ namespace Xcb.Net.Signer
 
             return new XcbECKey(privateBytes);
         }
-
-
-
     }
 }
