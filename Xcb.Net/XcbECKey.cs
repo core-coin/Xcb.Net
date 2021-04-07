@@ -67,7 +67,7 @@ namespace Xcb.Net.Signer
                 return _addressBytes;
 
             var pubBytes = GetPublicKeyBytes();
-            var pubHash = Sha3Hash(pubBytes);
+            var pubHash = Util.Sha3NIST.Current.CalculateHash(pubBytes);
             var addressBytes = new byte[pubHash.Length - 12];
             Array.Copy(pubHash, 12, addressBytes, 0, addressBytes.Length);
             var chsum = CaclulateChecksum(addressBytes, _networkId);
@@ -107,14 +107,7 @@ namespace Xcb.Net.Signer
         /// <returns></returns>
         public byte[] SignHashOfMessage(byte[] message)
         {
-            return SignMessage(Sha3Hash(message));
-        }
-
-        private byte[] Sha3Hash(byte[] input)
-        {
-            var sha3 = SHA3.Net.Sha3.Sha3256();
-            var result = sha3.ComputeHash(input);
-            return result;
+            return SignMessage(Util.Sha3NIST.Current.CalculateHash(message));
         }
 
         //same as common/types.go:CalculateChecksum in go-core
