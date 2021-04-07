@@ -36,6 +36,8 @@ namespace Xcb.Net.Signer
 
         public XcbECKey(byte[] privateKey, byte[] networkId)
         {
+            if(privateKey.Length!=57)
+                throw new InvalidKeyException("key length must be 57 bytes");
             _privateKey = new Ed448PrivateKeyParameters(privateKey, 0);
             _networkId = networkId;
         }
@@ -147,7 +149,7 @@ namespace Xcb.Net.Signer
 
         public static XcbECKey GenerateKey(string networkId = "cb", byte[] seed = null)
         {
-            return GenerateKey(networkId, seed);
+            return GenerateKey(networkId.HexToByteArray(), seed);
         }
 
         public static XcbECKey GenerateKey(byte[] networkId, byte[] seed = null)

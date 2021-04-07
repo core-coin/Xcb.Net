@@ -40,7 +40,7 @@ namespace Xcb.Net.Test
         [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3s0e")] //invalid character s
         public void Constructor_WithInvalidKeys(string privateKey)
         {
-            Assert.Throws<Exception>(() => new XcbECKey(privateKey));
+            Assert.ThrowsAny<Exception>(() => new XcbECKey(privateKey));
         }
 
         [Theory]
