@@ -45,7 +45,7 @@ namespace Xcb.Net.Signer
             return _publicKeyHex ?? (_publicKeyHex = GetPublicKeyBytes().ToHex());
         }
 
-        public static XcbECKey GenerateKey(byte[] seed)
+        public static XcbECKey GenerateKey(byte[] seed = null)
         {
             var secureRandom = _secureRandom;
             if (seed != null)
