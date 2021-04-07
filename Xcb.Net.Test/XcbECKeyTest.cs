@@ -50,5 +50,16 @@ namespace Xcb.Net.Test
             var key = new XcbECKey(privateKey);
             Assert.Equal(expectedAddress, key.GetAddressHex());
         }
+
+        [Theory]
+        [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", "666f6f",
+            "9db1a4fd159ec8449cc970e3c1e1848445997fb988f0c3aa1edf91ddb84dd873eb8c43bf052e0a56b49911d9981892811a9e28f02fd7472680388dd2f617f46c67501aea757c5fca981b749f4c6f08b2d480f66c44eaf1df9c7d02b934d45e31ffa8a6c07a54773f5dc1c0e2975b98792200315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
+        public void SignHashOfMessageTest(string privateKey, string message, string expectedSignature)
+        {
+            var key = new XcbECKey(privateKey);
+            var expectedBytes = expectedSignature.HexToByteArray();
+            var signatureBytes = key.SignHashOfMessage(message.HexToByteArray());
+            Assert.Equal(expectedBytes,signatureBytes);
+        }
     }
 }

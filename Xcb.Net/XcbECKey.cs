@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 using Org.BouncyCastle.Crypto.Generators;
@@ -14,6 +15,8 @@ namespace Xcb.Net.Signer
     {
         private static readonly SecureRandom _secureRandom = new SecureRandom();
         private static readonly byte[] _defaultNetworkId = new byte[] { 203 };
+
+        private static readonly byte[] _emptyBytes = new byte[] { };
         Ed448PrivateKeyParameters _privateKey;
 
         byte[] _privateKeyBytes = null;
@@ -81,6 +84,30 @@ namespace Xcb.Net.Signer
         public string GetAddressHex()
         {
             return _addressHex ?? (_addressHex = GetAddressBytes().ToHex());
+        }
+
+        /// <summary>
+        /// Sign the message directly, give the message bytes to the sign algorithm
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public byte[] SignMessage(byte[] message)
+        {
+            byte[] sign = new byte[Ed448.SignatureSize];
+            _privateKey.Sign(Ed448.Algorithm.Ed448, _emptyBytes, message, 0, message.Length, sign, 0);
+            var result = sign.ToList();
+            result.AddRange(GetPublicKeyBytes());
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// sign hash of the message, first calculate the hash of message, then sign the calculcated hash
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public byte[] SignHashOfMessage(byte[] message)
+        {
+            return SignMessage(Sha3Hash(message));
         }
 
         private byte[] Sha3Hash(byte[] input)
