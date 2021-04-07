@@ -1,6 +1,7 @@
 using System;
 using Xcb.Net.Signer;
 using Xunit;
+using Xcb.Net.Extensions;
 
 namespace Xcb.Net.Test
 {
@@ -40,6 +41,14 @@ namespace Xcb.Net.Test
         public void Constructor_WithInvalidKeys(string privateKey)
         {
             Assert.Throws<Exception>(() => new XcbECKey(privateKey));
+        }
+
+        [Theory]
+        [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", "cb82a5fd22b9bee8b8ab877c86e0a2c21765e1d5bfc5")]
+        public void AddressGeneration(string privateKey, string expectedAddress)
+        {
+            var key = new XcbECKey(privateKey);
+            Assert.Equal(expectedAddress, key.GetAddressHex());
         }
     }
 }
