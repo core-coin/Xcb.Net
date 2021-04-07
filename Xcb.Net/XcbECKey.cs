@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Text;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math.EC.Rfc8032;
@@ -9,6 +13,7 @@ namespace Xcb.Net.Signer
     public class XcbECKey
     {
         private static readonly SecureRandom _secureRandom = new SecureRandom();
+        private static readonly byte[] _defaultNetworkId = new byte[] { 203 };
         Ed448PrivateKeyParameters _privateKey;
 
         byte[] _privateKeyBytes = null;
@@ -21,12 +26,15 @@ namespace Xcb.Net.Signer
 
         string _addressHex = null;
 
-        public XcbECKey(string privateKey) : this(privateKey.HexToByteArray())
+        byte[] _networkId;
+
+        public XcbECKey(string privateKey, string networkId = "cb") : this(privateKey.HexToByteArray(), networkId.HexToByteArray())
         { }
 
-        public XcbECKey(byte[] privateKey)
+        public XcbECKey(byte[] privateKey, byte[] networkId)
         {
             _privateKey = new Ed448PrivateKeyParameters(privateKey, 0);
+            _networkId = networkId;
         }
 
         public byte[] GetPrivateKeyBytes()
@@ -49,19 +57,80 @@ namespace Xcb.Net.Signer
             return _publicKeyHex ?? (_publicKeyHex = GetPublicKeyBytes().ToHex());
         }
 
-        // private byte[] GetAddressBytes()
-        // {
-        //     var pubBytes = GetPublicKeyBytes();
+        //same as common/types.go:PubkeyToAddress in go-core
+        public byte[] GetAddressBytes()
+        {
+            if (_addressBytes != null)
+                return _addressBytes;
 
-        // }
+            var pubBytes = GetPublicKeyBytes();
+            var pubHash = Sha3Hash(pubBytes);
+            var addressBytes = new byte[pubHash.Length - 12];
+            Array.Copy(pubHash, 12, addressBytes, 0, addressBytes.Length);
+            var chsum = CaclulateChecksum(addressBytes, _networkId);
+            var chsumBytes = chsum.HexToByteArray();
 
-        private byte[] Sha3Hash(byte[] input){
+            var fullAddress = new List<byte>(_networkId.Length + chsumBytes.Length + addressBytes.Length);
+            fullAddress.AddRange(_networkId);
+            fullAddress.AddRange(chsumBytes);
+            fullAddress.AddRange(addressBytes);
+
+            return (_addressBytes = fullAddress.ToArray());
+        }
+
+        public string GetAddressHex()
+        {
+            return _addressHex ?? (_addressHex = GetAddressBytes().ToHex());
+        }
+
+        private byte[] Sha3Hash(byte[] input)
+        {
             var sha3 = SHA3.Net.Sha3.Sha3256();
             var result = sha3.ComputeHash(input);
             return result;
         }
 
-        public static XcbECKey GenerateKey(byte[] seed = null)
+        //same as common/types.go:CalculateChecksum in go-core
+        private string CaclulateChecksum(byte[] address, byte[] prefix)
+        {
+            var concated = new List<byte>(address.Length + prefix.Length);
+            concated.AddRange(address);
+            concated.AddRange(prefix);
+
+            var addrString = concated.ToArray().ToHex().ToUpper() + "00";
+            StringBuilder mods = new StringBuilder(concated.Count);
+
+            foreach (int c in addrString)
+            {
+                if (c > 64 && c < 91)
+                    mods.Append((c - 55).ToString());
+                else
+                    mods.Append((c - 48).ToString());
+            }
+
+
+            BigInteger bigVal = BigInteger.Parse(mods.ToString());
+
+            BigInteger val97 = new BigInteger(97);
+            BigInteger val98 = new BigInteger(98);
+
+            BigInteger remainder = bigVal % val97;
+            BigInteger checksum = val98 - remainder;
+
+            var resInt = (int)checksum;
+
+            if (resInt < 10)
+                return "0" + resInt.ToString();
+
+            return resInt.ToString();
+        }
+
+        public static XcbECKey GenerateKey(string networkId = "cb", byte[] seed = null)
+        {
+            return GenerateKey(networkId, seed);
+        }
+
+        public static XcbECKey GenerateKey(byte[] networkId, byte[] seed = null)
         {
             var secureRandom = _secureRandom;
             if (seed != null)
@@ -76,7 +145,7 @@ namespace Xcb.Net.Signer
             var keyPair = gen.GenerateKeyPair();
             var privateBytes = ((Ed448PrivateKeyParameters)keyPair.Private).GetEncoded();
 
-            return new XcbECKey(privateBytes);
+            return new XcbECKey(privateBytes, networkId);
         }
     }
 }
