@@ -46,7 +46,7 @@ namespace Xcb.Net.Signer
         {
         }
 
-        private byte[] GetEncodedRaw()
+        public byte[] GetEncodedRaw()
         {
             var rlpRawWitNoSignature = RLP.RLP.EncodeElementsAndList(Data);
             return rlpRawWitNoSignature;
