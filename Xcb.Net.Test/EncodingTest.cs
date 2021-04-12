@@ -8,6 +8,15 @@ namespace Xcb.Net.Test
 {
     public class EncodingTest
     {
+        object[] emptyTransactionData;
+
+        public EncodingTest()
+        {
+            emptyTransactionData = new object[]{
+
+            };
+        }
+
         [Fact]
         public void SimpleData()
         {
@@ -54,5 +63,22 @@ namespace Xcb.Net.Test
             //Then
             Assert.Equal(expectedHex, RplEncodedHex);
         }
+
+        [Theory]
+        [InlineData("cb08095e7baea6a6c7c4c2dfeb977efac326af552d87", "0xd796cb08095e7baea6a6c7c4c2dfeb977efac326af552d87")]
+        public void AddressRlpTest(string address, string expectedHex)
+        {
+            //Given
+            byte[] addressBytes = address.HexToByteArray();
+
+            //When
+            byte[] RlpEncoded = RLP.RLP.EncodeElementsAndList(addressBytes);
+
+            string RplEncodedHex = RlpEncoded.ToHex(prefix: true);
+
+            //Then
+            Assert.Equal(expectedHex, RplEncodedHex);
+        }
+
     }
 }
