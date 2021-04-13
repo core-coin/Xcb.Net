@@ -10,11 +10,11 @@ namespace Xcb.Net.Signer
     public class Transaction
     {
 
-        public const int NUMBER_ENCODING_ELEMENTS = 6;
+        public const int NUMBER_ENCODING_ELEMENTS = 7;
         public static readonly BigInteger DEFAULT_ENERGY_PRICE = BigInteger.Parse("20000000000");
         public static readonly BigInteger DEFAULT_ENERGY_LIMIT = BigInteger.Parse("21000");
 
-        public byte[] AccountNone { get; set; }
+        public byte[] AccountNonce { get; set; }
 
         public byte[] EnergyPrice { get; set; }
 
@@ -67,6 +67,50 @@ namespace Xcb.Net.Signer
             energyLimit.ToBytesForRLPEncoding(), to.HexToByteArray(), amount.ToBytesForRLPEncoding(), data.HexToByteArray(), chainId.ToBytesForRLPEncoding()
         )
         {
+        }
+
+        private byte[] GetRawEncoding()
+        {
+            byte[] encoding = RLP.RLP.EncodeElementsAndList(
+                this.AccountNonce,
+                this.EnergyPrice,
+                this.EnergyLimit,
+                this.RecipientAddress,
+                this.Amount,
+                this.Payload,
+                this.ChainId
+                );
+
+            return encoding;
+        }
+
+        public byte[] GetRlpEncoding()
+        {
+            byte[] encoding = RLP.RLP.EncodeElementsAndList(
+                this.AccountNonce,
+                this.EnergyPrice,
+                this.EnergyLimit,
+                this.RecipientAddress,
+                this.Amount,
+                this.Payload,
+                this.ChainId,
+                this.Signature
+                );
+
+            return encoding;
+        }
+
+        public byte[] GetTxHash()
+        {
+            byte[] hash = Util.Sha3NIST.Current.CalculateHash(GetRawEncoding());
+            return hash;
+        }
+
+        public void Sign(XcbECKey key)
+        {
+            byte[] hash = GetTxHash();
+
+            this.Signature = key.SignMessage(hash);
         }
 
     }
