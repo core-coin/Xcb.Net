@@ -13,29 +13,30 @@ namespace Xcb.Net.Test
         public EncodingTest()
         {
             emptyTransactionData = new byte[][]{
-                BigInteger.Zero.ToBytesForRLPEncoding(), 
-                BigInteger.Zero.ToBytesForRLPEncoding(), 
-                BigInteger.Zero.ToBytesForRLPEncoding(), 
-                BigInteger.Zero.ToBytesForRLPEncoding(), 
+                BigInteger.Zero.ToBytesForRLPEncoding(),
+                BigInteger.Zero.ToBytesForRLPEncoding(),
+                BigInteger.Zero.ToBytesForRLPEncoding(),
                 "cb08095e7baea6a6c7c4c2dfeb977efac326af552d87".HexToByteArray(),
                 BigInteger.Zero.ToBytesForRLPEncoding(),
                 "".ToBytesForRLPEncoding(),
-                "".ToBytesForRLPEncoding()
+                BigInteger.Zero.ToBytesForRLPEncoding(),
             };
         }
 
+
         [Fact]
-        public void EmptyTrasnactionDataEncodingTest()
+        public void EmptyTrasnactionSigHashTest()
         {
-            //Given            
+            //Given
             var data = emptyTransactionData;
 
             //When
             byte[] encoded = RLP.RLP.EncodeElementsAndList(data);
-            string encodedHex = encoded.ToHex(prefix: true);
+            byte[] hash = Xcb.Net.Util.Sha3NIST.Current.CalculateHash(encoded);
+            string hashHex = hash.ToHex(prefix: true);
 
             //Then
-            Assert.Equal("0xde8080808096cb08095e7baea6a6c7c4c2dfeb977efac326af552d87808080", encodedHex);
+            Assert.Equal("0x0064d7a2aa08686b4f36a2188352ba162ff2b5bdce72335f4a0e25a6c5f47af7", hashHex);
         }
 
         [Theory]

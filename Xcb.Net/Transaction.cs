@@ -13,15 +13,28 @@ namespace Xcb.Net.Signer
         public const int NUMBER_ENCODING_ELEMENTS = 6;
         public static readonly BigInteger DEFAULT_ENERGY_PRICE = BigInteger.Parse("20000000000");
         public static readonly BigInteger DEFAULT_ENERGY_LIMIT = BigInteger.Parse("21000");
-        public byte[][] Data { get; private set; }
+
+        public byte[] AccountNone { get; set; }
+
+        public byte[] EnergyPrice { get; set; }
+
+        public byte[] EnergyLimit { get; set; }
+
+        public byte[] RecipientAddress { get; set; }
+
+        public byte[] Amount { get; set; }
+
+        public byte[] Payload { get; set; }
+
+        public byte[] ChainId { get; set; }
 
         public byte[] Signature { get; private set; }
 
 
         public Transaction(byte[] nonce, byte[] energyPrice, byte[] energyLimit, byte[] receiveAddress, byte[] value,
-            byte[] data)
+            byte[] data, byte[] chainId)
         {
-            Data = GetElementsInOrder(nonce, energyPrice, energyLimit, receiveAddress, value, data);
+
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce)
@@ -30,50 +43,31 @@ namespace Xcb.Net.Signer
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce, string data)
-            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, data)
+            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, data, BigInteger.Zero)
+        {
+        }
+
+        public Transaction(string to, BigInteger amount, BigInteger nonce, string data, BigInteger chainId)
+            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, data, chainId)
+        {
+        }
+
+        public Transaction(string to, BigInteger amount, BigInteger nonce, BigInteger chainId)
+            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, "", chainId)
         {
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce, BigInteger energyPrice, BigInteger energyLimit)
-            : this(to, amount, nonce, energyPrice, energyLimit, "")
+            : this(to, amount, nonce, energyPrice, energyLimit, "", BigInteger.Zero)
         {
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce, BigInteger energyPrice,
-            BigInteger energyLimit, string data) : this(nonce.ToBytesForRLPEncoding(), energyPrice.ToBytesForRLPEncoding(),
-            energyLimit.ToBytesForRLPEncoding(), to.HexToByteArray(), amount.ToBytesForRLPEncoding(), data.HexToByteArray()
+            BigInteger energyLimit, string data, BigInteger chainId) : this(nonce.ToBytesForRLPEncoding(), energyPrice.ToBytesForRLPEncoding(),
+            energyLimit.ToBytesForRLPEncoding(), to.HexToByteArray(), amount.ToBytesForRLPEncoding(), data.HexToByteArray(), chainId.ToBytesForRLPEncoding()
         )
         {
         }
 
-        public byte[] GetEncodedRaw()
-        {
-            var rlpRawWitNoSignature = RLP.RLP.EncodeElementsAndList(Data);
-            return rlpRawWitNoSignature;
-        }
-
-        private byte[][] GetElementsInOrder(byte[] nonce, byte[] energyPrice, byte[] energyLimit, byte[] receiveAddress,
-            byte[] value,
-            byte[] data)
-        {
-            if (receiveAddress == null)
-                receiveAddress = DefaultValues.EMPTY_BYTE_ARRAY;
-            //order  nonce, energyPrice, energyLimit, receiveAddress, value, data
-            return new[] { nonce, energyPrice, energyLimit, receiveAddress, value, data };
-        }
-
-        public byte[] RawHash
-        {
-            get
-            {
-                var plainMsg = GetEncodedRaw();
-                return Util.Sha3NIST.Current.CalculateHash(plainMsg);
-            }
-        }
-
-        public void Sign(XcbECKey key)
-        {
-            Signature = key.SignMessage(RawHash);
-        }
     }
 }
