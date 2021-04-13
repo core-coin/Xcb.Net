@@ -8,27 +8,34 @@ namespace Xcb.Net.Test
 {
     public class EncodingTest
     {
-        object[] emptyTransactionData;
+        byte[][] emptyTransactionData;
 
         public EncodingTest()
         {
-            emptyTransactionData = new object[]{
-
+            emptyTransactionData = new byte[][]{
+                BigInteger.Zero.ToBytesForRLPEncoding(), 
+                BigInteger.Zero.ToBytesForRLPEncoding(), 
+                BigInteger.Zero.ToBytesForRLPEncoding(), 
+                BigInteger.Zero.ToBytesForRLPEncoding(), 
+                "cb08095e7baea6a6c7c4c2dfeb977efac326af552d87".HexToByteArray(),
+                BigInteger.Zero.ToBytesForRLPEncoding(),
+                "".ToBytesForRLPEncoding(),
+                "".ToBytesForRLPEncoding()
             };
         }
 
         [Fact]
-        public void SimpleData()
+        public void EmptyTrasnactionDataEncodingTest()
         {
-            //Given
-            var helloBytes = Encoding.UTF8.GetBytes("hello");
-            var data = new byte[][] { helloBytes };
+            //Given            
+            var data = emptyTransactionData;
 
             //When
-            var encoded = RLP.RLP.EncodeElement(helloBytes);
-            var encodedHex = encoded.ToHex();
-            System.Console.WriteLine(encodedHex);
+            byte[] encoded = RLP.RLP.EncodeElementsAndList(data);
+            string encodedHex = encoded.ToHex(prefix: true);
+
             //Then
+            Assert.Equal("0xde8080808096cb08095e7baea6a6c7c4c2dfeb977efac326af552d87808080", encodedHex);
         }
 
         [Theory]
