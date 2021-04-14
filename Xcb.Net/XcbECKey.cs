@@ -29,17 +29,17 @@ namespace Xcb.Net.Signer
 
         string _addressHex = null;
 
-        byte[] _networkId;
+        public int NetworkId { get; }
 
-        public XcbECKey(string privateKey, string networkId = "cb") : this(privateKey.HexToByteArray(), networkId.HexToByteArray())
+        public XcbECKey(string privateKey, int networkId = 1) : this(privateKey.HexToByteArray(), networkId)
         { }
 
-        public XcbECKey(byte[] privateKey, byte[] networkId)
+        public XcbECKey(byte[] privateKey, int networkId)
         {
-            if(privateKey.Length!=57)
+            if (privateKey.Length != 57)
                 throw new InvalidKeyException("key length must be 57 bytes");
             _privateKey = new Ed448PrivateKeyParameters(privateKey, 0);
-            _networkId = networkId;
+            NetworkId = networkId;
         }
 
         public byte[] GetPrivateKeyBytes()
@@ -71,12 +71,14 @@ namespace Xcb.Net.Signer
             var pubBytes = GetPublicKeyBytes();
             var pubHash = Util.Sha3NIST.Current.CalculateHash(pubBytes);
             var addressBytes = new byte[pubHash.Length - 12];
+            var networkIdBytes = GetNeworkIdPrefix().HexToByteArray();
+
             Array.Copy(pubHash, 12, addressBytes, 0, addressBytes.Length);
-            var chsum = CaclulateChecksum(addressBytes, _networkId);
+            var chsum = CaclulateChecksum(addressBytes, networkIdBytes);
             var chsumBytes = chsum.HexToByteArray();
 
-            var fullAddress = new List<byte>(_networkId.Length + chsumBytes.Length + addressBytes.Length);
-            fullAddress.AddRange(_networkId);
+            var fullAddress = new List<byte>(networkIdBytes.Length + chsumBytes.Length + addressBytes.Length);
+            fullAddress.AddRange(networkIdBytes);
             fullAddress.AddRange(chsumBytes);
             fullAddress.AddRange(addressBytes);
 
@@ -147,12 +149,7 @@ namespace Xcb.Net.Signer
             return resInt.ToString();
         }
 
-        public static XcbECKey GenerateKey(string networkId = "cb", byte[] seed = null)
-        {
-            return GenerateKey(networkId.HexToByteArray(), seed);
-        }
-
-        public static XcbECKey GenerateKey(byte[] networkId, byte[] seed = null)
+        public static XcbECKey GenerateKey(int networkId = 1, byte[] seed = null)
         {
             var secureRandom = _secureRandom;
             if (seed != null)
@@ -168,6 +165,19 @@ namespace Xcb.Net.Signer
             var privateBytes = ((Ed448PrivateKeyParameters)keyPair.Private).GetEncoded();
 
             return new XcbECKey(privateBytes, networkId);
+        }
+
+        public string GetNeworkIdPrefix()
+        {
+            if (NetworkId == 1)
+                return "cb";
+            else if (NetworkId == 3 || NetworkId == 4)
+                return "ab";
+            else if (NetworkId > 10)
+                return "ce";
+
+            else
+                throw new InvalidOperationException($"network id {NetworkId} is undefined");
         }
     }
 }

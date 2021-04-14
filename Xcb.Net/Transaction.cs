@@ -26,13 +26,13 @@ namespace Xcb.Net.Signer
 
         public byte[] Payload { get; set; }
 
-        public byte[] ChainId { get; set; }
+        public byte[] NetworkId { get; private set; }
 
         public byte[] Signature { get; private set; }
 
 
         public Transaction(byte[] nonce, byte[] energyPrice, byte[] energyLimit, byte[] receiveAddress, byte[] value,
-            byte[] data, byte[] chainId)
+            byte[] data)
         {
             this.AccountNonce = nonce ?? DefaultValues.EMPTY_BYTE_ARRAY;
             this.EnergyPrice = energyPrice ?? DefaultValues.EMPTY_BYTE_ARRAY;
@@ -40,7 +40,6 @@ namespace Xcb.Net.Signer
             this.RecipientAddress = receiveAddress ?? DefaultValues.EMPTY_BYTE_ARRAY;
             this.Amount = value ?? DefaultValues.EMPTY_BYTE_ARRAY;
             this.Payload = data ?? DefaultValues.EMPTY_BYTE_ARRAY;
-            this.ChainId = chainId ?? DefaultValues.EMPTY_BYTE_ARRAY;
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce)
@@ -49,28 +48,18 @@ namespace Xcb.Net.Signer
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce, string data)
-            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, data, BigInteger.One)
-        {
-        }
-
-        public Transaction(string to, BigInteger amount, BigInteger nonce, string data, BigInteger chainId)
-            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, data, chainId)
-        {
-        }
-
-        public Transaction(string to, BigInteger amount, BigInteger nonce, BigInteger chainId)
-            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, "", chainId)
+            : this(to, amount, nonce, DEFAULT_ENERGY_PRICE, DEFAULT_ENERGY_LIMIT, data)
         {
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce, BigInteger energyPrice, BigInteger energyLimit)
-            : this(to, amount, nonce, energyPrice, energyLimit, "", BigInteger.One)
+            : this(to, amount, nonce, energyPrice, energyLimit, "")
         {
         }
 
         public Transaction(string to, BigInteger amount, BigInteger nonce, BigInteger energyPrice,
-            BigInteger energyLimit, string data, BigInteger chainId) : this(nonce.ToBytesForRLPEncoding(), energyPrice.ToBytesForRLPEncoding(),
-            energyLimit.ToBytesForRLPEncoding(), to.HexToByteArray(), amount.ToBytesForRLPEncoding(), data.HexToByteArray(), chainId.ToBytesForRLPEncoding()
+            BigInteger energyLimit, string data) : this(nonce.ToBytesForRLPEncoding(), energyPrice.ToBytesForRLPEncoding(),
+            energyLimit.ToBytesForRLPEncoding(), to.HexToByteArray(), amount.ToBytesForRLPEncoding(), data.HexToByteArray()
         )
         {
         }
@@ -84,7 +73,7 @@ namespace Xcb.Net.Signer
                 this.RecipientAddress,
                 this.Amount,
                 this.Payload,
-                this.ChainId
+                this.NetworkId
                 );
 
             return encoding;
@@ -96,7 +85,7 @@ namespace Xcb.Net.Signer
                 this.AccountNonce,
                 this.EnergyPrice,
                 this.EnergyLimit,
-                this.ChainId,
+                this.NetworkId,
                 this.RecipientAddress,
                 this.Amount,
                 this.Payload,
@@ -116,6 +105,7 @@ namespace Xcb.Net.Signer
         {
             byte[] hash = GetTxHash();
 
+            this.NetworkId = new BigInteger(key.NetworkId).ToBytesForRLPEncoding();
             this.Signature = key.SignMessage(hash);
         }
 
@@ -127,7 +117,7 @@ namespace Xcb.Net.Signer
             var AccountNonce = decodedList[0].RLPData;
             var EnergyPrice = decodedList[1].RLPData;
             var EnergyLimit = decodedList[2].RLPData;
-            var ChainId = decodedList[3].RLPData;
+            var networkId = decodedList[3].RLPData;
             var RecipientAddress = decodedList[4].RLPData;
             var Amount = decodedList[5].RLPData;
             var Payload = decodedList[6].RLPData;
@@ -139,11 +129,11 @@ namespace Xcb.Net.Signer
                 energyLimit: EnergyLimit,
                 receiveAddress: RecipientAddress,
                 value: Amount,
-                data: Payload,
-                chainId: ChainId
+                data: Payload
             );
 
             transaction.Signature = Signature;
+            transaction.NetworkId = networkId;
 
             return transaction;
         }
