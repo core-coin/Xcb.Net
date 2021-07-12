@@ -49,10 +49,9 @@ namespace Xcb.Net.RLP
         /// </summary>
         private const int SIZE_THRESHOLD = 56;
 
-        /* RLP encoding rules are defined as follows:
-		 * For a single byte whose value is in the [0x00, 0x7f] range, that byte is
-		 * its own RLP encoding.
-		 */
+        // RLP encoding rules are defined as follows:
+        // For a single byte whose value is in the [0x00, 0x7f] range, that byte is
+        // its own RLP encoding.
 
         /// <summary>
         ///     [0x80]
@@ -94,7 +93,7 @@ namespace Xcb.Net.RLP
         private const byte OFFSET_LONG_LIST = 0xf7;
 
         public static readonly byte[] EMPTY_BYTE_ARRAY = new byte[0];
-        public static readonly byte[] ZERO_BYTE_ARRAY = {0};
+        public static readonly byte[] ZERO_BYTE_ARRAY = { 0 };
 
         public static int ByteArrayToInt(byte[] bytes)
         {
@@ -215,7 +214,7 @@ namespace Xcb.Net.RLP
 
         private static int ProcessSingleByteItem(byte[] msgData, RLPCollection rlpCollection, int currentPosition)
         {
-            byte[] item = {msgData[currentPosition]};
+            byte[] item = { msgData[currentPosition] };
 
             var rlpItem = new RLPItem(item);
             rlpCollection.Add(rlpItem);
@@ -234,7 +233,7 @@ namespace Xcb.Net.RLP
 
         private static int ProcessItemLessThan55Bytes(byte[] msgData, RLPCollection rlpCollection, int currentPosition)
         {
-            var length = (byte) (msgData[currentPosition] - OFFSET_SHORT_ITEM);
+            var length = (byte)(msgData[currentPosition] - OFFSET_SHORT_ITEM);
 
             var item = new byte[length];
             Array.Copy(msgData, currentPosition + 1, item, 0, length);
@@ -251,7 +250,7 @@ namespace Xcb.Net.RLP
         private static int ProcessItemBiggerThan55Bytes(byte[] msgData, RLPCollection rlpCollection,
             int currentPosition)
         {
-            var lengthOfLength = (byte) (msgData[currentPosition] - OFFSET_LONG_ITEM);
+            var lengthOfLength = (byte)(msgData[currentPosition] - OFFSET_LONG_ITEM);
             var length = CalculateLength(lengthOfLength, msgData, currentPosition);
 
             // now we can parse an item for data[1]..data[length]
@@ -278,7 +277,7 @@ namespace Xcb.Net.RLP
 
             Array.Copy(msgData, currentPosition, rlpData, 0, rlpDataLength);
 
-            var newLevelCollection = new RLPCollection {RLPData = rlpData};
+            var newLevelCollection = new RLPCollection { RLPData = rlpData };
 
             if (length > 0)
                 Decode(msgData, level + 1, currentPosition + 1, currentPosition + rlpDataLength,
@@ -294,14 +293,14 @@ namespace Xcb.Net.RLP
         private static int ProcessListBiggerThan55Bytes(byte[] msgData, int level, int levelToIndex,
             RLPCollection rlpCollection, int currentPosition)
         {
-            var lengthOfLength = (byte) (msgData[currentPosition] - OFFSET_LONG_LIST);
+            var lengthOfLength = (byte)(msgData[currentPosition] - OFFSET_LONG_LIST);
             var length = CalculateLength(lengthOfLength, msgData, currentPosition);
 
             var rlpDataLength = lengthOfLength + length + 1;
             var rlpData = new byte[rlpDataLength];
 
             Array.Copy(msgData, currentPosition, rlpData, 0, rlpDataLength);
-            var newLevelCollection = new RLPCollection {RLPData = rlpData};
+            var newLevelCollection = new RLPCollection { RLPData = rlpData };
 
             Decode(msgData, level + 1, currentPosition + lengthOfLength + 1,
                 currentPosition + rlpDataLength, levelToIndex,
@@ -322,16 +321,16 @@ namespace Xcb.Net.RLP
         public static byte[] EncodeByte(byte singleByte)
         {
             if (singleByte == 0)
-                return new[] {OFFSET_SHORT_ITEM};
+                return new[] { OFFSET_SHORT_ITEM };
             if (singleByte <= 0x7F)
-                return new[] {singleByte};
-            return new[] {(byte) (OFFSET_SHORT_ITEM + 1), singleByte};
+                return new[] { singleByte };
+            return new[] { (byte)(OFFSET_SHORT_ITEM + 1), singleByte };
         }
 
         public static byte[] EncodeElement(byte[] srcData)
         {
             if (IsNullOrZeroArray(srcData))
-                return new[] {OFFSET_SHORT_ITEM};
+                return new[] { OFFSET_SHORT_ITEM };
             if (IsSingleZero(srcData))
                 return srcData;
             if (srcData.Length == 1 && srcData[0] < 0x80)
@@ -339,7 +338,7 @@ namespace Xcb.Net.RLP
             if (srcData.Length < SIZE_THRESHOLD)
             {
                 // length = 8X
-                var length = (byte) (OFFSET_SHORT_ITEM + srcData.Length);
+                var length = (byte)(OFFSET_SHORT_ITEM + srcData.Length);
                 var data = new byte[srcData.Length + 1];
                 Array.Copy(srcData, 0, data, 1, srcData.Length);
                 data[0] = length;
@@ -359,11 +358,11 @@ namespace Xcb.Net.RLP
                 }
                 var lenBytes = new byte[byteNum];
                 for (var i = 0; i < byteNum; ++i)
-                    lenBytes[byteNum - 1 - i] = (byte) (srcData.Length >> (8 * i));
+                    lenBytes[byteNum - 1 - i] = (byte)(srcData.Length >> (8 * i));
                 // first byte = F7 + bytes.length
                 var data = new byte[srcData.Length + 1 + byteNum];
                 Array.Copy(srcData, 0, data, 1 + byteNum, srcData.Length);
-                data[0] = (byte) (OFFSET_LONG_ITEM + byteNum);
+                data[0] = (byte)(OFFSET_LONG_ITEM + byteNum);
                 Array.Copy(lenBytes, 0, data, 1, lenBytes.Length);
 
                 return data;
@@ -378,7 +377,7 @@ namespace Xcb.Net.RLP
         public static byte[] EncodeList(params byte[][] items)
         {
             if (items == null)
-                return new[] {OFFSET_SHORT_LIST};
+                return new[] { OFFSET_SHORT_LIST };
 
             var totalLength = 0;
             for (var i = 0; i < items.Length; i++)
@@ -394,7 +393,7 @@ namespace Xcb.Net.RLP
                 data = new byte[dataLength];
 
                 //single byte length
-                data[0] = (byte) (OFFSET_SHORT_LIST + totalLength);
+                data[0] = (byte)(OFFSET_SHORT_LIST + totalLength);
                 copyPos = 1;
             }
             else
@@ -414,11 +413,11 @@ namespace Xcb.Net.RLP
 
                 var lenBytes = new byte[byteNum];
                 for (var i = 0; i < byteNum; ++i)
-                    lenBytes[byteNum - 1 - i] = (byte) (tmpLength >> (8 * i));
+                    lenBytes[byteNum - 1 - i] = (byte)(tmpLength >> (8 * i));
                 // first byte = F7 + bytes.length
                 data = new byte[1 + lenBytes.Length + totalLength];
 
-                data[0] = (byte) (OFFSET_LONG_LIST + byteNum);
+                data[0] = (byte)(OFFSET_LONG_LIST + byteNum);
                 Array.Copy(lenBytes, 0, data, 1, lenBytes.Length);
 
                 copyPos = lenBytes.Length + 1;
@@ -445,7 +444,7 @@ namespace Xcb.Net.RLP
 
         private static int CalculateLength(int lengthOfLength, byte[] msgData, int pos)
         {
-            var pow = (byte) (lengthOfLength - 1);
+            var pow = (byte)(lengthOfLength - 1);
             var length = 0;
             for (var i = 1; i <= lengthOfLength; ++i)
             {

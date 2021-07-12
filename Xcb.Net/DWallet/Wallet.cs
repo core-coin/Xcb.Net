@@ -19,13 +19,14 @@ namespace Xcb.Net.DWallet
 
         public Wallet(byte[] masterSeed, int networkId = 1)
         {
-            if (masterSeed != null)
+            if (masterSeed == null)
                 throw new ArgumentNullException(nameof(masterSeed));
 
-            if (masterSeed.Length < (MIN_MASTER_SEED_LENGTH * 8))
+            if (masterSeed.Length < (MIN_MASTER_SEED_LENGTH / 8))
                 throw new ArgumentException($"master seed must be at least {MIN_MASTER_SEED_LENGTH} bits");
 
             _masterSeed = masterSeed;
+            _networkId = networkId;
         }
 
         public Wallet(string masterSeed, int networkId = 1) : this(masterSeed.HexToByteArray(), networkId)

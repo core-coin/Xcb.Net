@@ -88,5 +88,19 @@ namespace Xcb.Net.Test
             Assert.Equal(expectedHex, RplEncodedHex);
         }
 
+        [Fact]
+        public void EmptyBytesRlpTest()
+        {
+            //Given
+            var emptyBytes = new byte[0];
+
+            //When
+            var rlpEncoded = RLP.RLP.EncodeElementsAndList(emptyBytes);
+            var rlpEncodedHex = rlpEncoded.ToHex(true);
+
+            //Then
+            Assert.Equal("0xc180", rlpEncodedHex);
+        }
+
     }
 }

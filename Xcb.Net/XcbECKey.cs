@@ -31,7 +31,7 @@ namespace Xcb.Net.Signer
 
         public int NetworkId { get; }
 
-        public XcbECKey(string privateKey, int networkId = 1) : this(privateKey.HexToByteArray(), networkId)
+        public XcbECKey(string privateKey, int networkId) : this(privateKey.HexToByteArray(), networkId)
         { }
 
         public XcbECKey(byte[] privateKey, int networkId)
@@ -68,21 +68,7 @@ namespace Xcb.Net.Signer
             if (_addressBytes != null)
                 return _addressBytes;
 
-            var pubBytes = GetPublicKeyBytes();
-            var pubHash = Util.Sha3NIST.Current.CalculateHash(pubBytes);
-            var addressBytes = new byte[pubHash.Length - 12];
-            var networkIdBytes = GetNeworkIdPrefix().HexToByteArray();
-
-            Array.Copy(pubHash, 12, addressBytes, 0, addressBytes.Length);
-            var chsum = CaclulateChecksum(addressBytes, networkIdBytes);
-            var chsumBytes = chsum.HexToByteArray();
-
-            var fullAddress = new List<byte>(networkIdBytes.Length + chsumBytes.Length + addressBytes.Length);
-            fullAddress.AddRange(networkIdBytes);
-            fullAddress.AddRange(chsumBytes);
-            fullAddress.AddRange(addressBytes);
-
-            return (_addressBytes = fullAddress.ToArray());
+            return (_addressBytes = GetAddressFromPublicKey(GetPublicKeyBytes(), NetworkId));
         }
 
         public string GetAddressHex()
@@ -115,7 +101,7 @@ namespace Xcb.Net.Signer
         }
 
         //same as common/types.go:CalculateChecksum in go-core
-        private string CaclulateChecksum(byte[] address, byte[] prefix)
+        private static string CaclulateChecksum(byte[] address, byte[] prefix)
         {
             var concated = new List<byte>(address.Length + prefix.Length);
             concated.AddRange(address);
@@ -149,13 +135,12 @@ namespace Xcb.Net.Signer
             return resInt.ToString();
         }
 
-        public static XcbECKey GenerateKey(int networkId = 1, byte[] seed = null)
+        public static XcbECKey GenerateKey(int networkId, byte[] seed = null)
         {
             var secureRandom = _secureRandom;
             if (seed != null)
             {
-                secureRandom = new SecureRandom();
-                secureRandom.SetSeed(seed);
+                secureRandom = new SecureRandom(seed);                
             }
 
             var gen = new Ed448KeyPairGenerator();
@@ -169,15 +154,52 @@ namespace Xcb.Net.Signer
 
         public string GetNeworkIdPrefix()
         {
-            if (NetworkId == 1)
-                return "cb";
-            else if (NetworkId == 3 || NetworkId == 4)
-                return "ab";
-            else if (NetworkId > 10)
-                return "ce";
+            return getNetworkIdPrefix(NetworkId);
+        }
 
+        private static string getNetworkIdPrefix(int networkId)
+        {
+            if (networkId == 1)
+                return "cb";
+            else if (networkId == 3 || networkId == 4)
+                return "ab";
+            else if (networkId > 10)
+                return "ce";
             else
-                throw new InvalidOperationException($"network id {NetworkId} is undefined");
+                throw new InvalidOperationException($"network id {networkId} is undefined");
+        }
+
+        public static byte[] GetPublicKeyFromSignature(byte[] signature)
+        {
+            if (signature.Length != 171)
+                throw new ArgumentOutOfRangeException("signature must be 171 bytes");
+
+            byte[] publicKey = new byte[57];
+            Array.Copy(signature, 114, publicKey, 0, 57);
+
+            return publicKey;
+        }
+
+        public static byte[] GetAddressFromPublicKey(byte[] publicKey, int networkId)
+        {
+            if (publicKey.Length != Ed448.PublicKeySize)
+                throw new ArgumentOutOfRangeException($"public key must be {Ed448.PublicKeySize} bytes");
+
+            var pubBytes = publicKey;
+            var pubHash = Util.Sha3NIST.Current.CalculateHash(pubBytes);
+            var addressBytes = new byte[pubHash.Length - 12];
+            var networkIdBytes = getNetworkIdPrefix(networkId).HexToByteArray();
+
+            Array.Copy(pubHash, 12, addressBytes, 0, addressBytes.Length);
+            var chsum = CaclulateChecksum(addressBytes, networkIdBytes);
+            var chsumBytes = chsum.HexToByteArray();
+
+            var fullAddress = new List<byte>(networkIdBytes.Length + chsumBytes.Length + addressBytes.Length);
+            fullAddress.AddRange(networkIdBytes);
+            fullAddress.AddRange(chsumBytes);
+            fullAddress.AddRange(addressBytes);
+
+            return fullAddress.ToArray();
         }
     }
 }

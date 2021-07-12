@@ -51,12 +51,12 @@ namespace Xcb.Net.RLP
 
         public static int ToIntFromRLPDecoded(this byte[] bytes)
         {
-            return (int) ToBigIntegerFromRLPDecoded(bytes);
+            return (int)ToBigIntegerFromRLPDecoded(bytes);
         }
 
         public static long ToLongFromRLPDecoded(this byte[] bytes)
         {
-            return (long) ToBigIntegerFromRLPDecoded(bytes);
+            return (long)ToBigIntegerFromRLPDecoded(bytes);
         }
 
         public static string ToStringFromRLPDecoded(this byte[] bytes)

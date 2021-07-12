@@ -79,7 +79,7 @@ namespace Xcb.Net.Extensions
             {
                 var string_length = value.Length;
                 var character_index = value.StartsWith("0x", StringComparison.Ordinal) ? 2 : 0;
-                // Does the string define leading HEX indicator '0x'. Adjust starting index accordingly.               
+                // Does the string define leading HEX indicator '0x'. Adjust starting index accordingly.
                 var number_of_characters = string_length - character_index;
 
                 var add_leading_zero = false;

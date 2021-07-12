@@ -26,7 +26,7 @@ namespace Xcb.Net.Signer
 
         public byte[] Payload { get; set; }
 
-        public byte[] NetworkId { get; private set; }
+        public byte[] ChainId { get; private set; }
 
         public byte[] Signature { get; private set; }
 
@@ -73,7 +73,7 @@ namespace Xcb.Net.Signer
                 this.RecipientAddress,
                 this.Amount,
                 this.Payload,
-                this.NetworkId
+                this.ChainId
                 );
 
             return encoding;
@@ -85,7 +85,7 @@ namespace Xcb.Net.Signer
                 this.AccountNonce,
                 this.EnergyPrice,
                 this.EnergyLimit,
-                this.NetworkId,
+                this.ChainId,
                 this.RecipientAddress,
                 this.Amount,
                 this.Payload,
@@ -101,11 +101,11 @@ namespace Xcb.Net.Signer
             return hash;
         }
 
-        public void Sign(XcbECKey key)
+        public void Sign(XcbECKey key, int chainId = 0)
         {
             byte[] hash = GetTxHash();
 
-            this.NetworkId = new BigInteger(key.NetworkId).ToBytesForRLPEncoding();
+            this.ChainId = new BigInteger(chainId).ToBytesForRLPEncoding();
             this.Signature = key.SignMessage(hash);
         }
 
@@ -133,7 +133,7 @@ namespace Xcb.Net.Signer
             );
 
             transaction.Signature = Signature;
-            transaction.NetworkId = networkId;
+            transaction.ChainId = networkId;
 
             return transaction;
         }
