@@ -14,12 +14,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.x' # SDK Version to use.
+          dotnet-version: '5.0' # SDK Version to use.
           source-url: https://nuget.pkg.github.com/core-coin/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build --configuration Release Xcb.Net
       - name: Create the package
-        run: dotnet pack --configuration Release Xcb.Net
+        run: dotnet pack --configuration Release --output core-coin/bin/Release Xcb.Net
       - name: Publish the package to GPR
-        run: dotnet nuget push core-coin/bin/Release/*.nupkg
+        run: dotnet nuget push Xcb.Net/bin/Release/Xcb.Net.1.0.0.nupkg
