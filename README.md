@@ -28,7 +28,7 @@ var publicKey = key.GetPublicKeyBytes();
 //getting the public key hex
 var publicKey = key.GetPublicKeyHex();
 
-//"hello" in hex without "0x" prefix
+//"hello" in hex is "0x666f6f"
 var message = "666f6f"
 
 //signing the message (it will prehash the message with SHA3NIST)
