@@ -38,6 +38,12 @@ var signatureBytes = key.SignHashOfMessage(message.HexToByteArray());
 var recoveredPublicKey = XcbECKey.GetPublicKeyFromSignature(signatureBytes).ToHex();
 
 Assert.Equal(publicKey.ToHex(),recoveredPublicKey);
+
+//wallet address can be recovered from public key
+var recoveredAddress = XcbECKey.GetAddressFromPublicKey(publicKey,networkId);
+
+Assert.Equal(address, recoveredAddress);
+
 ```
 
 ## License
