@@ -11,7 +11,7 @@ namespace Xcb.Net.Test
         public void TransactionFullTest()
         {
             //Given
-            XcbECKey key = new XcbECKey("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", 11);
+            XcbECKey key = new XcbECKey("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c8e", 11);
 
             Transaction transaction = new Transaction(to: "ce276773ac97d16855a3c8faa45399136b56d4194860",
             amount: BigInteger.Parse("200"),

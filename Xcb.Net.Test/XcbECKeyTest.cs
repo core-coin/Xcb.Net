@@ -4,6 +4,7 @@ using Xunit;
 using Xcb.Net.Extensions;
 using Org.BouncyCastle.Security;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Xcb.Net.Test
 {
@@ -54,6 +55,7 @@ namespace Xcb.Net.Test
             Assert.Equal(expectedAddress, key.GetAddressHex());
         }
 
+
         [Theory]
         [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", "666f6f",
             "9db1a4fd159ec8449cc970e3c1e1848445997fb988f0c3aa1edf91ddb84dd873eb8c43bf052e0a56b49911d9981892811a9e28f02fd7472680388dd2f617f46c67501aea757c5fca981b749f4c6f08b2d480f66c44eaf1df9c7d02b934d45e31ffa8a6c07a54773f5dc1c0e2975b98792200315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
@@ -63,6 +65,18 @@ namespace Xcb.Net.Test
             var expectedBytes = expectedSignature.HexToByteArray();
             var signatureBytes = key.SignHashOfMessage(message.HexToByteArray());
             Assert.Equal(expectedBytes, signatureBytes);
+        }
+
+        [Theory]
+        [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e",
+        "", "f4df0c1b8a185377035f2096c43041f5253e54fd70ece0502e8e50279ec80b1b34ead6051dd62a91b57b2f67d37c02110a37ed6cecef43d200e5dd3a905b877a666f8c9ea815b2a11372976f29cc16be1502268379029ed3ff2e8b823de9f9fd11f4d9e7f269a3e64209eae5964db75b0a00315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
+        public void SignTest(string privateKey, string message, string expectedSignature)
+        {
+            var messageBytes = message.HexToByteArray();
+
+            var key = new XcbECKey(privateKey, 1);
+            var signatureBytes = key.SignMessage(messageBytes);
+            Assert.Equal(expectedSignature, signatureBytes.ToHex());
         }
 
         [Theory]
