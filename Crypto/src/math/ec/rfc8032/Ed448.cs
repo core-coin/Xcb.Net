@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             Ed448ph = 1,
         }
 
-        private class F : X448Field {};
+        private class F : X448Field { };
 
         private const ulong M26UL = 0x03FFFFFFUL;
         private const ulong M28UL = 0x0FFFFFFFUL;
@@ -36,7 +36,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
         public static readonly int SignatureSize = PointBytes + ScalarBytes;
 
         // "SigEd448"
-        private static readonly byte[] Dom4Prefix = new byte[]{ 0x53, 0x69, 0x67, 0x45, 0x64, 0x34, 0x34, 0x38 };
+        private static readonly byte[] Dom4Prefix = new byte[] { 0x53, 0x69, 0x67, 0x45, 0x64, 0x34, 0x34, 0x38 };
 
         private static readonly uint[] P = { 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU,
             0xFFFFFFFEU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU };
@@ -95,9 +95,9 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
 
         private static byte[] CalculateS(byte[] r, byte[] k, byte[] s)
         {
-            uint[] t = new uint[ScalarUints * 2];   DecodeScalar(r, 0, t);
-            uint[] u = new uint[ScalarUints];       DecodeScalar(k, 0, u);
-            uint[] v = new uint[ScalarUints];       DecodeScalar(s, 0, v);
+            uint[] t = new uint[ScalarUints * 2]; DecodeScalar(r, 0, t);
+            uint[] u = new uint[ScalarUints]; DecodeScalar(k, 0, u);
+            uint[] v = new uint[ScalarUints]; DecodeScalar(s, 0, v);
 
             Nat.MulAddTo(ScalarUints, u, v, t);
 
@@ -325,12 +325,12 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
         public static void GeneratePublicKey(byte[] sk, int skOff, byte[] pk, int pkOff)
         {
             if (sk[sk.Length - 1] >= 0x80)
-                Ed448.GeneratePublicKeyExtended(sk, 0, pk, 0);
+                Ed448.GenerateExtendedPublicKey(sk, 0, pk, 0);
             else
-                Ed448.GeneratePublicKeyNotExtended(sk, 0, pk, 0);
+                Ed448.GenerateNormal(sk, 0, pk, 0);
         }
 
-        public static void GeneratePublicKeyNotExtended(byte[] sk, int skOff, byte[] pk, int pkOff)
+        private static void GenerateNormal(byte[] sk, int skOff, byte[] pk, int pkOff)
         {
             IXof d = CreateXof();
             byte[] h = new byte[ScalarBytes * 2];
@@ -344,7 +344,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             ScalarMultBaseEncoded(s, pk, pkOff);
         }
 
-        public static void GeneratePublicKeyExtended(byte[] sk, int skOff, byte[] pk, int pkOff)
+        private static void GenerateExtendedPublicKey(byte[] sk, int skOff, byte[] pk, int pkOff)
         {
             byte[] s = new byte[ScalarBytes];
             PruneScalar(sk, 0, s);
@@ -752,8 +752,8 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             for (int i = 0; i < PrecompPoints; ++i)
             {
                 int cond = ((i ^ index) - 1) >> 31;
-                F.CMov(cond, precompBase, off, p.x, 0);     off += F.Size;
-                F.CMov(cond, precompBase, off, p.y, 0);     off += F.Size;
+                F.CMov(cond, precompBase, off, p.x, 0); off += F.Size;
+                F.CMov(cond, precompBase, off, p.y, 0); off += F.Size;
             }
         }
 
@@ -772,9 +772,9 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             for (int i = 0, off = 0; i < 8; ++i)
             {
                 int cond = ((i ^ abs) - 1) >> 31;
-                F.CMov(cond, table, off, r.x, 0);       off += F.Size;
-                F.CMov(cond, table, off, r.y, 0);       off += F.Size;
-                F.CMov(cond, table, off, r.z, 0);       off += F.Size;
+                F.CMov(cond, table, off, r.x, 0); off += F.Size;
+                F.CMov(cond, table, off, r.y, 0); off += F.Size;
+                F.CMov(cond, table, off, r.z, 0); off += F.Size;
             }
 
             F.CNegate(sign, r.x);
@@ -792,11 +792,11 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             int off = 0;
 
             int i = 0;
-            for (;;)
+            for (; ; )
             {
-                F.Copy(q.x, 0, table, off);     off += F.Size;
-                F.Copy(q.y, 0, table, off);     off += F.Size;
-                F.Copy(q.z, 0, table, off);     off += F.Size;
+                F.Copy(q.x, 0, table, off); off += F.Size;
+                F.Copy(q.y, 0, table, off); off += F.Size;
+                F.Copy(q.z, 0, table, off); off += F.Size;
 
                 if (++i == count)
                     break;
@@ -932,8 +932,8 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
                         //F.Normalize(q.x);
                         //F.Normalize(q.y);
 
-                        F.Copy(q.x, 0, precompBase, off);   off += F.Size;
-                        F.Copy(q.y, 0, precompBase, off);   off += F.Size;
+                        F.Copy(q.x, 0, precompBase, off); off += F.Size;
+                        F.Copy(q.y, 0, precompBase, off); off += F.Size;
                     }
                 }
 
@@ -947,46 +947,46 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
 
             r[0] &= 0xFC;
             r[ScalarBytes - 2] |= 0x80;
-            r[ScalarBytes - 1]  = 0x00;
+            r[ScalarBytes - 1] = 0x00;
         }
 
         private static byte[] ReduceScalar(byte[] n)
         {
-            ulong x00 =  Decode32(n,   0);          // x00:32/--
-            ulong x01 = (Decode24(n,   4) << 4);    // x01:28/--
-            ulong x02 =  Decode32(n,   7);          // x02:32/--
-            ulong x03 = (Decode24(n,  11) << 4);    // x03:28/--
-            ulong x04 =  Decode32(n,  14);          // x04:32/--
-            ulong x05 = (Decode24(n,  18) << 4);    // x05:28/--
-            ulong x06 =  Decode32(n,  21);          // x06:32/--
-            ulong x07 = (Decode24(n,  25) << 4);    // x07:28/--
-            ulong x08 =  Decode32(n,  28);          // x08:32/--
-            ulong x09 = (Decode24(n,  32) << 4);    // x09:28/--
-            ulong x10 =  Decode32(n,  35);          // x10:32/--
-            ulong x11 = (Decode24(n,  39) << 4);    // x11:28/--
-            ulong x12 =  Decode32(n,  42);          // x12:32/--
-            ulong x13 = (Decode24(n,  46) << 4);    // x13:28/--
-            ulong x14 =  Decode32(n,  49);          // x14:32/--
-            ulong x15 = (Decode24(n,  53) << 4);    // x15:28/--
-            ulong x16 =  Decode32(n,  56);          // x16:32/--
-            ulong x17 = (Decode24(n,  60) << 4);    // x17:28/--
-            ulong x18 =  Decode32(n,  63);          // x18:32/--
-            ulong x19 = (Decode24(n,  67) << 4);    // x19:28/--
-            ulong x20 =  Decode32(n,  70);          // x20:32/--
-            ulong x21 = (Decode24(n,  74) << 4);    // x21:28/--
-            ulong x22 =  Decode32(n,  77);          // x22:32/--
-            ulong x23 = (Decode24(n,  81) << 4);    // x23:28/--
-            ulong x24 =  Decode32(n,  84);          // x24:32/--
-            ulong x25 = (Decode24(n,  88) << 4);    // x25:28/--
-            ulong x26 =  Decode32(n,  91);          // x26:32/--
-            ulong x27 = (Decode24(n,  95) << 4);    // x27:28/--
-            ulong x28 =  Decode32(n,  98);          // x28:32/--
+            ulong x00 = Decode32(n, 0);          // x00:32/--
+            ulong x01 = (Decode24(n, 4) << 4);    // x01:28/--
+            ulong x02 = Decode32(n, 7);          // x02:32/--
+            ulong x03 = (Decode24(n, 11) << 4);    // x03:28/--
+            ulong x04 = Decode32(n, 14);          // x04:32/--
+            ulong x05 = (Decode24(n, 18) << 4);    // x05:28/--
+            ulong x06 = Decode32(n, 21);          // x06:32/--
+            ulong x07 = (Decode24(n, 25) << 4);    // x07:28/--
+            ulong x08 = Decode32(n, 28);          // x08:32/--
+            ulong x09 = (Decode24(n, 32) << 4);    // x09:28/--
+            ulong x10 = Decode32(n, 35);          // x10:32/--
+            ulong x11 = (Decode24(n, 39) << 4);    // x11:28/--
+            ulong x12 = Decode32(n, 42);          // x12:32/--
+            ulong x13 = (Decode24(n, 46) << 4);    // x13:28/--
+            ulong x14 = Decode32(n, 49);          // x14:32/--
+            ulong x15 = (Decode24(n, 53) << 4);    // x15:28/--
+            ulong x16 = Decode32(n, 56);          // x16:32/--
+            ulong x17 = (Decode24(n, 60) << 4);    // x17:28/--
+            ulong x18 = Decode32(n, 63);          // x18:32/--
+            ulong x19 = (Decode24(n, 67) << 4);    // x19:28/--
+            ulong x20 = Decode32(n, 70);          // x20:32/--
+            ulong x21 = (Decode24(n, 74) << 4);    // x21:28/--
+            ulong x22 = Decode32(n, 77);          // x22:32/--
+            ulong x23 = (Decode24(n, 81) << 4);    // x23:28/--
+            ulong x24 = Decode32(n, 84);          // x24:32/--
+            ulong x25 = (Decode24(n, 88) << 4);    // x25:28/--
+            ulong x26 = Decode32(n, 91);          // x26:32/--
+            ulong x27 = (Decode24(n, 95) << 4);    // x27:28/--
+            ulong x28 = Decode32(n, 98);          // x28:32/--
             ulong x29 = (Decode24(n, 102) << 4);    // x29:28/--
-            ulong x30 =  Decode32(n, 105);          // x30:32/--
+            ulong x30 = Decode32(n, 105);          // x30:32/--
             ulong x31 = (Decode24(n, 109) << 4);    // x31:28/--
-            ulong x32 =  Decode16(n, 112);          // x32:16/--
+            ulong x32 = Decode16(n, 112);          // x32:16/--
 
-    //        x32 += (x31 >> 28); x31 &= M28UL;
+            //        x32 += (x31 >> 28); x31 &= M28UL;
             x16 += x32 * L4_0;                          // x16:42/--
             x17 += x32 * L4_1;                          // x17:41/28
             x18 += x32 * L4_2;                          // x18:43/42
@@ -1181,7 +1181,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             x13 += (x12 >> 28); x12 &= M28UL;
             x14 += (x13 >> 28); x13 &= M28UL;
             x15 += (x14 >> 28); x14 &= M28UL;
-            x16  = (x15 >> 26); x15 &= M26UL;
+            x16 = (x15 >> 26); x15 &= M26UL;
 
             x16 -= 1;
 
@@ -1215,8 +1215,8 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             Debug.Assert(x15 >> 26 == 0UL);
 
             byte[] r = new byte[ScalarBytes];
-            Encode56(x00 | (x01 << 28), r,  0);
-            Encode56(x02 | (x03 << 28), r,  7);
+            Encode56(x00 | (x01 << 28), r, 0);
+            Encode56(x02 | (x03 << 28), r, 7);
             Encode56(x04 | (x05 << 28), r, 14);
             Encode56(x06 | (x07 << 28), r, 21);
             Encode56(x08 | (x09 << 28), r, 28);
@@ -1239,8 +1239,8 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
 
             // Recode the scalar into signed-digit form
             {
-                uint c1 = Nat.CAdd(ScalarUints, ~(int)n[0] & 1, n, L, n);   Debug.Assert(c1 == 0U);
-                uint c2 = Nat.ShiftDownBit(ScalarUints, n, 1U);             Debug.Assert(c2 == (1U << 31));
+                uint c1 = Nat.CAdd(ScalarUints, ~(int)n[0] & 1, n, L, n); Debug.Assert(c1 == 0U);
+                uint c2 = Nat.ShiftDownBit(ScalarUints, n, 1U); Debug.Assert(c2 == (1U << 31));
             }
 
             uint[] table = PointPrecompute(p, 8);
@@ -1284,7 +1284,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             PointSetNeutral(r);
 
             int cOff = PrecompSpacing - 1;
-            for (;;)
+            for (; ; )
             {
                 int tPos = cOff;
 
@@ -1383,7 +1383,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
 
             PointSetNeutral(r);
 
-            for (int bit = 446;;)
+            for (int bit = 446; ;)
             {
                 int wb = ws_b[bit];
                 if (wb != 0)
@@ -1449,16 +1449,18 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             ImplSign(sk, skOff, ctx, phflag, m, 0, m.Length, sig, sigOff);
         }
 
-        public static void ShiftPublic(byte[] pub, byte[] shift, byte[] result) {
+        public static void ShiftPublic(byte[] pub, byte[] shift, byte[] result)
+        {
             PointExt p2 = new PointExt();
             ScalarMultBase(shift, p2);
 
             PointExt p1 = new PointExt();
-            if (!DecodePointVar(pub, 0, false, p1)) {
+            if (!DecodePointVar(pub, 0, false, p1))
+            {
                 throw new Exception("Can't decode public key");
             }
 
-            PointAdd(p1,p2);
+            PointAdd(p1, p2);
 
             EncodePoint(p2, result, 0);
         }

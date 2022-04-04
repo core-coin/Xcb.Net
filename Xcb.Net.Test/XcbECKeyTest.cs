@@ -229,21 +229,5 @@ namespace Xcb.Net.Test
             //Then
             Assert.Equal(key.GetAddressHex(), key2.GetAddressHex());
         }
-
-        [Fact]
-        public void SecureRandomTest()
-        {
-            //Given
-            var masterSeed = "0x3c60d7ebb9e828bbe63b116bf7a7c21dfb61e5ccf3594639bdffe89eab44e200".HexToByteArray();
-            SecureRandom sr0 = new SecureRandom(masterSeed);
-            SecureRandom sr1 = new SecureRandom(masterSeed);
-
-            //When
-            var random0 = sr0.NextInt();
-            var random1 = sr1.NextInt();
-
-            //Then
-            Assert.Equal(random0, random1);
-        }
     }
 }

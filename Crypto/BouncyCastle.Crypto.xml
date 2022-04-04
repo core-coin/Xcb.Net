@@ -7497,7 +7497,25 @@
             
              @return the X9Curve for the curve in these parameters.
         </member>
-        <member name="P:Org.BouncyCastleger,
+        <member name="P:Org.BouncyCastle.Asn1.X9.X9ECParameters.FieldIDEntry">
+             Return the ASN.1 entry representing the FieldID.
+            
+             @return the X9FieldID for the FieldID in these parameters.
+        </member>
+        <member name="P:Org.BouncyCastle.Asn1.X9.X9ECParameters.BaseEntry">
+             Return the ASN.1 entry representing the base point G.
+            
+             @return the X9ECPoint for the base point in these parameters.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X9.X9ECParameters.ToAsn1Object">
+            Produce an object suitable for an Asn1OutputStream.
+            <pre>
+             ECParameters ::= Sequence {
+                 version         Integer { ecpVer1(1) } (ecpVer1),
+                 fieldID         FieldID {{FieldTypes}},
+                 curve           X9Curve,
+                 base            X9ECPoint,
+                 order           Integer,
                  cofactor        Integer OPTIONAL
              }
             </pre>
@@ -7650,7 +7668,7 @@
             Start a clear text signed message.
             @param hashAlgorithm
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.Dispose(System.Boolean)">
+        <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.Close">
             <b>Note</b>: Close() does not close the underlying stream. So it is possible to write
             multiple objects using armoring to a single stream.
         </member>
@@ -7947,22 +7965,6 @@
             packet giving time after creation at which the key expires.
         </member>
         <member name="P:Org.BouncyCastle.Bcpg.Sig.KeyExpirationTime.Time">
-             Return the ="P:Org.BouncyCastle.Bcpg.Sig.Features.SupportsModificationDetection">
-            Returns if modification detection is supported.
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.Sig.Features.SupportsFeature(System.Byte)">
-            Returns if a particular feature is supported.
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.Sig.Features.SetSupportsFeature(System.Byte,System.Boolean)">
-            Sets support for a particular feature.
-        </member>
-        <member name="T:Org.BouncyCastle.Bcpg.Sig.IssuerKeyId">
-            packet giving signature creation time.
-        </member>
-        <member name="T:Org.BouncyCastle.Bcpg.Sig.KeyExpirationTime">
-            packet giving time after creation at which the key expires.
-        </member>
-        <member name="P:Org.BouncyCastle.Bcpg.Sig.KeyExpirationTime.Time">
              Return the number of seconds after creation time a key is valid for.
             
              @return second count for key validity.
@@ -8028,7 +8030,27 @@
              @param fingerprint
              @param signature
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.#ctor(System.Int32,System.Int32,System.Int64,Org.BouncyCastle.Bcpg.Publi           		* return the signature as a set of integers - note this is normalised to be the
+        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.#ctor(System.Int32,System.Int32,System.Int64,Org.BouncyCastle.Bcpg.PublicKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Int64,System.Byte[],Org.BouncyCastle.Bcpg.MPInteger[])">
+             Generate a version 2/3 signature packet.
+            
+             @param signatureType
+             @param keyAlgorithm
+             @param hashAlgorithm
+             @param fingerprint
+             @param signature
+        </member>
+        <member name="P:Org.BouncyCastle.Bcpg.SignaturePacket.KeyId">
+            return the keyId
+            @return the keyId that created the signature.
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.GetSignatureTrailer">
+             return the signature trailer that must be included with the data
+             to reconstruct the signature
+            
+             @return byte[]
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.GetSignature">
+            		* return the signature as a set of integers - note this is normalised to be the
                     * ASN.1 encoding of what appears in the signature packet.
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.GetSignatureBytes">
@@ -8364,15 +8386,6 @@
             <param name="unhashedPackets">Packets to be attached unhashed to the certification.</param>
             <param name="rand">input secured random.</param>
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyRingGenerator.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,System.Byte[],System.Booleytes(), otherwise the conversion
-            is performed using Convert.ToByte(), which is the historical behaviour of the library (1.7 and earlier).
-            </param>
-            <param name="passPhrase">The passPhrase to be used to protect secret keys.</param>
-            <param name="useSha1">Checksum the secret keys with SHA1 rather than the older 16 bit checksum.</param>
-            <param name="hashedPackets">Packets to be included in the certification hash.</param>
-            <param name="unhashedPackets">Packets to be attached unhashed to the certification.</param>
-            <param name="rand">input secured random.</param>
-        </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyRingGenerator.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,System.Byte[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
             <summary>
             Create a new key ring generator.
@@ -8408,7 +8421,19 @@
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyRingGenerator.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Boolean,System.Char[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
             <summary>
-            Create a new key ring generath SHA1 rather than the older 16 bit checksum.</param>
+            Create a new key ring generator.
+            </summary>
+            <param name="certificationLevel">The certification level for keys on this ring.</param>
+            <param name="masterKey">The master key pair.</param>
+            <param name="id">The id to be associated with the ring.</param>
+            <param name="encAlgorithm">The algorithm to be used to protect secret keys.</param>
+            <param name="hashAlgorithm">The hash algorithm.</param>
+            <param name="utf8PassPhrase">
+            If true, conversion of the passphrase to bytes uses Encoding.UTF8.GetBytes(), otherwise the conversion
+            is performed using Convert.ToByte(), which is the historical behaviour of the library (1.7 and earlier).
+            </param>
+            <param name="passPhrase">The passPhrase to be used to protect secret keys.</param>
+            <param name="useSha1">Checksum the secret keys with SHA1 rather than the older 16 bit checksum.</param>
             <param name="hashedPackets">Packets to be included in the certification hash.</param>
             <param name="unhashedPackets">Packets to be attached unhashed to the certification.</param>
             <param name="rand">input secured random.</param>
@@ -8549,6 +8574,22 @@
             <param name="name">The name of the 'file'.</param>
             <param name="modificationTime">The time of last modification we want stored.</param>
             <param name="buffer">The buffer to use for collecting data to put into chunks.</param>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpLiteralDataGenerator.Open(System.IO.Stream,System.Char,System.IO.FileInfo)">
+            <summary>
+            <p>
+            Open a literal data packet for the passed in <c>FileInfo</c> object, returning
+            an output stream for saving the file contents.
+            </p>
+            <p>
+            The stream created can be closed off by either calling Close()
+            on the stream or Close() on the generator. Closing the returned
+            stream does not close off the Stream parameter <c>outStr</c>.
+            </p>
+            </summary>
+            <param name="outStr">The stream we want the packet in.</param>
+            <param name="format">The format we are using.</param>
+            <param name="file">The <c>FileInfo</c> object containg the packet details.</param>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpLiteralDataGenerator.Close">
             <summary>
@@ -8782,30 +8823,6 @@
             The re-certified key, or null if the user attribute subpacket was not found on the key.
             </returns>
         </member>
-        <member namture)">
-            <summary>Add a certification for an id to the given public key.</summary>
-            <param name="key">The key the certification is to be added to.</param>
-            <param name="id">The ID the certification is associated with.</param>
-            <param name="certification">The new certification.</param>
-            <returns>The re-certified key.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.AddCertification(Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey,Org.BouncyCastle.Bcpg.OpenPgp.PgpUserAttributeSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignature)">
-            <summary>Add a certification for the given UserAttributeSubpackets to the given public key.</summary>
-            <param name="key">The key the certification is to be added to.</param>
-            <param name="userAttributes">The attributes the certification is associated with.</param>
-            <param name="certification">The new certification.</param>
-            <returns>The re-certified key.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.RemoveCertification(Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey,Org.BouncyCastle.Bcpg.OpenPgp.PgpUserAttributeSubpacketVector)">
-            <summary>
-            Remove any certifications associated with a user attribute subpacket on a key.
-            </summary>
-            <param name="key">The key the certifications are to be removed from.</param>
-            <param name="userAttributes">The attributes to be removed.</param>
-            <returns>
-            The re-certified key, or null if the user attribute subpacket was not found on the key.
-            </returns>
-        </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.RemoveCertification(Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey,System.String)">
             <summary>Remove any certifications associated with a given ID on a key.</summary>
             <param name="key">The key the certifications are to be removed from.</param>
@@ -8830,7 +8847,34 @@
             <summary>Add a revocation or some other key certification to a key.</summary>
             <param name="key">The key the revocation is to be added to.</param>
             <param name="certification">The key signature to be added.</param>
-            <returns>The new      or construct one of these you should use the <c>PgpPublicKeyRingBundle</c> class.
+            <returns>The new changed public key object.</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.RemoveCertification(Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignature)">
+            <summary>Remove a certification from the key.</summary>
+            <param name="key">The key the certifications are to be removed from.</param>
+            <param name="certification">The certfication to be removed.</param>
+            <returns>The modified key, null if the certification was not found.</returns>
+        </member>
+        <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyEncryptedData">
+            <remarks>A public key encrypted data object.</remarks>
+        </member>
+        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyEncryptedData.KeyId">
+            <summary>The key ID for the key used to encrypt the data.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyEncryptedData.GetSymmetricAlgorithm(Org.BouncyCastle.Bcpg.OpenPgp.PgpPrivateKey)">
+            <summary>
+            Return the algorithm code for the symmetric algorithm used to encrypt the data.
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyEncryptedData.GetDataStream(Org.BouncyCastle.Bcpg.OpenPgp.PgpPrivateKey)">
+            <summary>Return the decrypted data stream for the packet.</summary>
+        </member>
+        <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyRing">
+            <remarks>
+            Class to hold a single master public key and its subkeys.
+            <p>
+            Often PGP keyring files consist of multiple master keys, if you are trying to process
+            or construct one of these you should use the <c>PgpPublicKeyRingBundle</c> class.
             </p>
             </remarks>
         </member>
@@ -8938,27 +8982,6 @@
             the historical behaviour of the library (1.7 and earlier).
             </remarks>
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKng is already present.</exception>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyRingBundle.RemovePublicKeyRing(Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyRingBundle,Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyRing)">
-            <summary>
-            Return a new bundle containing the contents of the passed in bundle with
-            the passed in public key ring removed.
-            </summary>
-            <param name="bundle">The <c>PgpPublicKeyRingBundle</c> the key ring is to be removed from.</param>
-            <param name="publicKeyRing">The key ring to be removed.</param>
-            <returns>A new <c>PgpPublicKeyRingBundle</c> not containing the passed in key ring.</returns>
-            <exception cref="T:System.ArgumentException">If the keyId for the passed in key ring is not present.</exception>
-        </member>
-        <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey">
-            <remarks>General class to handle a PGP secret key object.</remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,System.Char[],Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
-            <remarks>
-            Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
-            the historical behaviour of the library (1.7 and earlier).
-            </remarks>
-        </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,System.Char[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
             <remarks>
             Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
@@ -8980,7 +9003,28 @@
             <remarks>
             Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
             the historical behaviour of the library (1.7 and earlier).
-                 <returns>
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Boolean,System.Char[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
+            <remarks>
+            If utf8PassPhrase is true, conversion of the passphrase to bytes uses Encoding.UTF8.GetBytes(), otherwise the conversion
+            is performed using Convert.ToByte(), which is the historical behaviour of the library (1.7 and earlier).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Byte[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
+            <remarks>
+            Allows the caller to handle the encoding of the passphrase to bytes.
+            </remarks>
+        </member>
+        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.IsSigningKey">
+            <summary>
+            Check if this key has an algorithm type that makes it suitable to use for signing.
+            </summary>
+            <remarks>
+            Note: with version 4 keys KeyFlags subpackets should also be considered when present for
+            determining the preferred use of the key.
+            </remarks>
+            <returns>
             <c>true</c> if this key algorithm is suitable for use with signing.
             </returns>
         </member>
@@ -9045,33 +9089,6 @@
             <param name="oldPassPhrase">The current password for the key.</param>
             <param name="newPassPhrase">The new password for the key.</param>
             <param name="newEncAlgorithm">The algorithm to be used for the encryption.</param>
-            <param name="rand">Source of randomness.</paraks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ExtractPrivateKeyUtf8(System.Char[])">
-            <summary>Extract a <c>PgpPrivateKey</c> from this secret key's encrypted contents.</summary>
-            <remarks>
-            The passphrase is encoded to bytes using UTF8 (Encoding.UTF8.GetBytes).
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ExtractPrivateKeyRaw(System.Byte[])">
-            <summary>Extract a <c>PgpPrivateKey</c> from this secret key's encrypted contents.</summary>
-            <remarks>
-            Allows the caller to handle the encoding of the passphrase to bytes.
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.CopyWithNewPassword(Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey,System.Char[],System.Char[],Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Security.SecureRandom)">
-            <summary>
-            Return a copy of the passed in secret key, encrypted using a new password
-            and the passed in algorithm.
-            </summary>
-            <remarks>
-            Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
-            the historical behaviour of the library (1.7 and earlier).
-            </remarks>
-            <param name="key">The PgpSecretKey to be copied.</param>
-            <param name="oldPassPhrase">The current password for the key.</param>
-            <param name="newPassPhrase">The new password for the key.</param>
-            <param name="newEncAlgorithm">The algorithm to be used for the encryption.</param>
             <param name="rand">Source of randomness.</param>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.CopyWithNewPasswordUtf8(Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey,System.Char[],System.Char[],Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Security.SecureRandom)">
@@ -9106,7 +9123,35 @@
             <summary>Replace the passed the public key on the passed in secret key.</summary>
             <param name="secretKey">Secret key to change.</param>
             <param name="publicKey">New public key.</param>
-            Expr(System.IO.Stream,System.Char[])">
+            <returns>A new secret key.</returns>
+            <exception cref="T:System.ArgumentException">If KeyId's do not match.</exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExpr(System.IO.Stream,System.Char[],Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
+            <summary>
+            Parse a secret key from one of the GPG S expression keys associating it with the passed in public key.
+            </summary>
+            <remarks>
+            Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
+            the historical behaviour of the library (1.7 and earlier).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExprUtf8(System.IO.Stream,System.Char[],Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
+            <summary>
+            Parse a secret key from one of the GPG S expression keys associating it with the passed in public key.
+            </summary>
+            <remarks>
+            The passphrase is encoded to bytes using UTF8 (Encoding.UTF8.GetBytes).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExprRaw(System.IO.Stream,System.Byte[],Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
+            <summary>
+            Parse a secret key from one of the GPG S expression keys associating it with the passed in public key.
+            </summary>
+            <remarks>
+            Allows the caller to handle the encoding of the passphrase to bytes.
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExpr(System.IO.Stream,System.Char[])">
             <summary>
             Parse a secret key from one of the GPG S expression keys.
             </summary>
@@ -9153,31 +9198,6 @@
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing.GetSecretKeys">
             <summary>Allows enumeration of the secret keys.</summary>
-            <returns>An <c>IEnumerable</c> of <c>PgpSecretKey</c> objects.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing.GetExtraPublicKeys">
-            <summary>
-            Return an iterator of the public keys in the secret key ring that
-            have no matching private key. At the moment only personal certificate data
-            appears in this fashion.
-            </summary>
-            <returns>An <c>IEnumerable</c> of unattached, or extra, public keys.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing.ReplacePublicKeys(Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing,Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKeyRing)">
-            <summary>
-            Replace the public key set on the secret ring with the corresponding key off the public ring.
-            </summary>
-            <param name="secretRing">Secret ring to be changed.</param>
-            <param name="publicRing">Public ring containing the new public key set.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing.CopyWithNewPassword(Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing,System.Char[],System.Char[],Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Security.SecureRandom)">
-            <summary>
-            Return a copy of the passed in secret key ring, with the master key and sub keys encrypted
-            using a new password and the passed in algorithm.
-            </summary>
-            <param name="ring">The <c>PgpSecretKeyRing</c> to be copied.</param>
-            <param name="oldPassPhrase">The current password for key.</param>
-            <param namenumeration of the secret keys.</summary>
             <returns>An <c>IEnumerable</c> of <c>PgpSecretKey</c> objects.</returns>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKeyRing.GetExtraPublicKeys">
@@ -9471,7 +9491,41 @@
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector.GetKeyExpirationTime">
             <summary>
-            Return the number of seconds a key is valid/remarks>
+            Return the number of seconds a key is valid for after its creation date.
+            A value of zero means the key never expires.
+            </summary>
+            <returns>Seconds a signature is valid for.</returns>
+        </member>
+        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector.Count">
+            <summary>Return the number of packets this vector contains.</summary>
+        </member>
+        <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpUserAttributeSubpacketVector">
+            <remarks>Container for a list of user attribute subpackets.</remarks>
+        </member>
+        <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities">
+            <remarks>Basic utility class.</remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.MakeKeyFromPassPhrase(Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.S2k,System.Char[])">
+            <remarks>
+            Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
+            the historical behaviour of the library (1.7 and earlier).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.MakeKeyFromPassPhraseUtf8(Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.S2k,System.Char[])">
+            <remarks>
+            The passphrase is encoded to bytes using UTF8 (Encoding.UTF8.GetBytes).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.MakeKeyFromPassPhraseRaw(Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.S2k,System.Byte[])">
+            <remarks>
+            Allows the caller to handle the encoding of the passphrase to bytes.
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.WriteFileToLiteralData(System.IO.Stream,System.Char,System.IO.FileInfo)">
+            <summary>Write out the passed in file as a literal data packet.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.WriteFileToLiteralData(System.IO.Stream,System.Char,System.IO.FileInfo,System.Byte[])">
+            <summary>Write out the passed in file as a literal data packet in partial packet format.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.GetDecoderStream(System.IO.Stream)">
             <summary>
@@ -9498,50 +9552,6 @@
             <summary>Return a V3 signature object containing the current signature state.</summary>
         </member>
         <member name="T:Org.BouncyCastle.Bcpg.OpenPgp.SXprUtilities">
-            Utility functions for looking a S-expression keys. This class will move when it finds a better home!
-            <p>
-            Format documented here:
-            http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=blob;f=agent/keyformat.txt;h=42c4b1f06faf1bbe71ffadc2fee0fad6bec91a97;hb=refs/heads/master
-            </p>
-        </member>
-        <member name="M:Org.BouncyCastle.Cmp.GeneralPkiMessage.#ctor(Org.BouncyCastle.Asn1.Cmp.PkiMessage)">
-            <summary>
-            Wrap a PKIMessage ASN.1 structure.
-            </summary>
-            <param name="pkiMessage">PKI message.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Cmp.GeneralPkiMessage.#ctor(System.Byte[])">
-            <summary>
-            Create a PKIMessage from the passed in bytes.
-            </summary>
-            <param name="encoding">BER/DER encoding of the PKIMessage</param>
-        </member>
-        <member name="P:Org.BouncyCastle.Cmp.GeneralPkiMessage.HasProtection">
-            <summary>
-            Return true if this message has protection bits on it. A return value of true
-            indicates the message can be used to construct a ProtectedPKIMessage.
-            </summary>
-        </member>
-        <member name="T:Org.BouncyCastle.Cmp.ProtectedPkiMessage">
-            <summary>
-            Wrapper for a PKIMessage with protection attached to it.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Cmp.ProtectedPkiMessage.#ctor(Org.BouncyCastle.Cmp.GeneralPkiMessage)">
-            <summary>
-            Wrap a general message.
-            </summary>
-            <exception cref="T:System.ArgumentException">If the general message does not have protection.</exception>
-            <param name="pkiMessage">The General message</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Cmp.ProtectedPkiMessage.#ctor(Org.BouncyCastle.Asn1.Cmp.PkiMessage)">
-            <summary>
-            Wrap a PKI message.
-            </summary>
-            <exception cref="T:System.ArgumentException">If the PKI message does not have protection.</exception>
-            <param name="pkiMessage">The PKI message</param>
-        </member>
-        <member name="P:Org.BouncyCastle.cyCastle.Bcpg.OpenPgp.SXprUtilities">
             Utility functions for looking a S-expression keys. This class will move when it finds a better home!
             <p>
             Format documented here:
@@ -10008,7 +10018,49 @@
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedDataStreamGenerator.Open(System.IO.Stream,System.String,Org.BouncyCastle.Crypto.CipherKeyGenerator)">
             <summary>
-            Generate an enveloped object that coent(System.String,Org.BouncyCastle.Crypto.Parameters.KeyParameter,System.Byte[])">
+            Generate an enveloped object that contains an CMS Enveloped Data
+            object using the passed in key generator.
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedDataStreamGenerator.Open(System.IO.Stream,System.String)">
+            generate an enveloped object that contains an CMS Enveloped Data object
+            @throws IOException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedDataStreamGenerator.Open(System.IO.Stream,System.String,System.Int32)">
+            generate an enveloped object that contains an CMS Enveloped Data object
+            @throws IOException
+        </member>
+        <member name="T:Org.BouncyCastle.Cms.CmsEnvelopedGenerator">
+             General class for generating a CMS enveloped-data message.
+            
+             A simple example of usage.
+            
+             <pre>
+                  CMSEnvelopedDataGenerator  fact = new CMSEnvelopedDataGenerator();
+            
+                  fact.addKeyTransRecipient(cert);
+            
+                  CMSEnvelopedData         data = fact.generate(content, algorithm, "BC");
+             </pre>
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedGenerator.#ctor(Org.BouncyCastle.Security.SecureRandom)">
+            <summary>Constructor allowing specific source of randomness</summary>
+            <param name="rand">Instance of <c>SecureRandom</c> to use.</param>
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedGenerator.AddKeyTransRecipient(Org.BouncyCastle.X509.X509Certificate)">
+             add a recipient.
+            
+             @param cert recipient's public key certificate
+             @exception ArgumentException if there is a problem with the certificate
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedGenerator.AddKeyTransRecipient(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,System.Byte[])">
+             add a recipient
+            
+             @param key the public key used by the recipient
+             @param subKeyId the identifier for the recipient's public key
+             @exception ArgumentException if there is a problem with the key
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedGenerator.AddKekRecipient(System.String,Org.BouncyCastle.Crypto.Parameters.KeyParameter,System.Byte[])">
             add a KEK recipient.
             @param key the secret key to use for wrapping
             @param keyIdentifier the byte string that identifies the key
@@ -10031,47 +10083,6 @@
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedGenerator.AddKeyAgreementRecipients(System.String,Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.Crypto.AsymmetricKeyParameter,System.Collections.ICollection,System.String)">
              Add multiple key agreement based recipients (sharing a single KeyAgreeRecipientInfo structure).
-            
-             @param agreementAlgorithm key agreement algorithm to use.
-             @param senderPrivateKey private key to initialise sender side of agreement with.
-             @param senderPublicKey sender public key to include with message.
-             @param recipientCerts recipients' public key certificates.
-             @param cekWrapAlgorithm OID for key wrapping algorithm to use.
-             @exception SecurityUtilityException if the algorithm requested cannot be found
-             @exception InvalidKeyException if the keys are inappropriate for the algorithm specified
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsEnvelopedGenerator.AddRecipientInfoGenerator(Org.BouncyCastle.Cms.RecipientInfoGenerator)">
-            <summary>
-            Add a generator to produce the recipient info required.
-            </summary>
-            <param name="recipientInfoGenerator">a generator of a recipient info object.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsProcessable.Write(System.IO.Stream)">
-            <summary>
-            Generic routine to copy out the data we want processed.
-            </summary>
-            <remarks>
-            This routine may be called multiple times.
-            </remarks>
-        </member>
-        <member name="T:Org.BouncyCastle.Cms.CmsProcessableByteArray">
-            a holding class for a byte array of data to be processed.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsProcessableByteArray.GetContent">
-            <returns>A clone of the byte array</returns>
-        </member>
-        <member name="T:Org.BouncyCastle.Cms.CmsSignedData">
-             general class for handling a pkcs7-signature message.
-            
-             A simple example of usage - note, in the example below the validity of
-             the certificate isn't verified, just the fact that one of the certs
-             matches the given signer...
-            
-             <pre>
-              IX509Store              certs = s.GetCertificates();
-              SignerInformationStore  signers = s.GetSignerInfos();
-            
-              foreach (SignerInformati        Add multiple key agreement based recipients (sharing a single KeyAgreeRecipientInfo structure).
             
              @param agreementAlgorithm key agreement algorithm to use.
              @param senderPrivateKey private key to initialise sender side of agreement with.
@@ -10476,7 +10487,43 @@
             <param name="rand">Instance of <c>SecureRandom</c> to use.</param>
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.SetBufferSize(System.Int32)">
-             Set the underlying string size for e other than the default ones will be
+             Set the underlying string size for encapsulated data
+            
+             @param bufferSize length of octet strings to buffer the data.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String)">
+            add a signer - no attributes other than the default ones will be
+            provided here.
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String,System.String)">
+            add a signer, specifying the digest encryption algorithm - no attributes other than the default ones will be
+            provided here.
+            @throws NoSuchProviderException
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String,Org.BouncyCastle.Asn1.Cms.AttributeTable,Org.BouncyCastle.Asn1.Cms.AttributeTable)">
+            add a signer with extra signed/unsigned attributes.
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String,System.String,Org.BouncyCastle.Asn1.Cms.AttributeTable,Org.BouncyCastle.Asn1.Cms.AttributeTable)">
+            add a signer with extra signed/unsigned attributes - specifying digest
+            encryption algorithm.
+            @throws NoSuchProviderException
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,System.Byte[],System.String)">
+            add a signer - no attributes other than the default ones will be
+            provided here.
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,System.Byte[],System.String,System.String)">
+            add a signer - no attributes other than the default ones will be
             provided here.
             @throws NoSuchProviderException
             @throws NoSuchAlgorithmException
@@ -17981,6 +18028,11 @@
              @param bitsRequired size (in bits) of entropy to be created by the provided source.
              @return an EntropySource that generates bitsRequired bits of entropy on each call to its getEntropy() method.
         </member>
+        <member name="T:Org.BouncyCastle.Crypto.Prng.CryptoApiRandomGenerator">
+            <summary>
+            Uses RandomNumberGenerator.Create() to get randomness generator
+            </summary>
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.Prng.DigestRandomGenerator">
             Random generation based on the digest with counter. Calling AddSeedMaterial will
             always increase the entropy of the hash.
@@ -22406,6 +22458,18 @@
             <param name="mechanism">A string representation of the digest meanism.</param>
             <returns>A DerObjectIdentifier, null if the Oid is not available.</returns>
         </member>
+        <member name="T:Org.BouncyCastle.Security.DotNetUtilities">
+            <summary>
+            A class containing methods to interface the BouncyCastle world to the .NET Crypto world.
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Security.DotNetUtilities.ToX509Certificate(Org.BouncyCastle.Asn1.X509.X509CertificateStructure)">
+            <summary>
+            Create an System.Security.Cryptography.X509Certificate from an X509Certificate Structure.
+            </summary>
+            <param name="x509Struct"></param>
+            <returns>A System.Security.Cryptography.X509Certificate.</returns>
+        </member>
         <member name="T:Org.BouncyCastle.Security.MacUtilities">
             <remarks>
              Utility class for creating HMac object from their names/Oids
@@ -26143,64 +26207,6 @@
             <param name="oid">string containing a dotted decimal Object Identifier.</param>
             <param name="critical">Is it critical.</param>
             <param name="extensionValue">byte[] containing the value of this extension.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.AddExtension(Org.BouncyCastle.Asn1.DerObjectIdentifier,System.Boolean,System.Byte[])">
-            <summary>
-            Add an extension to this certificate.
-            </summary>
-            <param name="oid">Its Object Identifier.</param>
-            <param name="critical">Is it critical.</param>
-            <param name="extensionValue">byte[] containing the value of this extension.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.CopyAndAddExtension(System.String,System.Boolean,Org.BouncyCastle.X509.X509Certificate)">
-            <summary>
-            Add a given extension field for the standard extensions tag (tag 3),
-            copying the extension value from another certificate.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.CopyAndAddExtension(Org.BouncyCastle.Asn1.DerObjectIdentifier,System.Boolean,Org.BouncyCastle.X509.X509Certificate)">
-            add a given extension field for the standard extensions tag (tag 3)
-            copying the extension value from another certificate.
-            @throws CertificateParsingException if the extension cannot be extracted.
-        </member>
-        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.Generate(Org.BouncyCastle.Crypto.AsymmetricKeyParameter)">
-            <summary>
-            Generate an X509Certificate.
-            </summary>
-            <param name="privateKey">The private key of the issuer that is signing this certificate.</param>
-            <returns>An X509Certificate.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.Generate(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.Security.SecureRandom)">
-            <summary>
-            Generate an X509Certificate using your own SecureRandom.
-            </summary>
-            <param name="privateKey">The private key of the issuer that is signing this certificate.</param>
-            <param name="random">You Secure Random instance.</param>
-            <returns>An X509Certificate.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.Generate(Org.BouncyCastle.Crypto.ISignatureFactory)">
-            <summary>
-            Generate a new X509Certificate using the passed in SignatureCalculator.
-            </summary>
-            <param name="signatureCalculatorFactory">A signature calculator factory with the necessary algorithm details.</param>
-            <returns>An X509Certificate.</returns>
-        </member>
-        <member name="P:Org.BouncyCastle.X509.X509V3CertificateGenerator.SignatureAlgNames">
-            <summary>
-            Allows enumeration of the signature names supported by the generator.
-            </summary>
-        </member>
-        <member name="M:crypto.Security.ComputeHash(System.String,System.String)">
-            <summary>
-            Return a salted hash based on PBKDF2 for the UTF-8 encoding of the argument text.
-            </summary>
-            <param name="text">Provided key text</param>
-            <param name="salt">Base64 encoded string representing the salt</param>
-            <returns></returns>
-        </member>
-    </members>
-</doc>
-ram name="extensionValue">byte[] containing the value of this extension.</param>
         </member>
         <member name="M:Org.BouncyCastle.X509.X509V3CertificateGenerator.AddExtension(Org.BouncyCastle.Asn1.DerObjectIdentifier,System.Boolean,System.Byte[])">
             <summary>
