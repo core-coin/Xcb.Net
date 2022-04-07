@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Xcb.Net.HDWallet
 {
@@ -54,8 +55,8 @@ namespace Xcb.Net.HDWallet
 
         protected string GetTargetDerivationPath(string derivationPath, params uint[] index)
         {
-            var postfix = string.Join("'/", index);
-            return derivationPath + "'/" + postfix;
+            var postfix = string.Join("/", index.Select(a => a + "'"));
+            return derivationPath + "/" + postfix;
         }
 
         private void ValidateDerivationPath(string path)

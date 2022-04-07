@@ -1,4 +1,5 @@
 using System;
+using Org.BouncyCastle.Security;
 using Xcb.Net.Signer;
 
 namespace Xcb.Net.HDWallet
@@ -11,6 +12,14 @@ namespace Xcb.Net.HDWallet
         }
 
         public static explicit operator ExtendedPrivateKey(byte[] b) => new ExtendedPrivateKey(b);
+
+        public static ExtendedPrivateKey GenerateRandomMaster()
+        {
+            SecureRandom secureRandom = new SecureRandom();
+            byte[] randomBytes = new byte[64];
+            secureRandom.NextBytes(randomBytes, 0, 64);
+            return SeedToMaster(randomBytes);
+        }
 
         public static ExtendedPrivateKey SeedToMaster(byte[] seed)
         {

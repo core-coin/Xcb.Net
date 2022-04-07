@@ -8,11 +8,11 @@ namespace Xcb.Net.HDWallet
 {
     public class PrivateWallet : WalletBase
     {
+        public PrivateWallet(ExtendedPrivateKey master) : base(master) { }
         public PrivateWallet(ExtendedPrivateKey master, string derivationPath) : base(master, derivationPath)
         {
         }
 
-        public PrivateWallet(ExtendedPrivateKey master) : base(master) { }
 
         public override string GetAddress(int networkId, params uint[] index)
         {
