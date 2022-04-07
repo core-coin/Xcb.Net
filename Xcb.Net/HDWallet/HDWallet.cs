@@ -8,7 +8,5 @@ namespace Xcb.Net.HDWallet
 {
     public class Wallet
     {
-
-
     }
 }

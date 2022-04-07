@@ -120,13 +120,9 @@ namespace Xcb.Net.Signer
             return resInt.ToString();
         }
 
-        public static XcbECKey GenerateKey(int networkId, byte[] seed = null)
+        public static XcbECKey GenerateKey(int networkId)
         {
             var secureRandom = _secureRandom;
-            if (seed != null)
-            {
-                secureRandom = new SecureRandom(seed);
-            }
 
             var gen = new Ed448KeyPairGenerator();
             var keyGenParam = new Ed448KeyGenerationParameters(secureRandom);
