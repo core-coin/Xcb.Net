@@ -40,7 +40,7 @@ namespace Xcb.Net.DWallet
             Array.Copy(_masterSeed, seed, _masterSeed.Length);
             Array.Copy(seedPostfix, 0, seed, _masterSeed.Length, seedPostfix.Length);
 
-            XcbECKey key = XcbECKey.GenerateKey(_networkId, seed);
+            XcbECKey key = XcbECKey.GenerateKey(_networkId);
 
             return key;
         }

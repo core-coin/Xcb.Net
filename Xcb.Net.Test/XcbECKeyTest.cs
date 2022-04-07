@@ -79,20 +79,5 @@ namespace Xcb.Net.Test
 
             Assert.Equal(expectedPublicKey, publicKey);
         }
-
-        [Fact]
-        public void GenerateWithSeed()
-        {
-            //Given
-            var masterSeed = "0x3c60d7ebb9e828bbe63b116bf7a7c21dfb61e5ccf3594639bdffe89eab44e200".HexToByteArray();
-
-            //When
-            var key = XcbECKey.GenerateKey(1, masterSeed);
-            Task.Delay(1000).Wait();
-            var key2 = XcbECKey.GenerateKey(1, masterSeed);
-
-            //Then
-            Assert.Equal(key.GetAddress(), key2.GetAddress());
-        }
     }
 }
