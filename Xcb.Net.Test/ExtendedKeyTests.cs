@@ -15,7 +15,7 @@ namespace Xcb.Net.Test
         {
             var passwordBytes = password.HexToByteArray();
             var saltBytes = salt.HexToByteArray();
-            var hash = ExtendedKey.Pbkdf2(passwordBytes, saltBytes).ToHex();
+            var hash = ExtendedKeyBase.Pbkdf2(passwordBytes, saltBytes).ToHex();
 
             Assert.Equal(hash, expectedHash);
         }
@@ -28,7 +28,7 @@ namespace Xcb.Net.Test
         {
             var passwordBytes = password.HexToByteArray();
             var saltBytes = salt.HexToByteArray();
-            var hash = ExtendedKey.ConcatenateAndHex(prefix, passwordBytes, index, saltBytes).ToHex();
+            var hash = ExtendedKeyBase.ConcatenateAndHex(prefix, passwordBytes, index, saltBytes).ToHex();
 
             Assert.Equal(hash, expectedHash);
         }

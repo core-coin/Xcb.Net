@@ -3,7 +3,7 @@ using Xcb.Net.Signer;
 
 namespace Xcb.Net.HDWallet
 {
-    public class ExtendedPrivateKey : ExtendedKey
+    public class ExtendedPrivateKey : ExtendedKeyBase
     {
         public ExtendedPrivateKey(byte[] data) : base(data)
         {

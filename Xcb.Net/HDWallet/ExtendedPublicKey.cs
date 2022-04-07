@@ -5,7 +5,7 @@ using Xcb.Net.Signer;
 
 namespace Xcb.Net.HDWallet
 {
-    public class ExtendedPublicKey : ExtendedKey
+    public class ExtendedPublicKey : ExtendedKeyBase
     {
         public ExtendedPublicKey(byte[] data) : base(data)
         {

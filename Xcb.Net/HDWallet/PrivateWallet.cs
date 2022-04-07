@@ -6,7 +6,7 @@ using Org.BouncyCastle.Math.EC.Rfc8032;
 
 namespace Xcb.Net.HDWallet
 {
-    public class Wallet
+    public class PrivateWallet
     {
     }
 }

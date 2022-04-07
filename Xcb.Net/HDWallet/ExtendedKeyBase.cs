@@ -6,18 +6,18 @@ using Xcb.Net.Signer;
 
 namespace Xcb.Net.HDWallet
 {
-    public abstract class ExtendedKey
+    public abstract class ExtendedKeyBase
     {
         private readonly byte[] _data;
 
-        protected ExtendedKey(byte[] data)
+        protected ExtendedKeyBase(byte[] data)
         {
             if (data?.Length != 114)
                 throw new ArgumentException("data must be 114 bytes in length", nameof(data));
 
             _data = data;
         }
-        public static implicit operator byte[](ExtendedKey d) => d._data;
+        public static implicit operator byte[](ExtendedKeyBase d) => d._data;
 
         public abstract byte[] GetPublicKey();
 
