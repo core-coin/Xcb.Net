@@ -63,15 +63,15 @@ namespace Xcb.Net.Signer
         }
 
         //same as common/types.go:PubkeyToAddress in go-core
-        public byte[] GetAddressBytes()
+        private byte[] GetAddressBytes()
         {
             if (_addressBytes != null)
                 return _addressBytes;
 
-            return (_addressBytes = GetAddressFromPublicKey(GetPublicKeyBytes(), NetworkId));
+            return _addressBytes = GetAddressBytesFromPublicKey(GetPublicKeyBytes(), NetworkId);
         }
 
-        public string GetAddressHex()
+        public string GetAddress()
         {
             return _addressHex ?? (_addressHex = GetAddressBytes().ToHex());
         }
@@ -140,7 +140,7 @@ namespace Xcb.Net.Signer
             var secureRandom = _secureRandom;
             if (seed != null)
             {
-                secureRandom = new SecureRandom(seed);                
+                secureRandom = new SecureRandom(seed);
             }
 
             var gen = new Ed448KeyPairGenerator();
@@ -180,7 +180,7 @@ namespace Xcb.Net.Signer
             return publicKey;
         }
 
-        public static byte[] GetAddressFromPublicKey(byte[] publicKey, int networkId)
+        private static byte[] GetAddressBytesFromPublicKey(byte[] publicKey, int networkId)
         {
             if (publicKey.Length != Ed448.PublicKeySize)
                 throw new ArgumentOutOfRangeException($"public key must be {Ed448.PublicKeySize} bytes");
@@ -201,5 +201,12 @@ namespace Xcb.Net.Signer
 
             return fullAddress.ToArray();
         }
+
+        public static string GetAddressFromPublicKey(byte[] publicKey, int networkId)
+        {
+            return GetAddressBytesFromPublicKey(publicKey,networkId).ToHex();
+        }
+
+
     }
 }
