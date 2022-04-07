@@ -1,27 +1,34 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Xcb.Net.HDWallet
 {
     public abstract class WalletBase
     {
-        private readonly ExtendedKeyBase _masterExtendedKey;
+        protected readonly string _derivationPath;
+        protected readonly ExtendedKeyBase _masterExtendedKey;
 
-        public WalletBase(ExtendedKeyBase extendedKey)
+        public WalletBase(ExtendedKeyBase extendedKey, string derivationPath)
         {
-            _masterExtendedKey = extendedKey;
+            ValidateDerivationPath(derivationPath);
+            _derivationPath = derivationPath;
+            _masterExtendedKey = extendedKey ?? throw new ArgumentNullException(nameof(extendedKey));
         }
-        public abstract byte[] GetPublicKey(params int[] index);
 
-        public abstract string[] GetAddress(int networkId, params int[] index);
 
-        protected abstract ExtendedKeyBase Derive(ExtendedKeyBase extKey, int index);
+        public WalletBase(ExtendedKeyBase extendedKey) : this(extendedKey, "m/44'/0'/0'")
+        {
+
+        }
+
+        public abstract byte[] GetPublicKey(params uint[] index);
+
+        public abstract string GetAddress(int networkId, params uint[] index);
+
+        protected abstract ExtendedKeyBase Derive(ExtendedKeyBase extKey, uint index);
 
         protected K DerivePath<K>(string path) where K : ExtendedKeyBase
         {
-            ValidateDerivationPath(path);
-
             Queue<string> pathQueue = new Queue<string>(path.Split('/'));
 
             ExtendedKeyBase key = _masterExtendedKey;
@@ -34,7 +41,7 @@ namespace Xcb.Net.HDWallet
 
             while (pathQueue.Count != 0)
             {
-                if (!int.TryParse(pathQueue.Dequeue().Replace("'", ""), out int index))
+                if (!uint.TryParse(pathQueue.Dequeue().Replace("'", ""), out uint index))
                 {
                     throw new ArgumentException("Invalid Derivation Path number format");
                 }
@@ -43,7 +50,12 @@ namespace Xcb.Net.HDWallet
             }
 
             return (K)key;
+        }
 
+        protected string GetTargetDerivationPath(string derivationPath, params uint[] index)
+        {
+            var postfix = string.Join("'/", index);
+            return derivationPath + "'/" + postfix;
         }
 
         private void ValidateDerivationPath(string path)

@@ -85,6 +85,12 @@ namespace Xcb.Net.HDWallet
             return key;
         }
 
+        public byte[] GetPrivateKey()
+        {
+            var privateKey = (byte[])this;
+            return privateKey[57..114];
+        }
+
         public override byte[] GetPublicKey()
         {
             return ToXcbECKey(1).GetPrivateKey();
