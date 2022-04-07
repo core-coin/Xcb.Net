@@ -30,11 +30,11 @@ namespace Xcb.Net.Test
             var key = new XcbECKey(privateKey, 1);
 
             Assert.NotNull(key);
-            Assert.NotNull(key.GetPublicKeyBytes());
-            Assert.NotNull(key.GetPrivateKeyBytes());
+            Assert.NotNull(key.GetPublicKey());
+            Assert.NotNull(key.GetPrivateKey());
 
-            Assert.Equal(privateKey, key.GetPrivateKeyHex());
-            Assert.Equal(expectedPublicKey, key.GetPublicKeyHex());
+            Assert.Equal(privateKey, key.GetPrivateKey().ToHex());
+            Assert.Equal(expectedPublicKey, key.GetPublicKey().ToHex());
         }
 
         [Theory]

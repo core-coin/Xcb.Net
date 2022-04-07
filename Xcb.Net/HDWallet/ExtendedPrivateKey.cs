@@ -40,7 +40,7 @@ namespace Xcb.Net.HDWallet
             Array.Copy(extendedPrivateKey, 57, privateKey, 0, 57);
 
             var key = new XcbECKey(privateKey, 1);
-            var pub = key.GetPublicKeyBytes();
+            var pub = key.GetPublicKey();
             byte[] extendedPublic = new byte[114];
 
             Array.Copy(extendedPrivateKey, 0, extendedPublic, 0, 57);
@@ -62,7 +62,7 @@ namespace Xcb.Net.HDWallet
             Array.Copy(extendedPrivateKey, 57, priv, 0, 57);
 
             var key = new XcbECKey(priv, 1);
-            var pub = key.GetPublicKeyBytes();
+            var pub = key.GetPublicKey();
 
             var hex = index >= 0x80000000 ? ConcatenateAndHex(1, priv, index, chain) :
                                             ConcatenateAndHex(3, pub, index, chain);
@@ -87,7 +87,7 @@ namespace Xcb.Net.HDWallet
 
         public override byte[] GetPublicKey()
         {
-            return ToXcbECKey(1).GetPrivateKeyBytes();
+            return ToXcbECKey(1).GetPrivateKey();
         }
 
         public override string GetAddress(int networkId)

@@ -17,15 +17,9 @@ namespace Xcb.Net.Signer
         private static readonly byte[] _defaultNetworkId = new byte[] { 203 };
 
         private static readonly byte[] _emptyBytes = new byte[] { };
-        Ed448PrivateKeyParameters _privateKey;
-
-        byte[] _privateKeyBytes = null;
-        byte[] _publicKeyBytes = null;
+        readonly Ed448PrivateKeyParameters _privateKey;
 
         byte[] _addressBytes = null;
-
-        string _privateKeyHex = null;
-        string _publicKeyHex = null;
 
         string _addressHex = null;
 
@@ -37,29 +31,20 @@ namespace Xcb.Net.Signer
         public XcbECKey(byte[] privateKey, int networkId)
         {
             if (privateKey.Length != 57)
-                throw new InvalidKeyException("key length must be 57 bytes");
+                throw new InvalidKeyException("key length must be 57 bytes in length");
+
             _privateKey = new Ed448PrivateKeyParameters(privateKey, 0);
             NetworkId = networkId;
         }
 
-        public byte[] GetPrivateKeyBytes()
+        public byte[] GetPrivateKey()
         {
-            return _privateKeyBytes ?? (_privateKeyBytes = _privateKey.GetEncoded());
+            return _privateKey.GetEncoded();
         }
 
-        public byte[] GetPublicKeyBytes()
+        public byte[] GetPublicKey()
         {
-            return _publicKeyBytes ?? (_publicKeyBytes = _privateKey.GeneratePublicKey().GetEncoded());
-        }
-
-        public string GetPrivateKeyHex()
-        {
-            return _privateKeyHex ?? (_privateKeyHex = GetPrivateKeyBytes().ToHex());
-        }
-
-        public string GetPublicKeyHex()
-        {
-            return _publicKeyHex ?? (_publicKeyHex = GetPublicKeyBytes().ToHex());
+            return _privateKey.GeneratePublicKey().GetEncoded();
         }
 
         //same as common/types.go:PubkeyToAddress in go-core
@@ -68,7 +53,7 @@ namespace Xcb.Net.Signer
             if (_addressBytes != null)
                 return _addressBytes;
 
-            return _addressBytes = GetAddressBytesFromPublicKey(GetPublicKeyBytes(), NetworkId);
+            return _addressBytes = GetAddressBytesFromPublicKey(GetPublicKey(), NetworkId);
         }
 
         public string GetAddress()
@@ -86,7 +71,7 @@ namespace Xcb.Net.Signer
             byte[] sign = new byte[Ed448.SignatureSize];
             _privateKey.Sign(Ed448.Algorithm.Ed448, _emptyBytes, message, 0, message.Length, sign, 0);
             var result = sign.ToList();
-            result.AddRange(GetPublicKeyBytes());
+            result.AddRange(GetPublicKey());
             return result.ToArray();
         }
 
@@ -204,9 +189,7 @@ namespace Xcb.Net.Signer
 
         public static string GetAddressFromPublicKey(byte[] publicKey, int networkId)
         {
-            return GetAddressBytesFromPublicKey(publicKey,networkId).ToHex();
+            return GetAddressBytesFromPublicKey(publicKey, networkId).ToHex();
         }
-
-
     }
 }
