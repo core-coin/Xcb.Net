@@ -106,7 +106,7 @@ var seed = byte[64];
 // this key is the master key which m in derivaiton path stands for this key
 var masterExtPrivateKey = ExtendedPrivateKey.SeedToMaster(seed);
 
-// with an master extended private key you are able to create an private hd wallet
+// with an master extended private key you are able to create a private hd wallet
 // "m/44'/654'/0'/0'" is the derivation path
 var privateWallet = PrivateWallet.GetPrivateWalletAtSpecificDerivationPath(masterPrivateKey,  "m/44'/654'/0'/0'");
 
