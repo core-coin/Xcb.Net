@@ -17,7 +17,7 @@ namespace Xcb.Net.HDWallet
         }
 
 
-        public WalletBase(ExtendedKeyBase extendedKey) : this(extendedKey, "m/44'/0'/0'")
+        public WalletBase(ExtendedKeyBase extendedKey) : this(extendedKey, "m/44'/654'/0'/0'")
         {
 
         }
