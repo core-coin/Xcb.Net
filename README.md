@@ -91,7 +91,7 @@ Assert.Equal("0xf8ce800a830f423f8096ce276773ac97d16855a3c8faa45399136b56d4194860
 
 ```
 
-## Usage of Usage of Hierarchical Deterministic Wallet (HD-Wallet)
+## Usage of Hierarchical Deterministic Wallet (HD-Wallet)
 ``` C#
 // suppose you have an master extended private key
 var masterExtPrivateKey = (ExtendedPrivateKey)"004e843c2991930124e5a0711c6a8be763f5b605ee80f089dfa9cbec5ebb20123dcc787b162a7baf37b0251f6bdd4ac14ae111491ef391cf0d1413821ed67083c855c6db4405dd4fa5fdec39e1c761be1415623c1c202c5cb5176e578830372b7e07eb1ef9cf71b19518815c4da0fd2d3594"
