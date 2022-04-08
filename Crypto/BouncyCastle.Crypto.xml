@@ -7008,6 +7008,22 @@
              @param objectIDs an ArrayList of the object identifiers.
              @param values an ArrayList of the extension values.
         </member>
+        <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.Hashtable)">
+            constructor from a table of extensions.
+            <p>
+            it's is assumed the table contains Oid/string pairs.</p>
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.ArrayList,System.Collections.Hashtable)">
+            Constructor from a table of extensions with ordering.
+            <p>
+            It's is assumed the table contains Oid/string pairs.</p>
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X509.X509Extensions.#ctor(System.Collections.ArrayList,System.Collections.ArrayList)">
+             Constructor from two vectors
+            
+             @param objectIDs an ArrayList of the object identifiers.
+             @param values an ArrayList of the extension values.
+        </member>
         <member name="P:Org.BouncyCastle.Asn1.X509.X509Extensions.ExtensionOids">
             return an Enumeration of the extension field's object ids.
         </member>
@@ -7118,23 +7134,6 @@
         <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.Pseudonym">
             RFC 3039 Pseudonym - DirectoryString(SIZE(1..64)
         </member>
-        <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.DateOfBirth">
-            RFC 3039 DateOfBirth - GeneralizedTime - YYYYMMDD000000Z
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.PlaceOfBirth">
-            RFC 3039 PlaceOfBirth - DirectoryString(SIZE(1..128)
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.Gender">
-            RFC 3039 DateOfBirth - PrintableString (SIZE(1)) -- "M", "F", "m" or "f"
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.CountryOfCitizenship">
-            RFC 3039 CountryOfCitizenship - PrintableString (SIZE (2)) -- ISO 3166
-            codes only
-        </member>
-        <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.CountryOfResidence">
-            RFC 3039 CountryOfCitizenship - PrintableString (SIZE (2)) -- ISO 3166
-            codes only
-       </member>
         <member name="F:Org.BouncyCastle.Asn1.X509.X509Name.DateOfBirth">
             RFC 3039 DateOfBirth - GeneralizedTime - YYYYMMDD000000Z
         </member>
@@ -7332,7 +7331,27 @@
                  * <pre>
                  * public class X509DirEntryConverter
                  *     : X509NameEntryConverter
-                 *                 *         }
+                 * {
+                 *     public Asn1Object GetConvertedValue(
+                 *         DerObjectIdentifier  oid,
+                 *         string               value)
+                 *     {
+                 *         if (str.Length() != 0 &amp;&amp; str.charAt(0) == '#')
+                 *         {
+                 *             return ConvertHexEncoded(str, 1);
+                 *         }
+                 *         if (oid.Equals(EmailAddress))
+                 *         {
+                 *             return new DerIA5String(str);
+                 *         }
+                 *         else if (CanBePrintable(str))
+                 *         {
+                 *             return new DerPrintableString(str);
+                 *         }
+                 *         else if (CanBeUTF8(str))
+                 *         {
+                 *             return new DerUtf8String(str);
+                 *         }
                  *         else
                  *         {
                  *             return new DerBmpString(str);
@@ -7393,25 +7412,6 @@
         </member>
         <member name="P:Org.BouncyCastle.Asn1.X9.ECNamedCurveTable.Names">
              return an enumeration of the names of the available curves.
-            
-             @return an enumeration of the names of the available curves.
-        </member>
-        <member name="T:Org.BouncyCastle.Asn1.X9.KeySpecificInfo">
-            ASN.1 def for Diffie-Hellman key exchange KeySpecificInfo structure. See
-            RFC 2631, or X9.42, for further details.
-        </member>
-        <member name="M:Org.BouncyCastle.Asn1.X9.KeySpecificInfo.ToAsn1Object">
-            Produce an object suitable for an Asn1OutputStream.
-            <pre>
-             KeySpecificInfo ::= Sequence {
-                 algorithm OBJECT IDENTIFIER,
-                 counter OCTET STRING SIZE (4..4)
-             }
-            </pre>
-        </member>
-        <member name="T:Org.BouncyCastle.Asn1.X9.OtherInfo">
-            ANS.1 def for Diffie-Hellman key exchange OtherInfo structure. See
-                    return an enumeration of the names of the available curves.
             
              @return an enumeration of the names of the available curves.
         </member>
@@ -7497,7 +7497,25 @@
             
              @return the X9Curve for the curve in these parameters.
         </member>
-        <member name="P:Org.BouncyCastleger,
+        <member name="P:Org.BouncyCastle.Asn1.X9.X9ECParameters.FieldIDEntry">
+             Return the ASN.1 entry representing the FieldID.
+            
+             @return the X9FieldID for the FieldID in these parameters.
+        </member>
+        <member name="P:Org.BouncyCastle.Asn1.X9.X9ECParameters.BaseEntry">
+             Return the ASN.1 entry representing the base point G.
+            
+             @return the X9ECPoint for the base point in these parameters.
+        </member>
+        <member name="M:Org.BouncyCastle.Asn1.X9.X9ECParameters.ToAsn1Object">
+            Produce an object suitable for an Asn1OutputStream.
+            <pre>
+             ECParameters ::= Sequence {
+                 version         Integer { ecpVer1(1) } (ecpVer1),
+                 fieldID         FieldID {{FieldTypes}},
+                 curve           X9Curve,
+                 base            X9ECPoint,
+                 order           Integer,
                  cofactor        Integer OPTIONAL
              }
             </pre>
@@ -7650,7 +7668,7 @@
             Start a clear text signed message.
             @param hashAlgorithm
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.Dispose(System.Boolean)">
+        <member name="M:Org.BouncyCastle.Bcpg.ArmoredOutputStream.Close">
             <b>Note</b>: Close() does not close the underlying stream. So it is possible to write
             multiple objects using armoring to a single stream.
         </member>
@@ -7947,22 +7965,6 @@
             packet giving time after creation at which the key expires.
         </member>
         <member name="P:Org.BouncyCastle.Bcpg.Sig.KeyExpirationTime.Time">
-             Return the ="P:Org.BouncyCastle.Bcpg.Sig.Features.SupportsModificationDetection">
-            Returns if modification detection is supported.
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.Sig.Features.SupportsFeature(System.Byte)">
-            Returns if a particular feature is supported.
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.Sig.Features.SetSupportsFeature(System.Byte,System.Boolean)">
-            Sets support for a particular feature.
-        </member>
-        <member name="T:Org.BouncyCastle.Bcpg.Sig.IssuerKeyId">
-            packet giving signature creation time.
-        </member>
-        <member name="T:Org.BouncyCastle.Bcpg.Sig.KeyExpirationTime">
-            packet giving time after creation at which the key expires.
-        </member>
-        <member name="P:Org.BouncyCastle.Bcpg.Sig.KeyExpirationTime.Time">
              Return the number of seconds after creation time a key is valid for.
             
              @return second count for key validity.
@@ -8028,7 +8030,27 @@
              @param fingerprint
              @param signature
         </member>
-        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.#ctor(System.Int32,System.Int32,System.Int64,Org.BouncyCastle.Bcpg.Publi           		* return the signature as a set of integers - note this is normalised to be the
+        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.#ctor(System.Int32,System.Int32,System.Int64,Org.BouncyCastle.Bcpg.PublicKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Int64,System.Byte[],Org.BouncyCastle.Bcpg.MPInteger[])">
+             Generate a version 2/3 signature packet.
+            
+             @param signatureType
+             @param keyAlgorithm
+             @param hashAlgorithm
+             @param fingerprint
+             @param signature
+        </member>
+        <member name="P:Org.BouncyCastle.Bcpg.SignaturePacket.KeyId">
+            return the keyId
+            @return the keyId that created the signature.
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.GetSignatureTrailer">
+             return the signature trailer that must be included with the data
+             to reconstruct the signature
+            
+             @return byte[]
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.GetSignature">
+            		* return the signature as a set of integers - note this is normalised to be the
                     * ASN.1 encoding of what appears in the signature packet.
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.SignaturePacket.GetSignatureBytes">
@@ -8553,6 +8575,22 @@
             <param name="modificationTime">The time of last modification we want stored.</param>
             <param name="buffer">The buffer to use for collecting data to put into chunks.</param>
         </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpLiteralDataGenerator.Open(System.IO.Stream,System.Char,System.IO.FileInfo)">
+            <summary>
+            <p>
+            Open a literal data packet for the passed in <c>FileInfo</c> object, returning
+            an output stream for saving the file contents.
+            </p>
+            <p>
+            The stream created can be closed off by either calling Close()
+            on the stream or Close() on the generator. Closing the returned
+            stream does not close off the Stream parameter <c>outStr</c>.
+            </p>
+            </summary>
+            <param name="outStr">The stream we want the packet in.</param>
+            <param name="format">The format we are using.</param>
+            <param name="file">The <c>FileInfo</c> object containg the packet details.</param>
+        </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpLiteralDataGenerator.Close">
             <summary>
             Close the literal data packet - this is equivalent to calling Close()
@@ -8702,36 +8740,6 @@
         <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.IsEncryptionKey">
             <summary>
             Check if this key has an algorithm type that makes it suitable to use for encryption.
-            </summary>
-            <remarks>
-            Note: with version 4 keys KeyFlags subpackets should also be considered when present for
-            determining the preferred use of the key.
-            </remarks>
-            <returns>
-            <c>true</c> if this key algorithm is suitable for encryption.
-            </returns>
-        </member>
-        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.IsMasterKey">
-            <summary>True, if this could be a master key.</summary>
-        </member>
-        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.Algorithm">
-            <summary>The algorithm code associated with the public key.</summary>
-        </member>
-        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.BitStrength">
-            <summary>The strength of the key in bits.</summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.GetKey">
-            <summary>The public key contained in the object.</summary>
-            <returns>A lightweight public key.</returns>
-            <exception cref="T:Org.BouncyCastle.Bcpg.OpenPgp.PgpException">If the key algorithm is not recognised.</exception>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.GetUserIds">
-            <summary>Allows enumeration of any user IDs associated with the key.</summary>
-            <returns>An <c>IEnumerable</c> of <c>string</c> objects.</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey.GetUserAttributes">
-            <summary>Allows enumeration of any user attribute vectors associated with the key.</summary>
-            <returns>An <c>IEnumerable</c> of <c>PgpUserAttributeSubpacketVeon.
             </summary>
             <remarks>
             Note: with version 4 keys KeyFlags subpackets should also be considered when present for
@@ -8995,7 +9003,28 @@
             <remarks>
             Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
             the historical behaviour of the library (1.7 and earlier).
-                 <returns>
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Boolean,System.Char[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
+            <remarks>
+            If utf8PassPhrase is true, conversion of the passphrase to bytes uses Encoding.UTF8.GetBytes(), otherwise the conversion
+            is performed using Convert.ToByte(), which is the historical behaviour of the library (1.7 and earlier).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.#ctor(System.Int32,Org.BouncyCastle.Bcpg.OpenPgp.PgpKeyPair,System.String,Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Bcpg.HashAlgorithmTag,System.Byte[],System.Boolean,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Bcpg.OpenPgp.PgpSignatureSubpacketVector,Org.BouncyCastle.Security.SecureRandom)">
+            <remarks>
+            Allows the caller to handle the encoding of the passphrase to bytes.
+            </remarks>
+        </member>
+        <member name="P:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.IsSigningKey">
+            <summary>
+            Check if this key has an algorithm type that makes it suitable to use for signing.
+            </summary>
+            <remarks>
+            Note: with version 4 keys KeyFlags subpackets should also be considered when present for
+            determining the preferred use of the key.
+            </remarks>
+            <returns>
             <c>true</c> if this key algorithm is suitable for use with signing.
             </returns>
         </member>
@@ -9060,33 +9089,6 @@
             <param name="oldPassPhrase">The current password for the key.</param>
             <param name="newPassPhrase">The new password for the key.</param>
             <param name="newEncAlgorithm">The algorithm to be used for the encryption.</param>
-            <param name="rand">Source of randomness.</paraks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ExtractPrivateKeyUtf8(System.Char[])">
-            <summary>Extract a <c>PgpPrivateKey</c> from this secret key's encrypted contents.</summary>
-            <remarks>
-            The passphrase is encoded to bytes using UTF8 (Encoding.UTF8.GetBytes).
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ExtractPrivateKeyRaw(System.Byte[])">
-            <summary>Extract a <c>PgpPrivateKey</c> from this secret key's encrypted contents.</summary>
-            <remarks>
-            Allows the caller to handle the encoding of the passphrase to bytes.
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.CopyWithNewPassword(Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey,System.Char[],System.Char[],Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Security.SecureRandom)">
-            <summary>
-            Return a copy of the passed in secret key, encrypted using a new password
-            and the passed in algorithm.
-            </summary>
-            <remarks>
-            Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
-            the historical behaviour of the library (1.7 and earlier).
-            </remarks>
-            <param name="key">The PgpSecretKey to be copied.</param>
-            <param name="oldPassPhrase">The current password for the key.</param>
-            <param name="newPassPhrase">The new password for the key.</param>
-            <param name="newEncAlgorithm">The algorithm to be used for the encryption.</param>
             <param name="rand">Source of randomness.</param>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.CopyWithNewPasswordUtf8(Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey,System.Char[],System.Char[],Org.BouncyCastle.Bcpg.SymmetricKeyAlgorithmTag,Org.BouncyCastle.Security.SecureRandom)">
@@ -9121,7 +9123,35 @@
             <summary>Replace the passed the public key on the passed in secret key.</summary>
             <param name="secretKey">Secret key to change.</param>
             <param name="publicKey">New public key.</param>
-            Expr(System.IO.Stream,System.Char[])">
+            <returns>A new secret key.</returns>
+            <exception cref="T:System.ArgumentException">If KeyId's do not match.</exception>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExpr(System.IO.Stream,System.Char[],Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
+            <summary>
+            Parse a secret key from one of the GPG S expression keys associating it with the passed in public key.
+            </summary>
+            <remarks>
+            Conversion of the passphrase characters to bytes is performed using Convert.ToByte(), which is
+            the historical behaviour of the library (1.7 and earlier).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExprUtf8(System.IO.Stream,System.Char[],Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
+            <summary>
+            Parse a secret key from one of the GPG S expression keys associating it with the passed in public key.
+            </summary>
+            <remarks>
+            The passphrase is encoded to bytes using UTF8 (Encoding.UTF8.GetBytes).
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExprRaw(System.IO.Stream,System.Byte[],Org.BouncyCastle.Bcpg.OpenPgp.PgpPublicKey)">
+            <summary>
+            Parse a secret key from one of the GPG S expression keys associating it with the passed in public key.
+            </summary>
+            <remarks>
+            Allows the caller to handle the encoding of the passphrase to bytes.
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpSecretKey.ParseSecretKeyFromSExpr(System.IO.Stream,System.Char[])">
             <summary>
             Parse a secret key from one of the GPG S expression keys.
             </summary>
@@ -9490,6 +9520,12 @@
             <remarks>
             Allows the caller to handle the encoding of the passphrase to bytes.
             </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.WriteFileToLiteralData(System.IO.Stream,System.Char,System.IO.FileInfo)">
+            <summary>Write out the passed in file as a literal data packet.</summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.WriteFileToLiteralData(System.IO.Stream,System.Char,System.IO.FileInfo,System.Byte[])">
+            <summary>Write out the passed in file as a literal data packet in partial packet format.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Bcpg.OpenPgp.PgpUtilities.GetDecoderStream(System.IO.Stream)">
             <summary>
@@ -10076,6 +10112,12 @@
         <member name="M:Org.BouncyCastle.Cms.CmsProcessableByteArray.GetContent">
             <returns>A clone of the byte array</returns>
         </member>
+        <member name="T:Org.BouncyCastle.Cms.CmsProcessableFile">
+            a holding class for a file of data to be processed.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsProcessableFile.GetContent">
+            <returns>The file handle</returns>
+        </member>
         <member name="T:Org.BouncyCastle.Cms.CmsSignedData">
              general class for handling a pkcs7-signature message.
             
@@ -10119,53 +10161,6 @@
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetSignerInfos">
             return the collection of signers that are associated with the
-            signatures for the message.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetAttributeCertificates(System.String)">
-             return a X509Store containing the attribute certificates, if any, contained
-             in this message.
-            
-             @param type type of store to create
-             @return a store of attribute certificates
-             @exception NoSuchStoreException if the store type isn't available.
-             @exception CmsException if a general exception prevents creation of the X509Store
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetCertificates(System.String)">
-             return a X509Store containing the public key certificates, if any, contained
-             in this message.
-            
-             @param type type of store to create
-             @return a store of public key certificates
-             @exception NoSuchStoreException if the store type isn't available.
-             @exception CmsException if a general exception prevents creation of the X509Store
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetCrls(System.String)">
-             return a X509Store containing CRLs, if any, contained
-             in this message.
-            
-             @param type type of store to create
-             @return a store of CRLs
-             @exception NoSuchStoreException if the store type isn't available.
-             @exception CmsException if a general exception prevents creation of the X509Store
-        </member>
-        <member name="P:Org.BouncyCastle.Cms.CmsSignedData.SignedContentType">
-            <summary>
-            Return the <c>DerObjectIdentifier</c> associated with the encapsulated
-            content info structure carried in the signed data.
-            </summary>
-        </member>
-        <member name="P:Org.BouncyCastle.Cms.CmsSignedData.ContentInfo">
-            return the ContentInfo
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetEncoded">
-            return the ASN.1 encoded representation of this object.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetEncoded(System.String)">
-             return the ASN.1 encoded representation of this object using the specified encoding.
-            
-             @param encoding the ASN.1 encoding format to use ("BER" or "DER").
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedData.ReplaceSignere collection of signers that are associated with the
             signatures for the message.
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsSignedData.GetAttributeCertificates(System.String)">
@@ -10492,7 +10487,43 @@
             <param name="rand">Instance of <c>SecureRandom</c> to use.</param>
         </member>
         <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.SetBufferSize(System.Int32)">
-             Set the underlying string size for e other than the default ones will be
+             Set the underlying string size for encapsulated data
+            
+             @param bufferSize length of octet strings to buffer the data.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String)">
+            add a signer - no attributes other than the default ones will be
+            provided here.
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String,System.String)">
+            add a signer, specifying the digest encryption algorithm - no attributes other than the default ones will be
+            provided here.
+            @throws NoSuchProviderException
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String,Org.BouncyCastle.Asn1.Cms.AttributeTable,Org.BouncyCastle.Asn1.Cms.AttributeTable)">
+            add a signer with extra signed/unsigned attributes.
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,Org.BouncyCastle.X509.X509Certificate,System.String,System.String,Org.BouncyCastle.Asn1.Cms.AttributeTable,Org.BouncyCastle.Asn1.Cms.AttributeTable)">
+            add a signer with extra signed/unsigned attributes - specifying digest
+            encryption algorithm.
+            @throws NoSuchProviderException
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,System.Byte[],System.String)">
+            add a signer - no attributes other than the default ones will be
+            provided here.
+            @throws NoSuchAlgorithmException
+            @throws InvalidKeyException
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.AddSigner(Org.BouncyCastle.Crypto.AsymmetricKeyParameter,System.Byte[],System.String,System.String)">
+            add a signer - no attributes other than the default ones will be
             provided here.
             @throws NoSuchProviderException
             @throws NoSuchAlgorithmException
@@ -10517,43 +10548,6 @@
             object using the given provider - if encapsulate is true a copy
             of the message will be included in the signature with the
             default content type "data". If dataOutputStream is non null the data
-            being signed will be written to the stream as it is processed.
-            @param out stream the CMS object is to be written to.
-            @param encapsulate true if data should be encapsulated.
-            @param dataOutputStream output stream to copy the data being signed to.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.Open(System.IO.Stream,System.String,System.Boolean)">
-            generate a signed object that for a CMS Signed Data
-            object - if encapsulate is true a copy
-            of the message will be included in the signature. The content type
-            is set according to the OID represented by the string signedContentType.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedDataStreamGenerator.Open(System.IO.Stream,System.String,System.Boolean,System.IO.Stream)">
-            generate a signed object that for a CMS Signed Data
-            object using the given provider - if encapsulate is true a copy
-            of the message will be included in the signature. The content type
-            is set according to the OID represented by the string signedContentType.
-            @param out stream the CMS object is to be written to.
-            @param signedContentType OID for data to be signed.
-            @param encapsulate true if data should be encapsulated.
-            @param dataOutputStream output stream to copy the data being signed to.
-        </member>
-        <member name="F:Org.BouncyCastle.Cms.CmsSignedGenerator.Data">
-            Default type for the signed data.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedGenerator.#ctor(Org.BouncyCastle.Security.SecureRandom)">
-            <summary>Constructor allowing specific source of randomness</summary>
-            <param name="rand">Instance of <c>SecureRandom</c> to use.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedGenerator.AddAttributeCertificates(Org.BouncyCastle.X509.Store.IX509Store)">
-             Add the attribute certificates contained in the passed in store to the
-             generator.
-            
-             @param store a store of Version 2 attribute certificates
-             @throws CmsException if an error occurse processing the store.
-        </member>
-        <member name="M:Org.BouncyCastle.Cms.CmsSignedGenerator.AddSigners(Org.BouncyCastle.Cms.SignerInformationStore)">
-             Add a store of precalculated signers to the  default content type "data". If dataOutputStream is non null the data
             being signed will be written to the stream as it is processed.
             @param out stream the CMS object is to be written to.
             @param encapsulate true if data should be encapsulated.
@@ -10616,7 +10610,51 @@
             Initialise to use all defaults
         </member>
         <member name="M:Org.BouncyCastle.Cms.DefaultAuthenticatedAttributeTableGenerator.#ctor(Org.BouncyCastle.Asn1.Cms.AttributeTable)">
-             Initialise with some extra attributes or       the RecipientInfo class for a recipient who has been sent a message
+             Initialise with some extra attributes or overrides.
+            
+             @param attributeTable initial attribute table to use.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.DefaultAuthenticatedAttributeTableGenerator.CreateStandardAttributeTable(System.Collections.IDictionary)">
+             Create a standard attribute table from the passed in parameters - this will
+             normally include contentType and messageDigest. If the constructor
+             using an AttributeTable was used, entries in it for contentType and
+             messageDigest will override the generated ones.
+            
+             @param parameters source parameters for table generation.
+            
+             @return a filled in IDictionary of attributes.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.DefaultAuthenticatedAttributeTableGenerator.GetAttributes(System.Collections.IDictionary)">
+            @param parameters source parameters
+            @return the populated attribute table
+        </member>
+        <member name="T:Org.BouncyCastle.Cms.DefaultSignedAttributeTableGenerator">
+            Default signed attributes generator.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.DefaultSignedAttributeTableGenerator.#ctor">
+            Initialise to use all defaults
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.DefaultSignedAttributeTableGenerator.#ctor(Org.BouncyCastle.Asn1.Cms.AttributeTable)">
+             Initialise with some extra attributes or overrides.
+            
+             @param attributeTable initial attribute table to use.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.DefaultSignedAttributeTableGenerator.createStandardAttributeTable(System.Collections.IDictionary)">
+             Create a standard attribute table from the passed in parameters - this will
+             normally include contentType, signingTime, and messageDigest. If the constructor
+             using an AttributeTable was used, entries in it for contentType, signingTime, and
+             messageDigest will override the generated ones.
+            
+             @param parameters source parameters for table generation.
+            
+             @return a filled in Hashtable of attributes.
+        </member>
+        <member name="M:Org.BouncyCastle.Cms.DefaultSignedAttributeTableGenerator.GetAttributes(System.Collections.IDictionary)">
+            @param parameters source parameters
+            @return the populated attribute table
+        </member>
+        <member name="T:Org.BouncyCastle.Cms.KekRecipientInformation">
+            the RecipientInfo class for a recipient who has been sent a message
             encrypted using a secret key known to the other side.
         </member>
         <member name="M:Org.BouncyCastle.Cms.KekRecipientInformation.GetContentStream(Org.BouncyCastle.Crypto.ICipherParameters)">
@@ -11263,46 +11301,6 @@
              <p>
              Note: As stated P1363 compatibility mode with ECDH can be preset, and
              in this case the implementation doesn't have a ECDH compatibility mode
-           are available. See the DHAgreement class
-            for a "better" implementation.</p>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.DHBasicAgreement.CalculateAgreement(Org.BouncyCastle.Crypto.ICipherParameters)">
-            given a short term public key from a given party calculate the next
-            message in the agreement sequence.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.DHStandardGroups">
-            <summary>Standard Diffie-Hellman groups from various IETF specifications.</summary>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.ECDHBasicAgreement">
-             P1363 7.2.1 ECSVDP-DH
-            
-             ECSVDP-DH is Elliptic Curve Secret Value Derivation Primitive,
-             Diffie-Hellman version. It is based on the work of [DH76], [Mil86],
-             and [Kob87]. This primitive derives a shared secret value from one
-             party's private key and another party's public key, where both have
-             the same set of EC domain parameters. If two parties correctly
-             execute this primitive, they will produce the same output. This
-             primitive can be invoked by a scheme to derive a shared secret key;
-             specifically, it may be used with the schemes ECKAS-DH1 and
-             DL/ECKAS-DH2. It assumes that the input keys are valid (see also
-             Section 7.2.2).
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.ECDHCBasicAgreement">
-             P1363 7.2.2 ECSVDP-DHC
-            
-             ECSVDP-DHC is Elliptic Curve Secret Value Derivation Primitive,
-             Diffie-Hellman version with cofactor multiplication. It is based on
-             the work of [DH76], [Mil86], [Kob87], [LMQ98] and [Kal98a]. This
-             primitive derives a shared secret value from one party's private key
-             and another party's public key, where both have the same set of EC
-             domain parameters. If two parties correctly execute this primitive,
-             they will produce the same output. This primitive can be invoked by a
-             scheme to derive a shared secret key; specifically, it may be used
-             with the schemes ECKAS-DH1 and DL/ECKAS-DH2. It does not assume the
-             validity of the input public key (see also Section 7.2.1).
-             <p>
-             Note: As stated P1363 compatibility mode with ECDH can be preset, and
-             in this case the implementation doesn't have a ECDH compatibility mode
              (if you want that just use ECDHBasicAgreement and note they both implement
              BasicAgreement!).</p>
         </member>
@@ -11326,7 +11324,44 @@
              CreateRound1PayloadToSend() - and send the payload to the other participant
              ValidateRound1PayloadReceived(JPakeRound1Payload) - use the payload received from the other participant
              CreateRound2PayloadToSend() - and send the payload to the other participant
-             ValidateRound2Payln if password is empty.
+             ValidateRound2PayloadReceived(JPakeRound2Payload) - use the payload received from the other participant
+             CalculateKeyingMaterial()
+             CreateRound3PayloadToSend(BigInteger) - and send the payload to the other participant
+             ValidateRound3PayloadReceived(JPakeRound3Payload, BigInteger) - use the payload received from the other participant
+            
+             Each side should derive a session key from the keying material returned by CalculateKeyingMaterial().
+             The caller is responsible for deriving the session key using a secure key derivation function (KDF).
+            
+             Round 3 is an optional key confirmation process.
+             If you do not execute round 3, then there is no assurance that both participants are using the same key.
+             (i.e. if the participants used different passwords, then their session keys will differ.)
+            
+             If the round 3 validation succeeds, then the keys are guaranteed to be the same on both sides.
+            
+             The symmetric design can easily support the asymmetric cases when one party initiates the communication.
+             e.g. Sometimes the round1 payload and round2 payload may be sent in one pass.
+             Also, in some cases, the key confirmation payload can be sent together with the round2 payload.
+             These are the trivial techniques to optimize the communication.
+            
+             The key confirmation process is implemented as specified in
+             <a href="http://csrc.nist.gov/publications/nistpubs/800-56A/SP800-56A_Revision1_Mar08-2007.pdf">NIST SP 800-56A Revision 1</a>,
+             Section 8.2 Unilateral Key Confirmation for Key Agreement Schemes.
+            
+             This class is stateful and NOT threadsafe.
+             Each instance should only be used for ONE complete J-PAKE exchange
+             (i.e. a new JPakeParticipant should be constructed for each new J-PAKE exchange).
+             </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeParticipant.#ctor(System.String,System.Char[])">
+             <summary>
+             Convenience constructor for a new JPakeParticipant that uses
+             the JPakePrimeOrderGroups#NIST_3072 prime order group,
+             a SHA-256 digest, and a default SecureRandom implementation.
+            
+             After construction, the State state will be STATE_INITIALIZED.
+             
+             Throws NullReferenceException if any argument is null. Throws
+             ArgumentException if password is empty.
              </summary>
              <param name="participantId">Unique identifier of this participant.
                   The two participants in the exchange must NOT share the same id.</param>
@@ -11350,46 +11385,6 @@
                   A defensive copy of this array is made (and cleared once CalculateKeyingMaterial() is called).
                   Caller should clear the input password as soon as possible.</param>
              <param name="group">Prime order group. See JPakePrimeOrderGroups for standard groups.</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeParticipant.#ctor(System.String,System.Char[],Org.BouncyCastle.Crypto.Agreement.JPake.JPakePrimeOrderGroup,Org.BouncyCastle.Crypto.IDigest,Org.BouncyCastle.Security.SecureRandom)">
-             <summary>
-             Constructor for a new JPakeParticipant.
-            
-             After construction, the State state will be STATE_INITIALIZED.
-             
-             Throws NullReferenceException if any argument is null. Throws
-             ArgumentException if password is empty.
-             </summary>
-             <param name="participantId">Unique identifier of this participant.
-                  The two participants in the exchange must NOT share the same id.</param>
-             <param name="password">Shared secret.
-                  A defensive copy of this array is made (and cleared once CalculateKeyingMaterial() is called).
-                  Caller should clear the input password as soon as possible.</param>
-             <param name="group">Prime order group. See JPakePrimeOrderGroups for standard groups.</param>
-             <param name="digest">Digest to use during zero knowledge proofs and key confirmation
-                 (SHA-256 or stronger preferred).</param>
-             <param name="random">Source of secure random data for x1 and x2, and for the zero knowledge proofs.</param>
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeParticipant.State">
-            <summary>
-            Gets the current state of this participant.
-            See the <tt>STATE_*</tt> constants for possible values.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeParticipant.CreateRound1PayloadToSend">
-             <summary>
-             Creates and returns the payload to send to the other participant during round 1.
-            
-             After execution, the State state} will be STATE_ROUND_1_CREATED}.
-             </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeParticipant.ValidateRound1PayloadReceived(Org.BouncyCastle.Crypto.Agreement.JPake.JPakeRound1Payload)">
-             <summary>
-             Validates the payload received from the other participant during round 1.
-            
-             Must be called prior to CreateRound2PayloadToSend().
-            
-             After execution, the State sta       <param name="group">Prime order group. See JPakePrimeOrderGroups for standard groups.</param>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeParticipant.#ctor(System.String,System.Char[],Org.BouncyCastle.Crypto.Agreement.JPake.JPakePrimeOrderGroup,Org.BouncyCastle.Crypto.IDigest,Org.BouncyCastle.Security.SecureRandom)">
              <summary>
@@ -11523,7 +11518,53 @@
             
              See JPakePrimeOrderGroups for convenient standard groups.
             
-             NIST <a href="http://csrc.nist.gov/gr.html#AppB),
+             NIST <a href="http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/DSA2_All.pdf">publishes</a>
+             many groups that can be used for the desired level of security.
+             </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakePrimeOrderGroup.#ctor(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger)">
+             <summary>
+             Constructs a new JPakePrimeOrderGroup.
+            
+             In general, you should use one of the pre-approved groups from
+             JPakePrimeOrderGroups, rather than manually constructing one.
+            
+             The following basic checks are performed:
+            
+             p-1 must be evenly divisible by q
+             g must be in [2, p-1]
+             g^q mod p must equal 1
+             p must be prime (within reasonably certainty)
+             q must be prime (within reasonably certainty)
+            
+             The prime checks are performed using BigInteger#isProbablePrime(int),
+             and are therefore subject to the same probability guarantees.
+            
+             These checks prevent trivial mistakes.
+             However, due to the small uncertainties if p and q are not prime,
+             advanced attacks are not prevented.
+             Use it at your own risk.
+             
+             Throws NullReferenceException if any argument is null. Throws
+             InvalidOperationException is any of the above validations fail.
+             </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakePrimeOrderGroup.#ctor(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,System.Boolean)">
+            <summary>
+            Constructor used by the pre-approved groups in JPakePrimeOrderGroups.
+            These pre-approved groups can avoid the expensive checks.
+            User-specified groups should not use this constructor.
+            </summary>
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Agreement.JPake.JPakePrimeOrderGroups">
+            <summary>
+            Standard pre-computed prime order groups for use by J-PAKE.
+            (J-PAKE can use pre-computed prime order groups, same as DSA and Diffie-Hellman.)
+            <p/>
+            This class contains some convenient constants for use as input for
+            constructing {@link JPAKEParticipant}s.
+            <p/>
+            The prime order groups below are taken from Sun's JDK JavaDoc (docs/guide/security/CryptoSpec.html#AppB),
             and from the prime order groups
             <a href="http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/DSA2_All.pdf">published by NIST</a>.
             </summary>
@@ -11687,50 +11728,6 @@
             Calculate ga as done in round 2.
             </summary>
         </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateX2s(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigIn   The value of MacTag, as computed by round 3.
-            
-            See JPAKEUtil#calculateMacTag(string, string, BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, org.bouncycastle.crypto.Digest)
-            </summary>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities">
-            <summary>
-            Primitives needed for a J-PAKE exchange.
-            
-            The recommended way to perform a J-PAKE exchange is by using
-            two JPAKEParticipants.  Internally, those participants
-            call these primitive operations in JPakeUtilities.
-            
-            The primitives, however, can be used without a JPAKEParticipant if needed.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.GenerateX1(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Security.SecureRandom)">
-            <summary>
-            Return a value that can be used as x1 or x3 during round 1.
-            The returned value is a random value in the range [0, q-1].
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.GenerateX2(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Security.SecureRandom)">
-            <summary>
-            Return a value that can be used as x2 or x4 during round 1.
-            The returned value is a random value in the range [1, q-1].
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateS(System.Char[])">
-            <summary>
-            Converts the given password to a BigInteger
-            for use in arithmetic calculations.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateGx(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger)">
-            <summary>
-            Calculate g^x mod p as done in round 1.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateGA(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger)">
-            <summary>
-            Calculate ga as done in round 2.
-            </summary>
-        </member>
         <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateX2s(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger)">
             <summary>
             Calculate x2 * s as done in round 2.
@@ -11755,7 +11752,46 @@
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.ValidateGa(Org.BouncyCastle.Math.BigInteger)">
             <summary>
-            Validates that ga isure that the payloads received from
+            Validates that ga is not 1.
+            
+            As described by Feng Hao...
+            Alice could simply check ga != 1 to ensure it is a generator.
+            In fact, as we will explain in Section 3, (x1 + x3 + x4 ) is random over Zq even in the face of active attacks.
+            Hence, the probability for ga = 1 is extremely small - on the order of 2^160 for 160-bit q.
+            
+            throws CryptoException if ga is 1
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.ValidateZeroKnowledgeProof(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger[],System.String,Org.BouncyCastle.Crypto.IDigest)">
+            <summary>
+            Validates the zero knowledge proof (generated by
+            calculateZeroKnowledgeProof(BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, string, Digest, SecureRandom)
+            is correct.
+            
+            throws CryptoException if the zero knowledge proof is not correct
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateKeyingMaterial(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger)">
+            <summary>
+            Calculates the keying material, which can be done after round 2 has completed.
+            A session key must be derived from this key material using a secure key derivation function (KDF).
+            The KDF used to derive the key is handled externally (i.e. not by JPAKEParticipant).
+            
+            KeyingMaterial = (B/g^{x2*x4*s})^x2
+            </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.ValidateParticipantIdsDiffer(System.String,System.String)">
+             <summary>
+             Validates that the given participant ids are not equal.
+             (For the J-PAKE exchange, each participant must use a unique id.)
+            
+             Throws CryptoException if the participantId strings are equal.
+             </summary>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.ValidateParticipantIdsEqual(System.String,System.String)">
+            <summary>
+            Validates that the given participant ids are equal.
+            This is used to ensure that the payloads received from
             each round all come from the same participant.
             </summary>
         </member>
@@ -11778,49 +11814,6 @@
              MacData = "KC_1_U" || participantId || partnerParticipantId || gx1 || gx2 || gx3 || gx4
             
              Note that both participants use "KC_1_U" because the sender of the round 3 message
-             is always the initiator for key confirmation.
-            
-             HMAC = {@link HMac} used with the given {@link Digest}
-             H = The given {@link Digest}
-             MacLen = length of MacTag
-             </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.CalculateMacKey(Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Crypto.IDigest)">
-            <summary>
-            Calculates the MacKey (i.e. the key to use when calculating the MagTag for key confirmation).
-            
-            MacKey = H(K || "JPAKE_KC")
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.JPake.JPakeUtilities.ValidateMacTag(System.String,System.String,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Crypto.IDigest,Org.BouncyCastle.Math.BigInteger)">
-            <summary>
-            Validates the MacTag received from the partner participant.
-            
-            throws CryptoException if the participantId strings are equal.
-            </summary>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.Kdf.ConcatenationKdfGenerator">
-            Generator for Concatenation Key Derivation Function defined in NIST SP 800-56A, Sect 5.8.1
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.Kdf.ConcatenationKdfGenerator.#ctor(Org.BouncyCastle.Crypto.IDigest)">
-            @param digest the digest to be used as the source of generated bytes
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.Agreement.Kdf.ConcatenationKdfGenerator.Digest">
-            return the underlying digest.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Agreement.Kdf.ConcatenationKdfGenerator.GenerateBytes(System.Byte[],System.Int32,System.Int32)">
-             fill len bytes of the output buffer with bytes generated from
-             the derivation function.
-            
-             @throws DataLengthException if the out buffer is too small.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.Kdf.DHKekGenerator">
-            RFC 2631 Diffie-hellman KEK derivation function.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Agreement.Kdf.ECDHKekGenerator">
-            X9.63 based key derivation function for ECDH CMS.
-        </member>
-        <member name="T"KC_1_U" because the sender of the round 3 message
              is always the initiator for key confirmation.
             
              HMAC = {@link HMac} used with the given {@link Digest}
@@ -12211,7 +12204,54 @@
         <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.#ctor(Org.BouncyCastle.Crypto.IBlockCipher)">
              Create a buffered block cipher without padding.
             
-             @param cipher the underlying block         @param inOff the offset at which the input data starts.
+             @param cipher the underlying block cipher this buffering object wraps.
+             false otherwise.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
+             initialise the cipher.
+            
+             @param forEncryption if true the cipher is initialised for
+              encryption, if false for decryption.
+             @param param the key and other data required by the cipher.
+             @exception ArgumentException if the parameters argument is
+             inappropriate.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.GetBlockSize">
+             return the blocksize for the underlying cipher.
+            
+             @return the blocksize for the underlying cipher.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.GetUpdateOutputSize(System.Int32)">
+             return the size of the output buffer required for an update
+             an input of len bytes.
+            
+             @param len the length of the input.
+             @return the space required to accommodate a call to update
+             with len bytes of input.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.GetOutputSize(System.Int32)">
+             return the size of the output buffer required for an update plus a
+             doFinal with an input of len bytes.
+            
+             @param len the length of the input.
+             @return the space required to accommodate a call to update and doFinal
+             with len bytes of input.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.ProcessByte(System.Byte,System.Byte[],System.Int32)">
+             process a single byte, producing an output block if necessary.
+            
+             @param in the input byte.
+             @param out the space for any output that might be produced.
+             @param outOff the offset from which the output will be copied.
+             @return the number of output bytes copied to out.
+             @exception DataLengthException if there isn't enough space in out.
+             @exception InvalidOperationException if the cipher isn't initialised.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.ProcessBytes(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+             process an array of bytes, producing output if necessary.
+            
+             @param in the input byte array.
+             @param inOff the offset at which the input data starts.
              @param len the number of bytes to be copied out of the input array.
              @param out the space for any output that might be produced.
              @param outOff the offset from which the output will be copied.
@@ -12235,53 +12275,6 @@
         </member>
         <member name="M:Org.BouncyCastle.Crypto.BufferedBlockCipher.Reset">
             Reset the buffer and cipher. After resetting the object is in the same
-            state as it was after the last init (if there was one).
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.CipherKeyGenerator">
-            The base class for symmetric, or secret, cipher key generators.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.CipherKeyGenerator.Init(Org.BouncyCastle.Crypto.KeyGenerationParameters)">
-             initialise the key generator.
-            
-             @param param the parameters to be used for key generation
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.CipherKeyGenerator.GenerateKey">
-             Generate a secret key.
-            
-             @return a byte array containing the key value.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.DataLengthException">
-            this exception is thrown if a buffer that is meant to have output
-            copied into it turns out to be too short, or if we've been given
-            insufficient input. In general this exception will Get thrown rather
-            than an ArrayOutOfBounds exception.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.DataLengthException.#ctor">
-            base constructor.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.DataLengthException.#ctor(System.String)">
-             create a DataLengthException with the given message.
-            
-             @param message the message to be carried with the exception.
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Org.BouncyCastle.Crypto.Digests.Blake2bDigest" -->
-        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2bDigest.#ctor(System.Int32)">
-             Basic sized constructor - size in bits.
-            
-             @param digestSize size of the digest in bits
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2bDigest.#ctor(System.Byte[])">
-             Blake2b for authentication ("Prefix-MAC mode").
-             After calling the doFinal() method, the key will
-             remain to be used for further computations of
-             this instance.
-             The key can be overwritten using the clearKey() method.
-            
-             @param key A key up to 64 bytes or null
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2bDigest.#ctor(System.Byte[],System.Int32,System.Byte[],System.Byte[])">
-             Blake2b with key, required digest length (in bytes), salt and personalization.
-             After calling the resetting the object is in the same
             state as it was after the last init (if there was one).
         </member>
         <member name="T:Org.BouncyCastle.Crypto.CipherKeyGenerator">
@@ -12441,7 +12434,50 @@
         <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.#ctor(System.Int32)">
              BLAKE2s for hashing.
             
-       t.Reset">
+             @param digestBits the desired digest length in bits. Must be a multiple of 8 and less than 256.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.#ctor(System.Byte[])">
+             BLAKE2s for authentication ("Prefix-MAC mode").
+             <p/>
+             After calling the doFinal() method, the key will remain to be used for
+             further computations of this instance. The key can be overwritten using
+             the clearKey() method.
+            
+             @param key a key up to 32 bytes or null
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.#ctor(System.Byte[],System.Int32,System.Byte[],System.Byte[])">
+             BLAKE2s with key, required digest length, salt and personalization.
+             <p/>
+             After calling the doFinal() method, the key, the salt and the personal
+             string will remain and might be used for further computations with this
+             instance. The key can be overwritten using the clearKey() method, the
+             salt (pepper) can be overwritten using the clearSalt() method.
+            
+             @param key             a key up to 32 bytes or null
+             @param digestBytes     from 1 up to 32 bytes
+             @param salt            8 bytes or null
+             @param personalization 8 bytes or null
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.Update(System.Byte)">
+             Update the message digest with a single byte.
+            
+             @param b the input byte to be entered.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.BlockUpdate(System.Byte[],System.Int32,System.Int32)">
+             Update the message digest with a block of bytes.
+            
+             @param message the byte array containing the data.
+             @param offset  the offset into the byte array where the data starts.
+             @param len     the length of the data.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.DoFinal(System.Byte[],System.Int32)">
+             Close the digest, producing the final digest value. The doFinal() call
+             leaves the digest reset. Key, salt and personal string remain.
+            
+             @param out       the array the digest is to be copied into.
+             @param outOffset the offset into the out array the digest is to start at.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Digests.Blake2sDigest.Reset">
             Reset the digest back to its initial state. The key, the salt and the
             personal string will remain for further computations.
         </member>
@@ -13131,48 +13167,6 @@
             @param cipher The cipher to use for cryptographic operation.
             @param pLen Length of the expected plaintext.
         </member>
-        <member name="Mcodings.ISO9796d1Encoding.DecodeBlock(System.Byte[],System.Int32,System.Int32)">
-            @exception InvalidCipherTextException if the decrypted block is not a valid ISO 9796 bit string
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Encodings.OaepEncoding">
-            Optimal Asymmetric Encryption Padding (OAEP) - see PKCS 1 V 2.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.OaepEncoding.DecodeBlock(System.Byte[],System.Int32,System.Int32)">
-            @exception InvalidCipherTextException if the decrypted block turns out to
-            be badly formatted.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.OaepEncoding.ItoOSP(System.Int32,System.Byte[])">
-            int to octet string.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.OaepEncoding.maskGeneratorFunction1(System.Byte[],System.Int32,System.Int32,System.Int32)">
-            mask generator function, as described in PKCS1v2.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding">
-            this does your basic Pkcs 1 v1.5 padding - whether or not you should be using this
-            depends on your application - see Pkcs1 Version 2 for details.
-        </member>
-        <member name="F:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.StrictLengthEnabledProperty">
-            some providers fail to include the leading zero in PKCS1 encoded blocks. If you need to
-            work with one of these set the system property Org.BouncyCastle.Pkcs1.Strict to false.
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.StrictLengthEnabled">
-            The same effect can be achieved by setting the static property directly
-            <p>
-            The static property is checked during construction of the encoding object, it is set to
-            true by default.
-            </p>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.#ctor(Org.BouncyCastle.Crypto.IAsymmetricBlockCipher)">
-             Basic constructor.
-            
-             @param cipher
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.#ctor(Org.BouncyCastle.Crypto.IAsymmetricBlockCipher,System.Int32)">
-            Constructor for decryption with a fixed plaintext length.
-            
-            @param cipher The cipher to use for cryptographic operation.
-            @param pLen Length of the expected plaintext.
-        </member>
         <member name="M:Org.BouncyCastle.Crypto.Encodings.Pkcs1Encoding.#ctor(Org.BouncyCastle.Crypto.IAsymmetricBlockCipher,System.Byte[])">
             Constructor for decryption with a fixed plaintext length and a fallback
             value that is returned, if the padding is incorrect.
@@ -13264,7 +13258,49 @@
             
              The slowest version uses no static tables at all and computes the values in each round
              </p>
-                   
+             <p>
+             This file contains the fast version with 8Kbytes of static tables for round precomputation
+             </p>
+            <remarks>
+            Unfortunately this class has a few side channel issues.
+            In an environment where encryption/decryption may be closely observed it should not be used.
+            </remarks>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.AesFastEngine.GenerateWorkingKey(System.Byte[],System.Boolean)">
+            Calculate the necessary round keys
+            The number of calculations depends on key size and block size
+            AES specified a fixed block size of 128 bits and key sizes 128/192/256 bits
+            This code is written assuming those are the only possible values
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.AesFastEngine.#ctor">
+            default constructor - 128 bit block size.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.AesFastEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
+             initialise an AES cipher.
+            
+             @param forEncryption whether or not we are for encryption.
+             @param parameters the parameters required to set up the cipher.
+             @exception ArgumentException if the parameters argument is
+             inappropriate.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.AesLightEngine">
+             an implementation of the AES (Rijndael), from FIPS-197.
+             <p>
+             For further details see: <a href="http://csrc.nist.gov/encryption/aes/">http://csrc.nist.gov/encryption/aes/</a>.
+            
+             This implementation is based on optimizations from Dr. Brian Gladman's paper and C code at
+             <a href="http://fp.gladman.plus.com/cryptography_technology/rijndael/">http://fp.gladman.plus.com/cryptography_technology/rijndael/</a>
+            
+             There are three levels of tradeoff of speed vs memory
+             Because java has no preprocessor, they are written as three separate classes from which to choose
+            
+             The fastest uses 8Kbytes of static tables to precompute round calculations, 4 256 word tables for encryption
+             and 4 for decryption.
+            
+             The middle performance version uses only one 256 word table for each, for a total of 2Kbytes,
+             adding 12 rotate operations per round to compute the values contained in the other tables from
+             the contents of the first
+            
              The slowest version uses no static tables at all and computes the values
              in each round.
              </p>
@@ -13333,47 +13369,6 @@
         <member name="T:Org.BouncyCastle.Crypto.Engines.CamelliaWrapEngine">
             <remarks>
             An implementation of the Camellia key wrapper based on RFC 3657/RFC 3394.
-            <phe AES Key Wrapper from the NIST Key Wrap Specification.
-            <p/>
-            For further details see: <a href="http://csrc.nist.gov/encryption/kms/key-wrap.pdf">http://csrc.nist.gov/encryption/kms/key-wrap.pdf</a>.
-            </remarks>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.BlowfishEngine">
-            A class that provides Blowfish key encryption operations,
-            such as encoding data and generating keys.
-            All the algorithms herein are from Applied Cryptography
-            and implement a simplified cryptography interface.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.BlowfishEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
-             initialise a Blowfish cipher.
-            
-             @param forEncryption whether or not we are for encryption.
-             @param parameters the parameters required to set up the cipher.
-             @exception ArgumentException if the parameters argument is
-             inappropriate.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.BlowfishEngine.ProcessTable(System.UInt32,System.UInt32,System.UInt32[])">
-            apply the encryption cycle to each value pair in the table.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.BlowfishEngine.EncryptBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
-            Encrypt the given input starting at the given offset and place
-            the result in the provided buffer starting at the given offset.
-            The input will be an exact multiple of our blocksize.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.BlowfishEngine.DecryptBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
-            Decrypt the given input starting at the given offset and place
-            the result in the provided buffer starting at the given offset.
-            The input will be an exact multiple of our blocksize.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.CamelliaEngine">
-            Camellia - based on RFC 3713.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.CamelliaLightEngine">
-            Camellia - based on RFC 3713, smaller implementation, about half the size of CamelliaEngine.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.CamelliaWrapEngine">
-            <remarks>
-            An implementation of the Camellia key wrapper based on RFC 3657/RFC 3394.
             <p/>
             For further details see: <a href="http://www.ietf.org/rfc/rfc3657.txt">http://www.ietf.org/rfc/rfc3657.txt</a>.
             </remarks>
@@ -13402,7 +13397,57 @@
              the result in the provided buffer starting at the given offset.
             
              @param src        The plaintext buffer
-             @param srcIndex    An offset inerein are from the Internet RFC
+             @param srcIndex    An offset into src
+             @param dst        The ciphertext buffer
+             @param dstIndex    An offset into dst
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Cast5Engine.DecryptBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+             Decrypt the given input starting at the given offset and place
+             the result in the provided buffer starting at the given offset.
+            
+             @param src        The plaintext buffer
+             @param srcIndex    An offset into src
+             @param dst        The ciphertext buffer
+             @param dstIndex    An offset into dst
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Cast5Engine.F1(System.UInt32,System.UInt32,System.Int32)">
+             The first of the three processing functions for the
+             encryption and decryption.
+            
+             @param D            the input to be processed
+             @param Kmi        the mask to be used from Km[n]
+             @param Kri        the rotation value to be used
+            
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Cast5Engine.F2(System.UInt32,System.UInt32,System.Int32)">
+             The second of the three processing functions for the
+             encryption and decryption.
+            
+             @param D            the input to be processed
+             @param Kmi        the mask to be used from Km[n]
+             @param Kri        the rotation value to be used
+            
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Cast5Engine.F3(System.UInt32,System.UInt32,System.Int32)">
+             The third of the three processing functions for the
+             encryption and decryption.
+            
+             @param D            the input to be processed
+             @param Kmi        the mask to be used from Km[n]
+             @param Kri        the rotation value to be used
+            
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.Cast5Engine.CAST_Encipher(System.UInt32,System.UInt32,System.UInt32[])">
+             Does the 16 rounds to encrypt the block.
+            
+             @param L0    the LH-32bits of the plaintext block
+             @param R0    the RH-32bits of the plaintext block
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.Cast6Engine">
+             A class that provides CAST6 key encryption operations,
+             such as encoding data and generating keys.
+            
+             All the algorithms herein are from the Internet RFC
             
              RFC2612 - CAST6 (128bit block, 128-256bit key)
             
@@ -13430,57 +13475,6 @@
              Does the 12 quad rounds rounds to encrypt the block.
             
              @param A    the 00-31  bits of the plaintext block
-             @param B    the 32-63  bits of the plaintext block
-             @param C    the 64-95  bits of the plaintext block
-             @param D    the 96-127 bits of the plaintext block
-             @param result the resulting ciphertext
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.Cast6Engine.CAST_Decipher(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32[])">
-             Does the 12 quad rounds rounds to decrypt the block.
-            
-             @param A    the 00-31  bits of the ciphertext block
-             @param B    the 32-63  bits of the ciphertext block
-             @param C    the 64-95  bits of the ciphertext block
-             @param D    the 96-127 bits of the ciphertext block
-             @param result the resulting plaintext
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.ChaCha7539Engine">
-            <summary>
-            Implementation of Daniel J. Bernstein's ChaCha stream cipher.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.ChaCha7539Engine.#ctor">
-            <summary>
-            Creates a 20 rounds ChaCha engine.
-            </summary>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.ChaChaEngine">
-            <summary>
-            Implementation of Daniel J. Bernstein's ChaCha stream cipher.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.ChaChaEngine.#ctor">
-            <summary>
-            Creates a 20 rounds ChaCha engine.
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.ChaChaEngine.#ctor(System.Int32)">
-            <summary>
-            Creates a ChaCha engine with a specific number of rounds.
-            </summary>
-            <param name="rounds">the number of rounds (must be an even number).</param>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.ChaChaEngine.ChachaCore(System.Int32,System.UInt32[],System.UInt32[])">
-            <summary>
-            ChaCha function.
-            </summary>
-            <param name="rounds">The number of ChaCha rounds to execute</param>
-            <param name="input">The input words.</param>
-            <param name="x">The ChaCha state to modify.</param>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.DesEdeEngine">
-            <remarks>A class that provides a basic DESede (or Triple DES) engine.</remarks>
-        </member>the 00-31  bits of the plaintext block
              @param B    the 32-63  bits of the plaintext block
              @param C    the 64-95  bits of the plaintext block
              @param D    the 96-127 bits of the plaintext block
@@ -14026,7 +14020,53 @@
             and set some defaults
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.RC532Engine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
-             initia size.</p>
+             initialise a RC5-32 cipher.
+            
+             @param forEncryption whether or not we are for encryption.
+             @param parameters the parameters required to set up the cipher.
+             @exception ArgumentException if the parameters argument is
+             inappropriate.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RC532Engine.SetKey(System.Byte[])">
+             Re-key the cipher.
+            
+             @param  key  the key to be used
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RC532Engine.EncryptBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+             Encrypt the given block starting at the given offset and place
+             the result in the provided buffer starting at the given offset.
+            
+             @param  in     in byte buffer containing data to encrypt
+             @param  inOff  offset into src buffer
+             @param  out     out buffer where encrypted data is written
+             @param  outOff  offset into out buffer
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RC532Engine.RotateLeft(System.Int32,System.Int32)">
+             Perform a left "spin" of the word. The rotation of the given
+             word <em>x</em> is rotated left by <em>y</em> bits.
+             Only the <em>lg(32)</em> low-order bits of <em>y</em>
+             are used to determine the rotation amount. Here it is
+             assumed that the wordsize used is a power of 2.
+            
+             @param  x  word to rotate
+             @param  y    number of bits to rotate % 32
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RC532Engine.RotateRight(System.Int32,System.Int32)">
+             Perform a right "spin" of the word. The rotation of the given
+             word <em>x</em> is rotated left by <em>y</em> bits.
+             Only the <em>lg(32)</em> low-order bits of <em>y</em>
+             are used to determine the rotation amount. Here it is
+             assumed that the wordsize used is a power of 2.
+            
+             @param  x  word to rotate
+             @param  y    number of bits to rotate % 32
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.RC564Engine">
+            The specification for RC5 came from the <code>RC5 Encryption Algorithm</code>
+            publication in RSA CryptoBytes, Spring of 1995.
+            <em>http://www.rsasecurity.com/rsalabs/cryptobytes</em>.
+            <p>
+            This implementation is set to work with a 64 bit word size.</p>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.RC564Engine.#ctor">
             Create an instance of the RC5 encryption algorithm
@@ -14055,54 +14095,6 @@
              @param  outOff  offset into out buffer
         </member>
         <member name="M:Org.BouncyCastle.Crypto.Engines.RC564Engine.RotateLeft(System.Int64,System.Int64)">
-             Perform a left "spin" of the word. The rotation of the given
-             word <em>x</em> is rotated left by <em>y</em> bits.
-             Only the <em>lg(wordSize)</em> low-order bits of <em>y</em>
-             are used to determine the rotation amount. Here it is
-             assumed that the wordsize used is a power of 2.
-            
-             @param  x  word to rotate
-             @param  y    number of bits to rotate % wordSize
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.RC564Engine.RotateRight(System.Int64,System.Int64)">
-             Perform a right "spin" of the word. The rotation of the given
-             word <em>x</em> is rotated left by <em>y</em> bits.
-             Only the <em>lg(wordSize)</em> low-order bits of <em>y</em>
-             are used to determine the rotation amount. Here it is
-             assumed that the wordsize used is a power of 2.
-            
-             @param x word to rotate
-             @param y number of bits to rotate % wordSize
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Engines.RC6Engine">
-            An RC6 engine.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.RC6Engine.#ctor">
-            Create an instance of the RC6 encryption algorithm
-            and set some defaults
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.RC6Engine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
-             initialise a RC5-32 cipher.
-            
-             @param forEncryption whether or not we are for encryption.
-             @param parameters the parameters required to set up the cipher.
-             @exception ArgumentException if the parameters argument is
-             inappropriate.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.RC6Engine.SetKey(System.Byte[])">
-             Re-key the cipher.
-            
-             @param inKey the key to be used
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.RC6Engine.RotateLeft(System.Int32,System.Int32)">
-             Perform a left "spin" of the word. The rotation of the given
-             word <em>x</em> is rotated left by <em>y</em> bits.
-             Only the <em>lg(wordSize)</em> low-order bits of <em>y</em>
-             are used to determine the rotation amount. Here it is
-             assumed that the wordsize used is a power of 2.
-            
-             @param x word to rotate
-             @param y number of bits to rotate % ft(System.Int64,System.Int64)">
              Perform a left "spin" of the word. The rotation of the given
              word <em>x</em> is rotated left by <em>y</em> bits.
              Only the <em>lg(wordSize)</em> low-order bits of <em>y</em>
@@ -14251,7 +14243,50 @@
              Process a single block using the basic RSA algorithm.
             
              @param inBuf the input array.
-             @param inOff.RsaCoreEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
+             @param inOff the offset into the input buffer where the data starts.
+             @param inLen the length of the data to be processed.
+             @return the result of the RSA process.
+             @exception DataLengthException the input block is too large.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.RsaBlindingEngine">
+            This does your basic RSA Chaum's blinding and unblinding as outlined in
+            "Handbook of Applied Cryptography", page 475. You need to use this if you are
+            trying to get another party to generate signatures without them being aware
+            of the message they are signing.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RsaBlindingEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
+             Initialise the blinding engine.
+            
+             @param forEncryption true if we are encrypting (blinding), false otherwise.
+             @param param         the necessary RSA key parameters.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RsaBlindingEngine.GetInputBlockSize">
+             Return the maximum size for an input block to this engine.
+             For RSA this is always one byte less than the key size on
+             encryption, and the same length as the key size on decryption.
+            
+             @return maximum size for an input block.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RsaBlindingEngine.GetOutputBlockSize">
+             Return the maximum size for an output block to this engine.
+             For RSA this is always one byte less than the key size on
+             decryption, and the same length as the key size on encryption.
+            
+             @return maximum size for an output block.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RsaBlindingEngine.ProcessBlock(System.Byte[],System.Int32,System.Int32)">
+             Process a single block using the RSA blinding algorithm.
+            
+             @param in    the input array.
+             @param inOff the offset into the input buffer where the data starts.
+             @param inLen the length of the data to be processed.
+             @return the result of the RSA process.
+             @throws DataLengthException the input block is too large.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Engines.RsaCoreEngine">
+            this does your basic RSA algorithm.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Engines.RsaCoreEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
              initialise the RSA engine.
             
              @param forEncryption true if we are encrypting, false otherwise.
@@ -14740,54 +14775,6 @@
                the parameters required to set up the cipher.
             @exception ArgumentException
                if the params argument is inappropriate.
-        an,Org.BouncyCastle.Crypto.ICipherParameters)">
-             initialise a Twofish cipher.
-            
-             @param forEncryption whether or not we are for encryption.
-             @param parameters the parameters required to set up the cipher.
-             @exception ArgumentException if the parameters argument is
-             inappropriate.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.TwofishEngine.EncryptBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
-             Encrypt the given input starting at the given offset and place
-             the result in the provided buffer starting at the given offset.
-             The input will be an exact multiple of our blocksize.
-            
-             encryptBlock uses the pre-calculated gSBox[] and subKey[]
-             arrays.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.TwofishEngine.DecryptBlock(System.Byte[],System.Int32,System.Byte[],System.Int32)">
-            Decrypt the given input starting at the given offset and place
-            the result in the provided buffer starting at the given offset.
-            The input will be an exact multiple of our blocksize.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.TwofishEngine.RS_MDS_Encode(System.Int32,System.Int32)">
-             Use (12, 8) Reed-Solomon code over GF(256) to produce
-             a key S-box 32-bit entity from 2 key material 32-bit
-             entities.
-            
-             @param    k0 first 32-bit entity
-             @param    k1 second 32-bit entity
-             @return     Remainder polynomial Generated using RS code
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.TwofishEngine.RS_rem(System.Int32)">
-                    * Reed-Solomon code parameters: (12,8) reversible code:
-            		* <p>
-                    * <pre>
-                    * G(x) = x^4 + (a+1/a)x^3 + ax^2 + (a+1/a)x + 1
-                    * </pre>
-                    * where a = primitive root of field generator 0x14D
-            		* </p>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Engines.VmpcEngine.Init(System.Boolean,Org.BouncyCastle.Crypto.ICipherParameters)">
-            initialise a VMPC cipher.
-            
-            @param forEncryption
-               whether or not we are for encryption.
-            @param params
-               the parameters required to set up the cipher.
-            @exception ArgumentException
-               if the params argument is inappropriate.
         </member>
         <member name="T:Org.BouncyCastle.Crypto.Engines.XSalsa20Engine">
             <summary>
@@ -14893,7 +14880,48 @@
              @param password the password to be encoded.
              @return a byte representation of the password in UTF8 + trailing zero.
         </member>
-ates the p and g values from the given parameters,
+        <member name="M:Org.BouncyCastle.Crypto.Generators.BCrypt.Generate(System.Byte[],System.Byte[],System.Int32)">
+            Calculates the <b>bcrypt</b> hash of a password.
+            <p>
+            This implements the raw <b>bcrypt</b> function as defined in the bcrypt specification, not
+            the crypt encoded version implemented in OpenBSD.
+            </p>
+            @param password the password bytes (up to 72 bytes) to use for this invocation.
+            @param salt     the 128 bit salt to use for this invocation.
+            @param cost     the bcrypt cost parameter. The cost of the bcrypt function grows as
+                            <code>2^cost</code>. Legal values are 4..31 inclusive.
+            @return the output of the raw bcrypt operation: a 192 bit (24 byte) hash.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.DesEdeKeyGenerator.engineInit(Org.BouncyCastle.Crypto.KeyGenerationParameters)">
+             initialise the key generator - if strength is set to zero
+             the key Generated will be 192 bits in size, otherwise
+             strength can be 128 or 192 (or 112 or 168 if you don't count
+             parity bits), depending on whether you wish to do 2-key or 3-key
+             triple DES.
+            
+             @param param the parameters to be used for key generation
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.DesKeyGenerator.engineInit(Org.BouncyCastle.Crypto.KeyGenerationParameters)">
+             initialise the key generator - if strength is set to zero
+             the key generated will be 64 bits in size, otherwise
+             strength can be 64 or 56 bits (if you don't count the parity bits).
+            
+             @param param the parameters to be used for key generation
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Generators.DHBasicKeyPairGenerator">
+             a basic Diffie-Hellman key pair generator.
+            
+             This generates keys consistent for use with the basic algorithm for
+             Diffie-Hellman.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Generators.DHKeyPairGenerator">
+             a Diffie-Hellman key pair generator.
+            
+             This generates keys consistent for use in the MTI/A0 key agreement protocol
+             as described in "Handbook of Applied Cryptography", Pages 516-519.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.DHParametersGenerator.GenerateParameters">
+            which Generates the p and g values from the given parameters,
             returning the DHParameters object.
             <p>
             Note: can take a while...</p>
@@ -14984,51 +15012,6 @@ ates the p and g values from the given parameters,
              Performs the extract part of the key derivation function.
             
              @param salt the salt to use
-             @param ikm  the input keying material
-             @return the PRK as KeyParameter
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Generators.HkdfBytesGenerator.ExpandNext">
-             Performs the expand part of the key derivation function, using currentT
-             as input and output buffer.
-            
-             @throws DataLengthException if the total number of bytes generated is larger than the one
-             specified by RFC 5869 (255 * HashLen)
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Generators.Kdf1BytesGenerator">
-            KFD2 generator for derived keys and ivs as defined by IEEE P1363a/ISO 18033
-            <br/>
-            This implementation is based on IEEE P1363/ISO 18033.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Generators.Kdf1BytesGenerator.#ctor(Org.BouncyCastle.Crypto.IDigest)">
-             Construct a KDF1 byte generator.
-            
-             @param digest the digest to be used as the source of derived keys.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Generators.Kdf2BytesGenerator">
-            KDF2 generator for derived keys and ivs as defined by IEEE P1363a/ISO 18033
-            <br/>
-            This implementation is based on IEEE P1363/ISO 18033.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Generators.Kdf2BytesGenerator.#ctor(Org.BouncyCastle.Crypto.IDigest)">
-             Construct a KDF2 bytes generator. Generates key material
-             according to IEEE P1363 or ISO 18033 depending on the initialisation.
-            
-             @param digest the digest to be used as the source of derived keys.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Generators.Mgf1BytesGenerator">
-            Generator for MGF1 as defined in Pkcs 1v2
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Generators.Mgf1BytesGenerator.#ctor(Org.BouncyCastle.Crypto.IDigest)">
-            @param digest the digest to be used as the source of Generated bytes
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.Generators.Mgf1BytesGenerator.Digest">
-            return the underlying digest.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Generators.Mgf1BytesGenerator.ItoOSP(System.Int32,System.Byte[])">
-            int to octet string.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Generators.Mgf1BytesGenerator.GenerateBytes(System.Byte[],System.Int32,System.Int32)">
-             fill len bytes of the outo use
              @param ikm  the input keying material
              @return the PRK as KeyParameter
         </member>
@@ -15239,7 +15222,49 @@ ates the p and g values from the given parameters,
         <member name="T:Org.BouncyCastle.Crypto.Generators.Pkcs5S1ParametersGenerator">
             Generator for Pbe derived keys and ivs as defined by Pkcs 5 V2.0 Scheme 1.
             Note this generator is limited to the size of the hash produced by the
-            digest u V2.0 Scheme 2.
+            digest used to drive it.
+            <p>
+            The document this implementation is based on can be found at
+            <a href="http://www.rsasecurity.com/rsalabs/pkcs/pkcs-5/index.html">
+            RSA's Pkcs5 Page</a>
+            </p>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.Pkcs5S1ParametersGenerator.#ctor(Org.BouncyCastle.Crypto.IDigest)">
+             Construct a Pkcs 5 Scheme 1 Parameters generator.
+            
+             @param digest the digest to be used as the source of derived keys.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.Pkcs5S1ParametersGenerator.GenerateDerivedKey">
+            the derived key function, the ith hash of the mPassword and the mSalt.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.Pkcs5S1ParametersGenerator.GenerateDerivedParameters(System.Int32)">
+             Generate a key parameter derived from the mPassword, mSalt, and iteration
+             count we are currently initialised with.
+            
+             @param keySize the size of the key we want (in bits)
+             @return a KeyParameter object.
+             @exception ArgumentException if the key length larger than the base hash size.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.Pkcs5S1ParametersGenerator.GenerateDerivedParameters(System.Int32,System.Int32)">
+             Generate a key with initialisation vector parameter derived from
+             the mPassword, mSalt, and iteration count we are currently initialised
+             with.
+            
+             @param keySize the size of the key we want (in bits)
+             @param ivSize the size of the iv we want (in bits)
+             @return a ParametersWithIV object.
+             @exception ArgumentException if keySize + ivSize is larger than the base hash size.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Generators.Pkcs5S1ParametersGenerator.GenerateDerivedMacParameters(System.Int32)">
+             Generate a key parameter for use with a MAC derived from the mPassword,
+             mSalt, and iteration count we are currently initialised with.
+            
+             @param keySize the size of the key we want (in bits)
+             @return a KeyParameter object.
+             @exception ArgumentException if the key length larger than the base hash size.
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.Generators.Pkcs5S2ParametersGenerator">
+            Generator for Pbe derived keys and ivs as defined by Pkcs 5 V2.0 Scheme 2.
             This generator uses a SHA-1 HMac as the calculation function.
             <p>
             The document this implementation is based on can be found at
@@ -15821,52 +15846,6 @@ ates the p and g values from the given parameters,
             </summary>
         </member>
         <member name="P:Org.BouncyCastle.Crypto.ISignatureFactory.AlgorithmDetails">
-            <summary>The algorithm details object for this calculator.</summary         @exception DataLengthException if there isn't enough data in in.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.IMac.DoFinal(System.Byte[],System.Int32)">
-            Compute the final stage of the MAC writing the output to the out
-            parameter.
-            <p>
-            doFinal leaves the MAC in the same state it was after the last init.
-            </p>
-            @param out the array the MAC is to be output to.
-            @param outOff the offset into the out buffer the output is to start at.
-            @exception DataLengthException if there isn't enough space in out.
-            @exception InvalidOperationException if the MAC is not initialised.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.IMac.Reset">
-            Reset the MAC. At the end of resetting the MAC should be in the
-            in the same state it was after the last init (if there was one).
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.IMacFactory.AlgorithmDetails">
-            <summary>The algorithm details object for this calculator.</summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.IMacFactory.CreateCalculator">
-            <summary>
-            Create a stream calculator for this signature calculator. The stream
-            calculator is used for the actual operation of entering the data to be signed
-            and producing the signature block.
-            </summary>
-            <returns>A calculator producing an IBlockResult with a signature in it.</returns>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.InvalidCipherTextException">
-            this exception is thrown whenever we find something we don't expect in a
-            message.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.InvalidCipherTextException.#ctor">
-            base constructor.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.InvalidCipherTextException.#ctor(System.String)">
-             create a InvalidCipherTextException with the given message.
-            
-             @param message the message to be carried with the exception.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.ISignatureFactory">
-            <summary>
-            Base interface for operators that serve as stream-based signature calculators.
-            </summary>
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.ISignatureFactory.AlgorithmDetails">
             <summary>The algorithm details object for this calculator.</summary>
         </member>
         <member name="M:Org.BouncyCastle.Crypto.ISignatureFactory.CreateCalculator">
@@ -15895,7 +15874,55 @@ ates the p and g values from the given parameters,
             update the internal digest with the byte array in
         </member>
         <member name="M:Org.BouncyCastle.Crypto.ISigner.GenerateSignature">
-            Generate a signature for the messag       </member>
+            Generate a signature for the message we've been loaded with using
+            the key we were initialised with.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.ISigner.VerifySignature(System.Byte[])">
+            return true if the internal state represents the signature described
+            in the passed in array.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.ISigner.Reset">
+            reset the internal state
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.ISignerWithRecovery">
+            Signer with message recovery.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.ISignerWithRecovery.HasFullMessage">
+             Returns true if the signer has recovered the full message as
+             part of signature verification.
+            
+             @return true if full message recovered.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.ISignerWithRecovery.GetRecoveredMessage">
+             Returns a reference to what message was recovered (if any).
+            
+             @return full/partial message, null if nothing.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.ISignerWithRecovery.UpdateWithRecoveredMessage(System.Byte[])">
+             Perform an update with the recovered message before adding any other data. This must
+             be the first update method called, and calling it will result in the signer assuming
+             that further calls to update will include message content past what is recoverable.
+            
+             @param signature the signature that we are in the process of verifying.
+             @throws IllegalStateException
+        </member>
+        <member name="T:Org.BouncyCastle.Crypto.IStreamCalculator">
+            <summary>
+            Base interface for cryptographic operations such as Hashes, MACs, and Signatures which reduce a stream of data
+            to a single value.
+            </summary>
+        </member>
+        <member name="P:Org.BouncyCastle.Crypto.IStreamCalculator.Stream">
+            <summary>Return a "sink" stream which only exists to update the implementing object.</summary>
+            <returns>A stream to write to in order to update the implementing object.</returns>
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.IStreamCalculator.GetResult">
+            <summary>
+            Return the result of processing the stream. This value is only available once the stream
+            has been closed.
+            </summary>
+            <returns>The result of processing the stream.</returns>
+        </member>
         <member name="T:Org.BouncyCastle.Crypto.IStreamCipher">
             <summary>The interface stream ciphers conform to.</summary>
         </member>
@@ -16035,50 +16062,6 @@ ates the p and g values from the given parameters,
             
              @return the strength of the keys this generator produces (in bits).
         </member>
-        <member name="T:Org.BouncyCastle.Crypto.Macs.CbcBd extendable output, or variable digest sizes.
-            This interface provides the extra method required to support variable output on a digest implementation.
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.IXof.DoFinal(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Output the results of the final calculation for this digest to outLen number of bytes.
-            </summary>
-            <param name="output">output array to write the output bytes to.</param>
-            <param name="outOff">offset to start writing the bytes at.</param>
-            <param name="outLen">the number of output bytes requested.</param>
-            <returns>the number of bytes written</returns>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.IXof.DoOutput(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Start outputting the results of the final calculation for this digest. Unlike DoFinal, this method
-            will continue producing output until the Xof is explicitly reset, or signals otherwise.
-            </summary>
-            <param name="output">output array to write the output bytes to.</param>
-            <param name="outOff">offset to start writing the bytes at.</param>
-            <param name="outLen">the number of output bytes requested.</param>
-            <returns>the number of bytes written</returns>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.KeyGenerationParameters">
-            The base class for parameters to key generators.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.KeyGenerationParameters.#ctor(Org.BouncyCastle.Security.SecureRandom,System.Int32)">
-             initialise the generator with a source of randomness
-             and a strength (in bits).
-            
-             @param random the random byte source.
-             @param strength the size, in bits, of the keys we want to produce.
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.KeyGenerationParameters.Random">
-             return the random source associated with this
-             generator.
-            
-             @return the generators random source.
-        </member>
-        <member name="P:Org.BouncyCastle.Crypto.KeyGenerationParameters.Strength">
-             return the bit strength for keys produced by this generator,
-            
-             @return the strength of the keys this generator produces (in bits).
-        </member>
         <member name="T:Org.BouncyCastle.Crypto.Macs.CbcBlockCipherMac">
             standard CBC Block Cipher MAC - if no padding is specified the default of
             pad of zeroes is used.
@@ -16169,7 +16152,45 @@ ates the p and g values from the given parameters,
              @exception InvalidOperationException if the cipher isn't initialised.
              @return the number of bytes processed and produced.
         </member>
-        <member te: the size of the MAC must be at least 24 bits (FIPS Publication 81),
+        <member name="M:Org.BouncyCastle.Crypto.Macs.MacCFBBlockCipher.Reset">
+            reset the chaining vector back to the IV and reset the underlying
+            cipher.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Macs.CfbBlockCipherMac.#ctor(Org.BouncyCastle.Crypto.IBlockCipher)">
+             create a standard MAC based on a CFB block cipher. This will produce an
+             authentication code half the length of the block size of the cipher, with
+             the CFB mode set to 8 bits.
+            
+             @param cipher the cipher to be used as the basis of the MAC generation.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Macs.CfbBlockCipherMac.#ctor(Org.BouncyCastle.Crypto.IBlockCipher,Org.BouncyCastle.Crypto.Paddings.IBlockCipherPadding)">
+             create a standard MAC based on a CFB block cipher. This will produce an
+             authentication code half the length of the block size of the cipher, with
+             the CFB mode set to 8 bits.
+            
+             @param cipher the cipher to be used as the basis of the MAC generation.
+             @param padding the padding to be used.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Macs.CfbBlockCipherMac.#ctor(Org.BouncyCastle.Crypto.IBlockCipher,System.Int32,System.Int32)">
+            create a standard MAC based on a block cipher with the size of the
+            MAC been given in bits. This class uses CFB mode as the basis for the
+            MAC generation.
+            <p>
+            Note: the size of the MAC must be at least 24 bits (FIPS Publication 81),
+            or 16 bits if being used as a data authenticator (FIPS Publication 113),
+            and in general should be less than the size of the block cipher as it reduces
+            the chance of an exhaustive attack (see Handbook of Applied Cryptography).
+            </p>
+            @param cipher the cipher to be used as the basis of the MAC generation.
+            @param cfbBitSize the size of an output block produced by the CFB mode.
+            @param macSizeInBits the size of the MAC in bits, must be a multiple of 8.
+        </member>
+        <member name="M:Org.BouncyCastle.Crypto.Macs.CfbBlockCipherMac.#ctor(Org.BouncyCastle.Crypto.IBlockCipher,System.Int32,System.Int32,Org.BouncyCastle.Crypto.Paddings.IBlockCipherPadding)">
+            create a standard MAC based on a block cipher with the size of the
+            MAC been given in bits. This class uses CFB mode as the basis for the
+            MAC generation.
+            <p>
+            Note: the size of the MAC must be at least 24 bits (FIPS Publication 81),
             or 16 bits if being used as a data authenticator (FIPS Publication 113),
             and in general should be less than the size of the block cipher as it reduces
             the chance of an exhaustive attack (see Handbook of Applied Cryptography).
@@ -16195,55 +16216,6 @@ ates the p and g values from the given parameters,
             </p><p>
             CMAC/OMAC1 is a simple variant of the CBC MAC (Cipher Block Chaining Message 
             Authentication Code). OMAC stands for One-Key CBC MAC.
-            </p><p>
-            It supports 128- or 64-bits block ciphers, with any key size, and returns
-            a MAC with dimension less or equal to the block size of the underlying 
-            cipher.
-            </p>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.CMac.#ctor(Org.BouncyCastle.Crypto.IBlockCipher)">
-             create a standard MAC based on a CBC block cipher (64 or 128 bit block).
-             This will produce an authentication code the length of the block size
-             of the cipher.
-            
-             @param cipher the cipher to be used as the basis of the MAC generation.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.CMac.#ctor(Org.BouncyCastle.Crypto.IBlockCipher,System.Int32)">
-             create a standard MAC based on a block cipher with the size of the
-             MAC been given in bits.
-             <p/>
-             Note: the size of the MAC must be at least 24 bits (FIPS Publication 81),
-             or 16 bits if being used as a data authenticator (FIPS Publication 113),
-             and in general should be less than the size of the block cipher as it reduces
-             the chance of an exhaustive attack (see Handbook of Applied Cryptography).
-            
-             @param cipher        the cipher to be used as the basis of the MAC generation.
-             @param macSizeInBits the size of the MAC in bits, must be a multiple of 8 and @lt;= 128.
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.CMac.Reset">
-            Reset the mac generator.
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Macs.Dstu7564Mac">
-            <summary>
-            Implementation of DSTU7564 mac mode
-            </summary>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Macs.Dstu7624Mac">
-            implementation of DSTU 7624 MAC
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Macs.GMac">
-            <summary>
-            The GMAC specialisation of Galois/Counter mode (GCM) detailed in NIST Special Publication
-            800-38D.
-            </summary>
-            <remarks>
-            GMac is an invocation of the GCM mode where no data is encrypted (i.e. all input data to the Mac
-            is processed as additional authenticated data with the underlying GCM block cipher).
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.GMac.#ctor(Org.BouncyCastle.Crypto.Modes.GcmBlockCipher)">
-            <summary>
-      for One-Key CBC MAC.
             </p><p>
             It supports 128- or 64-bits block ciphers, with any key size, and returns
             a MAC with dimension less or equal to the block size of the underlying 
@@ -16382,7 +16354,66 @@ ates the p and g values from the given parameters,
             <summary>
             Poly1305 message authentication code, designed by D. J. Bernstein.
             </summary>
-            <remark      <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.h1">
+            <remarks>
+            Poly1305 computes a 128-bit (16 bytes) authenticator, using a 128 bit nonce and a 256 bit key
+            consisting of a 128 bit key applied to an underlying cipher, and a 128 bit key (with 106
+            effective key bits) used in the authenticator.
+            
+            The polynomial calculation in this implementation is adapted from the public domain <a
+            href="https://github.com/floodyberry/poly1305-donna">poly1305-donna-unrolled</a> C implementation
+            by Andrew M (@floodyberry).
+            </remarks>
+            <seealso cref="T:Org.BouncyCastle.Crypto.Generators.Poly1305KeyGenerator"/>
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.r0">
+            Polynomial key 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.r1">
+            Polynomial key 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.r2">
+            Polynomial key 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.r3">
+            Polynomial key 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.r4">
+            Polynomial key 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.s1">
+            Precomputed 5 * r[1..4] 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.s2">
+            Precomputed 5 * r[1..4] 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.s3">
+            Precomputed 5 * r[1..4] 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.s4">
+            Precomputed 5 * r[1..4] 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.k0">
+            Encrypted nonce 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.k1">
+            Encrypted nonce 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.k2">
+            Encrypted nonce 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.k3">
+            Encrypted nonce 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.currentBlock">
+            Current block of buffered input 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.currentBlockOffset">
+            Current offset in input buffer 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.h0">
+            Polynomial accumulator 
+        </member>
+        <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.h1">
             Polynomial accumulator 
         </member>
         <member name="F:Org.BouncyCastle.Crypto.Macs.Poly1305.h2">
@@ -16411,55 +16442,6 @@ ates the p and g values from the given parameters,
             <summary>
             Implementation of SipHash as specified in "SipHash: a fast short-input PRF", by Jean-Philippe
             Aumasson and Daniel J. Bernstein (https://131002.net/siphash/siphash.pdf).
-            </summary>
-            <remarks>
-            "SipHash is a family of PRFs SipHash-c-d where the integer parameters c and d are the number of
-            compression rounds and the number of finalization rounds. A compression round is identical to a
-            finalization round and this round function is called SipRound. Given a 128-bit key k and a
-            (possibly empty) byte string m, SipHash-c-d returns a 64-bit value..."
-            </remarks>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.SipHash.#ctor">
-            <summary>SipHash-2-4</summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.SipHash.#ctor(System.Int32,System.Int32)">
-            <summary>SipHash-c-d</summary>
-            <param name="c">the number of compression rounds</param>
-            <param name="d">the number of finalization rounds</param>
-        </member>
-        <member name="T:Org.BouncyCastle.Crypto.Macs.SkeinMac">
-            <summary>
-            Implementation of the Skein parameterised MAC function in 256, 512 and 1024 bit block sizes,
-            based on the <see cref="T:Org.BouncyCastle.Crypto.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
-            </summary>
-            <remarks>
-            This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
-            competition in October 2010.
-            <p/>
-            Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
-            Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
-            </remarks>
-            <seealso cref="T:Org.BouncyCastle.Crypto.Digests.SkeinEngine"/>
-            <seealso cref="T:Org.BouncyCastle.Crypto.Parameters.SkeinParameters"/>
-        </member>
-        <member name="F:Org.BouncyCastle.Crypto.Macs.SkeinMac.SKEIN_256">
-            <summary>
-            256 bit block size - Skein-256
-            </summary>
-        </member>
-        <member name="F:Org.BouncyCastle.Crypto.Macs.SkeinMac.SKEIN_512">
-            <summary>
-            512 bit block size - Skein-512
-            </summary>
-        </member>
-        <member name="F:Org.BouncyCastle.Crypto.Macs.SkeinMac.SKEIN_1024">
-            <summary>
-            1024 bit block size - Skein-1024
-            </summary>
-        </member>
-        <member name="M:Org.BouncyCastle.Crypto.Macs.SkeinMac.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Constructs a Skein MA and Daniel J. Bernstein (https://131002.net/siphash/siphash.pdf).
             </summary>
             <remarks>
             "SipHash is a family of PRFs SipHash-c-d where the integer parameters c and d are the number of

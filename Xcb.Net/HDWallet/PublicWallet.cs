@@ -25,7 +25,7 @@ namespace Xcb.Net.HDWallet
 
         public override string GetAddress(int networkId, string childDerivaitonPath)
         {
-            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(derivationPath);
+            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(childDerivaitonPath);
 
             return derivedPublicKey.GetAddress(networkId);
         }
@@ -48,7 +48,7 @@ namespace Xcb.Net.HDWallet
 
         public override byte[] GetPublicKey(string childDerviationPath)
         {
-            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(derivationPath);
+            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(childDerviationPath);
 
             return derivedPublicKey.GetPublicKey();
         }
