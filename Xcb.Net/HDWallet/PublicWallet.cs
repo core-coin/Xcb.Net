@@ -23,35 +23,37 @@ namespace Xcb.Net.HDWallet
             return postfix;
         }
 
+        public override string GetAddress(int networkId, string childDerivaitonPath)
+        {
+            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(derivationPath);
+
+            return derivedPublicKey.GetAddress(networkId);
+        }
+
         public override string GetAddress(int networkId, params uint[] index)
         {
             var derivationPath = GetTargetDerivationPath(index);
 
-            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(derivationPath);
-
-            return derivedPublicKey.GetAddress(networkId);
+            return GetAddress(networkId, derivationPath);
         }
 
         public override byte[] GetPublicKey(params uint[] index)
         {
             var derivationPath = GetTargetDerivationPath(index);
 
-            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(derivationPath);
-
-            return derivedPublicKey.GetPublicKey();
+            return GetPublicKey(derivationPath);
         }
 
 
 
         public override byte[] GetPublicKey(string childDerviationPath)
         {
-            throw new System.NotImplementedException();
+            var derivedPublicKey = this.DerivePath<ExtendedPublicKey>(derivationPath);
+
+            return derivedPublicKey.GetPublicKey();
         }
 
-        public override string GetAddress(int networkId, string childDerivaitonPath)
-        {
-            throw new System.NotImplementedException();
-        }
+
 
         protected override ExtendedKeyBase Derive(ExtendedKeyBase extKey, uint index)
         {

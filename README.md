@@ -115,15 +115,18 @@ var privateWallet = PrivateWallet.GetPrivateWalletAtSpecificDerivationPath(maste
 var derivedPrivateKey = privateWallet.GetPrivateKey(20);
 
 // this private key derivation path will be "m/44'/654'/0'/0'/14/36/15"
-var derivedPrivateKey = privateWallet.GetPrivateKey(14,36,15);
+var derivedPrivateKey = privateWallet.GetPrivateKey(14,36,15); // you can also pass "14/36/15"
+
+// you can get XcbECKey from a wallet directly too
+var xcbeckey = privateWallet.GetXcbECKey("14/36/15");
 
 //you can also get public key or address from private hd wallet
 // this public key derivation path will be "m/44'/654'/0'/0'/14/36/15"
-var derivedPublicKey = privateWallet.GetPublicKey(14,36,15);
+var derivedPublicKey = privateWallet.GetPublicKey(14,36,15); // you can also pass "14/36/15"
 
 var networkId = 1;
 // this address derivation path will be "m/44'/654'/0'/0'/14/36/15"
-var derivedAddress = privateWallet.GetAddress(networkId, 14, 36, 15)
+var derivedAddress = privateWallet.GetAddress(networkId, 14, 36, 15) // you can also pass "14/36/15"
 
 
 // you can also have public hd wallet, which they only have access to public key and address not private keys
@@ -134,11 +137,11 @@ var publicWallet = PrivateWallet.GetPublicWalletAtSpecificDerivationPath(masterP
 
 // same as private hd wallet you can derive public keyes or addresses at any derivation path after "m/44'/654'/0'/0'"
 // this public key derivation path will be "m/44'/654'/0'/0'/14/36/15"
-var derivedPublicKey = publicWallet.GetPublicKey(14, 36, 15);
+var derivedPublicKey = publicWallet.GetPublicKey(14, 36, 15); // you can also pass "14/36/15"
 
 var networkId = 1;
 // this address derivation path will be "m/44'/654'/0'/0'/14/36/15"
-var derivedAddress = publicWallet.GetAddress(networkId, 14, 36, 15)
+var derivedAddress = publicWallet.GetAddress(networkId, 14, 36, 15) // you can also pass "14/36/15"
 
 // public hd wallets cannot derive private keys
 
