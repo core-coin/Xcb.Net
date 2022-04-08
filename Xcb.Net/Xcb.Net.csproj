@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.8" />    
+    <ProjectReference Include="..\Crypto\BouncyCastle_NetCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using Xunit;
 using Xcb.Net.Extensions;
 using Org.BouncyCastle.Security;
 using System.Threading.Tasks;
+using Org.BouncyCastle.Math.EC.Rfc8032;
 
 namespace Xcb.Net.Test
 {
@@ -20,18 +21,20 @@ namespace Xcb.Net.Test
         [Theory]
         [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e",
             "315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
-        [InlineData("be2dca3a23e96807306c14354f99773e75a628e35712ac396bbee074bc9366f74d25d62ccfc0653139c04c8daaca0000b92147ebe0557ad0ac",
-            "d6b96f877844ae137422944e113437745be7776e2712d43f5d93623a02c557193d2e4dc115bdc9220528678d1cfe8a73abf1cc56c2e4c53700")]
+        [InlineData("59fc82f514f3fc8d02d987e52a03cdcae81a257bed6ec9b668bf6acd8fe9e7d27cbcc4d8f463d917642d30e7ca44c3521370f78790b3b561dd",
+            "3cba3b2560c2779170ce5947f55bf73b93a1dd51d99b0b483ed0cfb5a9bb8409830c0f96068c799dbc6a28ca6bc1aad95d0387c36a731d7800")]
+        [InlineData("a8ea212cc24ae0fd029a97b64be540885af0e1b7dc9faf4a591742850c4377f857ae9a8f87df1de98e397a5867dd6f20211ef3f234ae71bc56",
+            "b615e57dd4d15c3ed1323725c0ba8b1d7f6e740d08e0e29c6d3ff564c896c0c3dd28a9bb5065e06725c8f9e3f7c2c6bbad4900b7447ecf9880")]
         public void Constructor_WithValidKeys(string privateKey, string expectedPublicKey)
         {
             var key = new XcbECKey(privateKey, 1);
 
             Assert.NotNull(key);
-            Assert.NotNull(key.GetPublicKeyBytes());
-            Assert.NotNull(key.GetPrivateKeyBytes());
+            Assert.NotNull(key.GetPublicKey());
+            Assert.NotNull(key.GetPrivateKey());
 
-            Assert.Equal(privateKey, key.GetPrivateKeyHex());
-            Assert.Equal(expectedPublicKey, key.GetPublicKeyHex());
+            Assert.Equal(privateKey, key.GetPrivateKey().ToHex());
+            Assert.Equal(expectedPublicKey, key.GetPublicKey().ToHex());
         }
 
         [Theory]
@@ -51,7 +54,7 @@ namespace Xcb.Net.Test
         public void AddressGeneration(string privateKey, int networkId, string expectedAddress)
         {
             var key = new XcbECKey(privateKey, networkId);
-            Assert.Equal(expectedAddress, key.GetAddressHex());
+            Assert.Equal(expectedAddress, key.GetAddress());
         }
 
         [Theory]
@@ -75,37 +78,6 @@ namespace Xcb.Net.Test
             var publicKey = XcbECKey.GetPublicKeyFromSignature(signatureBytes).ToHex();
 
             Assert.Equal(expectedPublicKey, publicKey);
-        }
-
-        [Fact]
-        public void GenerateWithSeed()
-        {
-            //Given
-            var masterSeed = "0x3c60d7ebb9e828bbe63b116bf7a7c21dfb61e5ccf3594639bdffe89eab44e200".HexToByteArray();
-
-            //When
-            var key = XcbECKey.GenerateKey(1, masterSeed);
-            Task.Delay(1000).Wait();
-            var key2 = XcbECKey.GenerateKey(1, masterSeed);
-
-            //Then
-            Assert.Equal(key.GetAddressHex(), key2.GetAddressHex());
-        }
-
-        [Fact]
-        public void SecureRandomTest()
-        {
-            //Given
-            var masterSeed = "0x3c60d7ebb9e828bbe63b116bf7a7c21dfb61e5ccf3594639bdffe89eab44e200".HexToByteArray();
-            SecureRandom sr0 = new SecureRandom(masterSeed);
-            SecureRandom sr1 = new SecureRandom(masterSeed);
-
-            //When
-            var random0 = sr0.NextInt();
-            var random1 = sr1.NextInt();
-
-            //Then
-            Assert.Equal(random0, random1);
         }
     }
 }
