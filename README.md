@@ -102,52 +102,50 @@ var masterExtPrivateKey = ExtendedPrivateKey.GenerateRandomMaster();
 
 // or generate a deterministic master extended private key using a seed
 var seed = byte[64];
+
+// this key is the master key which m in derivaiton path stands for this key
 var masterExtPrivateKey = ExtendedPrivateKey.SeedToMaster(seed);
 
 // with an master extended private key you are able to create an private hd wallet
 // "m/44'/654'/0'/0'" is the derivation path
-var privateWallet = new HDWallet.PrivateWallet(masterExtPrivateKey, "m/44'/654'/0'/0'");
+var privateWallet = PrivateWallet.GetPrivateWalletAtSpecificDerivationPath(masterPrivateKey,  "m/44'/654'/0'/0'");
 
 // you can derive a child private key
-// this private key derivation path will be "m/44'/654'/0'/0'/20'"
+// this private key derivation path will be "m/44'/654'/0'/0'/20"
 var derivedPrivateKey = privateWallet.GetPrivateKey(20);
 
-// this private key derivation path will be "m/44'/654'/0'/0'/14'/36'/15'"
+// this private key derivation path will be "m/44'/654'/0'/0'/14/36/15"
 var derivedPrivateKey = privateWallet.GetPrivateKey(14,36,15);
 
 //you can also get public key or address from private hd wallet
-// this public key derivation path will be "m/44'/654'/0'/0'/14'/36'/15'"
+// this public key derivation path will be "m/44'/654'/0'/0'/14/36/15"
 var derivedPublicKey = privateWallet.GetPublicKey(14,36,15);
 
 var networkId = 1;
-// this address derivation path will be "m/44'/654'/0'/0'/14'/36'/15'"
+// this address derivation path will be "m/44'/654'/0'/0'/14/36/15"
 var derivedAddress = privateWallet.GetAddress(networkId, 14, 36, 15)
 
 
 // you can also have public hd wallet, which they only have access to public key and address not private keys
 // mostly they are used for watch-only wallets
 
-// for creating a public hd wallet you need to have a master extended public key
-// simply you can generate it from a master extended private key
-var masterExtPublicKey = masterExtPrivateKey.ToExtendedPublicKey();
-
-// with a master public key and a derivation path you can create a public hd wallet
-var publicWallet = new PublicWallet(masterPublicKey, "m/44'/654'/0'/0'");
+// with a master private key and a derivation path you can create a public hd wallet
+var publicWallet = PrivateWallet.GetPublicWalletAtSpecificDerivationPath(masterPrivateKey,  "m/44'/654'/0'/0'");
 
 // same as private hd wallet you can derive public keyes or addresses at any derivation path after "m/44'/654'/0'/0'"
-// this public key derivation path will be "m/44'/654'/0'/0'/14'/36'/15'"
+// this public key derivation path will be "m/44'/654'/0'/0'/14/36/15"
 var derivedPublicKey = publicWallet.GetPublicKey(14, 36, 15);
 
 var networkId = 1;
-// this address derivation path will be "m/44'/654'/0'/0'/14'/36'/15'"
+// this address derivation path will be "m/44'/654'/0'/0'/14/36/15"
 var derivedAddress = publicWallet.GetAddress(networkId, 14, 36, 15)
 
 // public hd wallets cannot derive private keys
 
 ```
 Notice: if you create public/private hd wallet from a pair of `master extended keys`
-they will be associated with each other, which means a private key derived at `m/44'/654'/0'/0'/8'` can sign a message
-which a public key derived from public hd wallet at `m/44'/654'/0'/0'/8'` can verify it.
+they will be associated with each other, which means a private key derived at `m/44'/654'/0'/0'/8` can sign a message
+which a public key derived from public hd wallet at `m/44'/654'/0'/0'/8` can verify it.
 
 also remember that the standard derivation path for coreblockchain XCB is `m/44'/654'/0'/0'`
 

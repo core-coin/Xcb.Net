@@ -10,13 +10,13 @@ namespace Xcb.Net.Test
         {
             // Given
             var masterPrivateKey = ExtendedPrivateKey.GenerateRandomMaster();
-            PrivateWallet privateWallet = new PrivateWallet(masterPrivateKey, "m/84'/0'/8'");
+            PrivateWallet privateWallet = PrivateWallet.GetPrivateWalletAtSpecificDerivationPath(masterPrivateKey, "m/84'/0'/8'");
 
             // When
             var derivedPrivateKey = privateWallet.GetPrivateKey(20);
-            var expectedDerivedPrivateKey = masterPrivateKey.ToChildExtendedPrivateKey(84)
-                                                            .ToChildExtendedPrivateKey(0)
-                                                            .ToChildExtendedPrivateKey(8)
+            var expectedDerivedPrivateKey = masterPrivateKey.ToChildExtendedPrivateKey(0x80000000 + 84)
+                                                            .ToChildExtendedPrivateKey(0x80000000 + 0)
+                                                            .ToChildExtendedPrivateKey(0x80000000 + 8)
                                                             .ToChildExtendedPrivateKey(20)
                                                             .GetPrivateKey();
 
@@ -29,15 +29,15 @@ namespace Xcb.Net.Test
         {
             // Given
             var masterPrivateKey = ExtendedPrivateKey.GenerateRandomMaster();
-            var masterPublicKey = masterPrivateKey.ToExtendedPublicKey();
 
-            PublicWallet publicWallet = new PublicWallet(masterPublicKey, "m/84'/0'/8'");
+            PublicWallet publicWallet = PrivateWallet.GetPublicWalletAtSpecificDerivationPath(masterPrivateKey, "m/84'/0'/8'");
 
             // When
             var derivedPublicKey = publicWallet.GetPublicKey(20);
-            var expectedDerivedPublicKey = masterPublicKey.ToChildExtendedPublicKey(84)
-                                                           .ToChildExtendedPublicKey(0)
-                                                           .ToChildExtendedPublicKey(8)
+            var expectedDerivedPublicKey = masterPrivateKey.ToChildExtendedPrivateKey(0x80000000 + 84)
+                                                           .ToChildExtendedPrivateKey(0x80000000 + 0)
+                                                           .ToChildExtendedPrivateKey(0x80000000 + 8)
+                                                           .ToExtendedPublicKey()
                                                            .ToChildExtendedPublicKey(20)
                                                            .GetPublicKey();
 

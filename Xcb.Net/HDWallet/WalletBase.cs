@@ -6,57 +6,63 @@ namespace Xcb.Net.HDWallet
 {
     public abstract class WalletBase
     {
-        protected readonly string _derivationPath;
+        public string RootDerivationPath { get; private set; }
+
         protected readonly ExtendedKeyBase _masterExtendedKey;
 
         public WalletBase(ExtendedKeyBase extendedKey, string derivationPath)
         {
             ValidateDerivationPath(derivationPath);
-            _derivationPath = derivationPath;
+            RootDerivationPath = derivationPath;
             _masterExtendedKey = extendedKey ?? throw new ArgumentNullException(nameof(extendedKey));
         }
 
 
-        public WalletBase(ExtendedKeyBase extendedKey) : this(extendedKey, "m/44'/654'/0'/0'")
+        public WalletBase(ExtendedKeyBase extendedKey) : this(extendedKey, "m")
         {
 
         }
 
         public abstract byte[] GetPublicKey(params uint[] index);
 
+        public abstract byte[] GetPublicKey(string childDerviationPath);
+
         public abstract string GetAddress(int networkId, params uint[] index);
+
+        public abstract string GetAddress(int networkId, string childDerivaitonPath);
 
         protected abstract ExtendedKeyBase Derive(ExtendedKeyBase extKey, uint index);
 
-        protected K DerivePath<K>(string path) where K : ExtendedKeyBase
+        protected K DerivePath<K>(string derivationpath) where K : ExtendedKeyBase
         {
-            Queue<string> pathQueue = new Queue<string>(path.Split('/'));
+            return GetKeyAtDerivePath<K>((K)_masterExtendedKey, derivationpath, this.Derive);
+        }
+        protected static K GetKeyAtDerivePath<K>(K masertKey, string derivationpath, Func<ExtendedKeyBase, uint, ExtendedKeyBase> derive) where K : ExtendedKeyBase
+        {
+            Queue<string> pathQueue = new Queue<string>(derivationpath.Split('/'));
 
-            ExtendedKeyBase key = _masterExtendedKey;
-
-            _ = pathQueue.Dequeue() switch
-            {
-                "m" => "m",
-                _ => throw new ArgumentException("Invalid Derivation Path")
-            };
+            K key = masertKey;
 
             while (pathQueue.Count != 0)
             {
-                if (!uint.TryParse(pathQueue.Dequeue().Replace("'", ""), out uint index))
+                var indexStr = pathQueue.Dequeue();
+                if (indexStr == "m")
+                    continue;
+
+                bool hardened = indexStr.EndsWith("'");
+
+                if (!uint.TryParse(indexStr.Replace("'", ""), out uint index))
                 {
                     throw new ArgumentException("Invalid Derivation Path number format");
                 }
 
-                key = Derive(key, index);
+                if (hardened)
+                    index += 0x80000000;
+
+                key = (K)derive((K)key, index);
             }
 
             return (K)key;
-        }
-
-        protected string GetTargetDerivationPath(string derivationPath, params uint[] index)
-        {
-            var postfix = string.Join("/", index.Select(a => a + "'"));
-            return derivationPath + "/" + postfix;
         }
 
         private void ValidateDerivationPath(string path)
@@ -64,7 +70,7 @@ namespace Xcb.Net.HDWallet
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException("Empty path", nameof(path));
 
-            if (!path.StartsWith("m/"))
+            if (!path.StartsWith("m"))
                 throw new ArgumentException("Invalid Derivation Path, {0} should start with m/", nameof(path));
         }
     }
