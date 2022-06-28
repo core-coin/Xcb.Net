@@ -1,16 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-  <PackageId>AppLogger</PackageId>
+  <PackageId>Xcb.Net</PackageId>
   <Version>1.0.0</Version>
   <Authors>Mojtaba Goodarzi</Authors>
   <Company>CoDeTech Company</Company>
   <Title>Coreblockchain library for .NET</Title>
+  <Description>By adding this nuget to your project, you will be able to create and sign transactions using enhanced ed448 cryptographic algorithm.</Description>
   <PackageTags>blockchain crypto cryptography corecoin wallet hdwallet</PackageTags>
+  <Summary>Create privatekeys, manage keys using BIP32 HD-Wallets to manage the keys, create and sign transaction. using enhanced version of ed448 for coreblockchain </Summary>
   <PackageReadmeFile>README.md</PackageReadmeFile>
   <PackageLicenseFile>LICENSE</PackageLicenseFile>
   <RepositoryUrl>https://github.com/core-coin/Xcb.net</RepositoryUrl>
-  <RespositoryType>git</RespositoryType>
+  <ProjectURL>https://github.com/core-coin/Xcb.net</ProjectURL>
+  <RepositoryType>git</RepositoryType>
+  <Language>C#</Language>
 </PropertyGroup>
 
 <ItemGroup>
