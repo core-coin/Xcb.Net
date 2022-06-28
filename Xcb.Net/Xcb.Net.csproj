@@ -2,7 +2,7 @@
 
 <PropertyGroup>
   <PackageId>Xcb.Net</PackageId>
-  <Version>1.0.0</Version>
+  <Version>1.0.1</Version>
   <Authors>Mojtaba Goodarzi</Authors>
   <Company>CoDeTech Company</Company>
   <Title>Coreblockchain library for .NET</Title>
@@ -28,9 +28,5 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Crypto\BouncyCastle_NetCore.csproj" />
-  </ItemGroup>
 
 </Project>
