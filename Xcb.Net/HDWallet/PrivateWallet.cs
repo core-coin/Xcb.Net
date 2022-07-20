@@ -74,6 +74,18 @@ namespace Xcb.Net.HDWallet
             return derivedPrivateKey.GetPublicKey();
         }
 
+        public ExtendedPublicKey GetExtendedPublicKey()
+        {
+            var extendedPrivateKey = (ExtendedPrivateKey)_masterExtendedKey;
+            return extendedPrivateKey.ToExtendedPublicKey();
+        }
+
+        public ExtendedPrivateKey GetExtendedPrivateKey()
+        {
+            var extendedPrivateKey = (ExtendedPrivateKey)_masterExtendedKey;
+            return extendedPrivateKey;
+        }
+
         public byte[] GetPrivateKey(params uint[] index)
         {
             var derivationPath = GetTargetDerivationPath(null, index);

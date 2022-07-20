@@ -44,7 +44,10 @@ namespace Xcb.Net.HDWallet
             return GetPublicKey(derivationPath);
         }
 
-
+        public ExtendedPublicKey GetExtendedPublicKey()
+        {
+            return (ExtendedPublicKey)_masterExtendedKey;
+        }
 
         public override byte[] GetPublicKey(string childDerviationPath)
         {
