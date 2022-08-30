@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
     public class Crc24
     {

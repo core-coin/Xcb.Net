@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
 
-namespace Org.BouncyCastle.Asn1.Smime
+namespace Org.BouncyCastle.Extended.Asn1.Smime
 {
     public class SmimeCapability
         : Asn1Encodable

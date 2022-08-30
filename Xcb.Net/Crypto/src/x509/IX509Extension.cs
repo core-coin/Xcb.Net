@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Utilities.Collections;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Utilities.Collections;
 
-namespace Org.BouncyCastle.X509
+namespace Org.BouncyCastle.Extended.X509
 {
 	public interface IX509Extension
 	{

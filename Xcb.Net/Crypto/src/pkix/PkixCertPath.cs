@@ -3,18 +3,18 @@ using System.Collections;
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Cms;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Cms;
-using Org.BouncyCastle.X509;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Security.Certificates;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Cms;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Cms;
+using Org.BouncyCastle.Extended.X509;
+using Org.BouncyCastle.Extended.OpenSsl;
+using Org.BouncyCastle.Extended.Security.Certificates;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
 
-namespace Org.BouncyCastle.Pkix
+namespace Org.BouncyCastle.Extended.Pkix
 {
 	/**
 	 * An immutable sequence of certificates (a certification path).<br />

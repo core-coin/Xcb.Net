@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
     /**
      * A class that provides CAST6 key encryption operations,

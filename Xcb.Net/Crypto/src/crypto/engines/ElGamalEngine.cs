@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
 	/**
 	* this does your basic ElGamal algorithm.

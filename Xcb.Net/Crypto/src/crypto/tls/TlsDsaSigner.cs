@@ -1,11 +1,11 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Signers;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Signers;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public abstract class TlsDsaSigner
         :	AbstractTlsSigner

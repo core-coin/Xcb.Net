@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	internal class CounterSignatureDigestCalculator
 		: IDigestCalculator

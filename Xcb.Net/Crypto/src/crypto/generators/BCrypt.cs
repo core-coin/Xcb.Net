@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Generators
+namespace Org.BouncyCastle.Extended.Crypto.Generators
 {
     /**
      * Core of password hashing scheme Bcrypt,

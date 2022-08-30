@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 #if !(NETCF_1_0 || NETCF_2_0 || SILVERLIGHT || PORTABLE)
     [Serializable]

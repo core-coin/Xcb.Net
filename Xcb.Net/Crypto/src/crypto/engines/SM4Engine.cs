@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
     /// <summary>SM4 Block Cipher - SM4 is a 128 bit block cipher with a 128 bit key.</summary>
     /// <remarks>

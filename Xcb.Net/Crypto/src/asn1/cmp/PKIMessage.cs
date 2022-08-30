@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Asn1.Cmp
+namespace Org.BouncyCastle.Extended.Asn1.Cmp
 {
     public class PkiMessage
         : Asn1Encodable

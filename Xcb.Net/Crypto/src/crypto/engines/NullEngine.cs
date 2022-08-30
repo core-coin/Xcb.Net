@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
 	/**
 	* The no-op engine that just copies bytes through, irrespective of whether encrypting and decrypting.

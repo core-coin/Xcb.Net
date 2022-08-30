@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Macs;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Crypto.Macs;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Crypto.Generators
+namespace Org.BouncyCastle.Extended.Crypto.Generators
 {
     public class KdfDoublePipelineIterationBytesGenerator : IMacDerivationFunction
     {

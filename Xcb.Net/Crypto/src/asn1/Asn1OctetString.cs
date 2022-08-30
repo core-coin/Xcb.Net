@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
     public abstract class Asn1OctetString
         : Asn1Object, Asn1OctetStringParser

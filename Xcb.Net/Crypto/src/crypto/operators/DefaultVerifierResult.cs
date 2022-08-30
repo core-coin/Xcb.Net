@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Operators
+namespace Org.BouncyCastle.Extended.Crypto.Operators
 {
     public class DefaultVerifierResult
         : IVerifier

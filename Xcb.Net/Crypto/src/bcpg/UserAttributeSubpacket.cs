@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
     /**
     * Basic type for a user attribute sub-packet.

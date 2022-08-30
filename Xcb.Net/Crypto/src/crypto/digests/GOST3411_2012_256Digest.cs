@@ -1,7 +1,7 @@
 ﻿using System;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace Org.BouncyCastle.Extended.Crypto.Digests
 {
     public class Gost3411_2012_256Digest : Gost3411_2012Digest
     {

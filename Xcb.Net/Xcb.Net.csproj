@@ -2,7 +2,7 @@
 
 <PropertyGroup>
   <PackageId>Xcb.Net</PackageId>
-  <Version>1.0.4</Version>
+  <Version>1.0.5</Version>
   <Authors>Mojtaba Goodarzi</Authors>
   <Company>CoDeTech Company</Company>
   <Title>Coreblockchain library for .NET</Title>

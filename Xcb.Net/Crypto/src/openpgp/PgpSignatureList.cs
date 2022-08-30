@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>A list of PGP signatures - normally in the signature block after literal data.</remarks>
     public class PgpSignatureList

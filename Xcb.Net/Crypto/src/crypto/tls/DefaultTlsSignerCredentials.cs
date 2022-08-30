@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public class DefaultTlsSignerCredentials
         :   AbstractTlsSignerCredentials

@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace Org.BouncyCastle.Extended.Asn1.X509
 {
     public class Time
         : Asn1Encodable, IAsn1Choice

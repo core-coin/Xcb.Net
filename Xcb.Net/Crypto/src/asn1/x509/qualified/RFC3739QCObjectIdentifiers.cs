@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Extended.Asn1;
 
-namespace Org.BouncyCastle.Asn1.X509.Qualified
+namespace Org.BouncyCastle.Extended.Asn1.X509.Qualified
 {
     public sealed class Rfc3739QCObjectIdentifiers
     {

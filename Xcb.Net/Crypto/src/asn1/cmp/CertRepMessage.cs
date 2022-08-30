@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Cmp
+namespace Org.BouncyCastle.Extended.Asn1.Cmp
 {
 	public class CertRepMessage
 		: Asn1Encodable

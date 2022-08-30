@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.Raw;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Math.Raw;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Math.EC.Custom.GM
+namespace Org.BouncyCastle.Extended.Math.EC.Custom.GM
 {
     internal class SM2P256V1FieldElement
         : AbstractFpFieldElement

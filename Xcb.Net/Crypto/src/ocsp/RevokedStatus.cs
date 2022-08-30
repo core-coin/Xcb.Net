@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Ocsp;
-using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Ocsp;
+using Org.BouncyCastle.Extended.Asn1.X509;
 
-namespace Org.BouncyCastle.Ocsp
+namespace Org.BouncyCastle.Extended.Ocsp
 {
 	/**
 	 * wrapper for the RevokedInfo object

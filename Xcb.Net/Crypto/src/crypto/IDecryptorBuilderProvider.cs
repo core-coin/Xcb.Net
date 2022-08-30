@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Crypto
+namespace Org.BouncyCastle.Extended.Crypto
 {
     /// <summary>
     /// Interface describing a provider of cipher builders for creating decrypting ciphers.

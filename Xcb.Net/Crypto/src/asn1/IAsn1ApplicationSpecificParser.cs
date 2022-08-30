@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
 	public interface IAsn1ApplicationSpecificParser
     	: IAsn1Convertible

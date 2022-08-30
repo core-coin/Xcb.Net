@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace Org.BouncyCastle.Extended.Crypto.Digests
 {
     /**
     * base implementation of MD4 family style digest as outlined in

@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Esf
+namespace Org.BouncyCastle.Extended.Asn1.Esf
 {
     /**
     * Commitment type qualifiers, used in the Commitment-Type-Indication attribute (RFC3126).

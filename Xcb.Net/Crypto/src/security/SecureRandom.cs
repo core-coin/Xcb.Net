@@ -1,13 +1,13 @@
 using System;
 using System.Threading;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Prng;
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Crypto.Prng;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Security
+namespace Org.BouncyCastle.Extended.Security
 {
     public class SecureRandom
         : Random

@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Ocsp;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Ocsp;
 
-namespace Org.BouncyCastle.Ocsp
+namespace Org.BouncyCastle.Extended.Ocsp
 {
 	/**
 	 * base generator for an OCSP response - at the moment this only supports the

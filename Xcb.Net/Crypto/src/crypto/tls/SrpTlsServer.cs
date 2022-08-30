@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public class SrpTlsServer
         :   AbstractTlsServer

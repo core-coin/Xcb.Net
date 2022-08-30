@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>A multiple precision integer</remarks>
     public class MPInteger

@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1.Cms;
+using Org.BouncyCastle.Extended.Asn1.Cms;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	/// <remarks>
 	/// The 'Signature' parameter is only available when generating unsigned attributes.

@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Crmf
+namespace Org.BouncyCastle.Extended.Asn1.Crmf
 {
     public class CertReqMessages
         : Asn1Encodable

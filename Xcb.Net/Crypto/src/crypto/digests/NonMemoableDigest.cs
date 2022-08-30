@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace Org.BouncyCastle.Extended.Crypto.Digests
 {
     /**
      * Wrapper removes exposure to the IMemoable interface on an IDigest implementation.

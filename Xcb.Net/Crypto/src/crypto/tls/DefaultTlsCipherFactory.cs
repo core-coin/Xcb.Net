@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Modes;
+using Org.BouncyCastle.Extended.Crypto.Engines;
+using Org.BouncyCastle.Extended.Crypto.Modes;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public class DefaultTlsCipherFactory
         :   AbstractTlsCipherFactory

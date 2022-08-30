@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Pkcs
+namespace Org.BouncyCastle.Extended.Asn1.Pkcs
 {
     /**
      * a Pkcs#7 signer info object.

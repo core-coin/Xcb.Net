@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace Org.BouncyCastle.Extended.Crypto.Digests
 {
     /**
     * Base class for SHA-384 and SHA-512.

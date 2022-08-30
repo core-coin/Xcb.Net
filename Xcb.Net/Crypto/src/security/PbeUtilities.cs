@@ -1,24 +1,24 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.BC;
-using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.Oiw;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.TeleTrust;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Macs;
-using Org.BouncyCastle.Crypto.Modes;
-using Org.BouncyCastle.Crypto.Paddings;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.BC;
+using Org.BouncyCastle.Extended.Asn1.Nist;
+using Org.BouncyCastle.Extended.Asn1.Oiw;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1.TeleTrust;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Crypto.Engines;
+using Org.BouncyCastle.Extended.Crypto.Generators;
+using Org.BouncyCastle.Extended.Crypto.Macs;
+using Org.BouncyCastle.Extended.Crypto.Modes;
+using Org.BouncyCastle.Extended.Crypto.Paddings;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Security
+namespace Org.BouncyCastle.Extended.Security
 {
     /// <summary>
     ///

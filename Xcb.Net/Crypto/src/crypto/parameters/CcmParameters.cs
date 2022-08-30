@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
     [Obsolete("Use AeadParameters")]
     public class CcmParameters

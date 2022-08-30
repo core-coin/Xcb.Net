@@ -1,22 +1,22 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.CryptoPro;
-using Org.BouncyCastle.Asn1.GM;
-using Org.BouncyCastle.Asn1.Misc;
-using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.Oiw;
-using Org.BouncyCastle.Asn1.Rosstandart;
-using Org.BouncyCastle.Asn1.TeleTrust;
-using Org.BouncyCastle.Asn1.UA;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.CryptoPro;
+using Org.BouncyCastle.Extended.Asn1.GM;
+using Org.BouncyCastle.Extended.Asn1.Misc;
+using Org.BouncyCastle.Extended.Asn1.Nist;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1.Oiw;
+using Org.BouncyCastle.Extended.Asn1.Rosstandart;
+using Org.BouncyCastle.Extended.Asn1.TeleTrust;
+using Org.BouncyCastle.Extended.Asn1.UA;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Security
+namespace Org.BouncyCastle.Extended.Security
 {
     /// <remarks>
     ///  Utility class for creating IDigest objects from their names/Oids

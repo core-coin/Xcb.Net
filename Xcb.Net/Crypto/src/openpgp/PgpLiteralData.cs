@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Utilities.Date;
+using Org.BouncyCastle.Extended.Utilities.Date;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <summary>Class for processing literal data objects.</summary>
     public class PgpLiteralData

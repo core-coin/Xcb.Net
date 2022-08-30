@@ -1,18 +1,18 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Crmf;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Operators;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Crmf;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Operators;
 
-namespace Org.BouncyCastle.Crmf
+namespace Org.BouncyCastle.Extended.Crmf
 {
     public class CertificateRequestMessage
     {
-        public static readonly int popRaVerified = Org.BouncyCastle.Asn1.Crmf.ProofOfPossession.TYPE_RA_VERIFIED;
-        public static readonly int popSigningKey = Org.BouncyCastle.Asn1.Crmf.ProofOfPossession.TYPE_SIGNING_KEY;
-        public static readonly int popKeyEncipherment = Org.BouncyCastle.Asn1.Crmf.ProofOfPossession.TYPE_KEY_ENCIPHERMENT;
-        public static readonly int popKeyAgreement = Org.BouncyCastle.Asn1.Crmf.ProofOfPossession.TYPE_KEY_AGREEMENT;
+        public static readonly int popRaVerified = Org.BouncyCastle.Extended.Asn1.Crmf.ProofOfPossession.TYPE_RA_VERIFIED;
+        public static readonly int popSigningKey = Org.BouncyCastle.Extended.Asn1.Crmf.ProofOfPossession.TYPE_SIGNING_KEY;
+        public static readonly int popKeyEncipherment = Org.BouncyCastle.Extended.Asn1.Crmf.ProofOfPossession.TYPE_KEY_ENCIPHERMENT;
+        public static readonly int popKeyAgreement = Org.BouncyCastle.Extended.Asn1.Crmf.ProofOfPossession.TYPE_KEY_AGREEMENT;
 
         private readonly CertReqMsg certReqMsg;
         private readonly Controls controls;

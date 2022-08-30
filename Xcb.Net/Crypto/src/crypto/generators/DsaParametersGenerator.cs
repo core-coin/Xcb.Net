@@ -1,13 +1,13 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Crypto.Generators
+namespace Org.BouncyCastle.Extended.Crypto.Generators
 {
     /**
      * Generate suitable parameters for DSA, in line with FIPS 186-2, or FIPS 186-3.

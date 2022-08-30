@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Prng
+namespace Org.BouncyCastle.Extended.Crypto.Prng
 {
     public class X931SecureRandom
         :   SecureRandom

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>Basic packet for a PGP secret key.</remarks>
     public class SecretSubkeyPacket

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.IO;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.IO;
 
-namespace Org.BouncyCastle.Pkcs
+namespace Org.BouncyCastle.Extended.Pkcs
 {
     public class Pkcs8EncryptedPrivateKeyInfoBuilder
     {

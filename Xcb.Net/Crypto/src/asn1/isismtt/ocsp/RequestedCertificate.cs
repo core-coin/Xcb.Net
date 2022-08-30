@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.IsisMtt.Ocsp
+namespace Org.BouncyCastle.Extended.Asn1.IsisMtt.Ocsp
 {
 	/**
 	* ISIS-MTT-Optional: The certificate requested by the client by inserting the

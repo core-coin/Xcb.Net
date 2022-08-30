@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Signers
+namespace Org.BouncyCastle.Extended.Crypto.Signers
 {
     public class StandardDsaEncoding
         : IDsaEncoding

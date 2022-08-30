@@ -1,4 +1,4 @@
-﻿namespace Org.BouncyCastle.Math.EC.Multiplier
+﻿namespace Org.BouncyCastle.Extended.Math.EC.Multiplier
 {
     public abstract class AbstractECMultiplier
         : ECMultiplier

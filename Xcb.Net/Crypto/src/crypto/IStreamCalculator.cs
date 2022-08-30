@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Crypto
+namespace Org.BouncyCastle.Extended.Crypto
 {
     /// <summary>
     /// Base interface for cryptographic operations such as Hashes, MACs, and Signatures which reduce a stream of data

@@ -1,14 +1,14 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Ocsp;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.X509;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Ocsp;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.X509;
 
-namespace Org.BouncyCastle.Ocsp
+namespace Org.BouncyCastle.Extended.Ocsp
 {
 	public class CertificateID
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace Org.BouncyCastle.Extended.Crypto.Digests
 {
     /*
       The BLAKE2 cryptographic hash function was designed by Jean-

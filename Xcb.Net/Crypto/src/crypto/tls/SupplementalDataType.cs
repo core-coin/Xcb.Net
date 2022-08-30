@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     /// <summary>RFC 4680</summary>
     public abstract class SupplementalDataType

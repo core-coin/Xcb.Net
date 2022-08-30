@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Crmf
+namespace Org.BouncyCastle.Extended.Crmf
 {
      /// <summary>
      /// An encrypted value padder is used to make sure that prior to a value been

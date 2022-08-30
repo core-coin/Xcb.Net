@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.Agreement;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Crypto.Agreement;
+using Org.BouncyCastle.Extended.Crypto.Generators;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public abstract class TlsDHUtilities
     {

@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>Base class for an RSA secret (or priate) key.</remarks>
 	public class RsaSecretBcpgKey

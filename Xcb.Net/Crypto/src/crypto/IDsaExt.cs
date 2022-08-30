@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Crypto
+namespace Org.BouncyCastle.Extended.Crypto
 {
     /// <summary>
     /// An "extended" interface for classes implementing DSA-style algorithms, that provides access

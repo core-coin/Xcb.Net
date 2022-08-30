@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
 	public class Gost3410Parameters
 		: ICipherParameters

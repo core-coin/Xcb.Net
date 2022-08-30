@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Crypto.Agreement.JPake
+namespace Org.BouncyCastle.Extended.Crypto.Agreement.JPake
 {
     /// <summary>
     /// A pre-computed prime order group for use during a J-PAKE exchange.

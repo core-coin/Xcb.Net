@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Asn1.BC
+namespace Org.BouncyCastle.Extended.Asn1.BC
 {
 	public abstract class BCObjectIdentifiers
 	{

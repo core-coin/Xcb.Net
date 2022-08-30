@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Cms
+namespace Org.BouncyCastle.Extended.Asn1.Cms
 {
 	/**
 	* <pre>

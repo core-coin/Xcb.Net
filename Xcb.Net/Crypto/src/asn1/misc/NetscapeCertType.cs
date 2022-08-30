@@ -1,6 +1,6 @@
-using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Extended.Asn1;
 
-namespace Org.BouncyCastle.Asn1.Misc
+namespace Org.BouncyCastle.Extended.Asn1.Misc
 {
     /**
      * The NetscapeCertType object.

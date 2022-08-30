@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Asn1.Icao
+namespace Org.BouncyCastle.Extended.Asn1.Icao
 {
 	public abstract class IcaoObjectIdentifiers
 	{

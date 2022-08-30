@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Sec;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Sec;
+using Org.BouncyCastle.Extended.Asn1.X9;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
 
-namespace Org.BouncyCastle.Asn1.Nist
+namespace Org.BouncyCastle.Extended.Asn1.Nist
 {
     /**
     * Utility class for fetching curves using their NIST names as published in FIPS-PUB 186-3

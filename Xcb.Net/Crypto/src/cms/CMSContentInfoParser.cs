@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Cms;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Cms;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	public class CmsContentInfoParser
 	{

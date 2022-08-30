@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace Org.BouncyCastle.Extended.Asn1.X509
 {
     /**
      * The OtherName object.

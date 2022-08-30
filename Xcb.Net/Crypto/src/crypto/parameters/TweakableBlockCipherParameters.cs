@@ -1,7 +1,7 @@
 using System;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
 
 	/// <summary>

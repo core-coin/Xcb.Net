@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Security.Certificates;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Security.Certificates;
 
-namespace Org.BouncyCastle.X509
+namespace Org.BouncyCastle.Extended.X509
 {
 	/// <remarks>
 	/// A utility class that will extract X509Principal objects from X.509 certificates.

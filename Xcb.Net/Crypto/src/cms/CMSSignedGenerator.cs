@@ -2,29 +2,29 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.BC;
-using Org.BouncyCastle.Asn1.Bsi;
-using Org.BouncyCastle.Asn1.Cms;
-using Org.BouncyCastle.Asn1.CryptoPro;
-using Org.BouncyCastle.Asn1.Eac;
-using Org.BouncyCastle.Asn1.GM;
-using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.Oiw;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.Rosstandart;
-using Org.BouncyCastle.Asn1.TeleTrust;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
-using Org.BouncyCastle.X509;
-using Org.BouncyCastle.X509.Store;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.BC;
+using Org.BouncyCastle.Extended.Asn1.Bsi;
+using Org.BouncyCastle.Extended.Asn1.Cms;
+using Org.BouncyCastle.Extended.Asn1.CryptoPro;
+using Org.BouncyCastle.Extended.Asn1.Eac;
+using Org.BouncyCastle.Extended.Asn1.GM;
+using Org.BouncyCastle.Extended.Asn1.Nist;
+using Org.BouncyCastle.Extended.Asn1.Oiw;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1.Rosstandart;
+using Org.BouncyCastle.Extended.Asn1.TeleTrust;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.X9;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
+using Org.BouncyCastle.Extended.X509;
+using Org.BouncyCastle.Extended.X509.Store;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
     public class DefaultSignatureAlgorithmIdentifierFinder
     {

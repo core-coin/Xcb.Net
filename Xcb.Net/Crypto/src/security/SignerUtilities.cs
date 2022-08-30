@@ -2,26 +2,26 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Bsi;
-using Org.BouncyCastle.Asn1.CryptoPro;
-using Org.BouncyCastle.Asn1.Eac;
-using Org.BouncyCastle.Asn1.EdEC;
-using Org.BouncyCastle.Asn1.GM;
-using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.Oiw;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.TeleTrust;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Signers;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Bsi;
+using Org.BouncyCastle.Extended.Asn1.CryptoPro;
+using Org.BouncyCastle.Extended.Asn1.Eac;
+using Org.BouncyCastle.Extended.Asn1.EdEC;
+using Org.BouncyCastle.Extended.Asn1.GM;
+using Org.BouncyCastle.Extended.Asn1.Nist;
+using Org.BouncyCastle.Extended.Asn1.Oiw;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1.TeleTrust;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.X9;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Engines;
+using Org.BouncyCastle.Extended.Crypto.Signers;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Security
+namespace Org.BouncyCastle.Extended.Security
 {
     /// <summary>
     ///  Signer Utility class contains methods that can not be specifically grouped into other classes.

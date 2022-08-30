@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.IO;
+using Org.BouncyCastle.Extended.Crypto.IO;
 
-namespace Org.BouncyCastle.Crypto.Operators
+namespace Org.BouncyCastle.Extended.Crypto.Operators
 {
     public class DefaultVerifierCalculator
         : IStreamCalculator

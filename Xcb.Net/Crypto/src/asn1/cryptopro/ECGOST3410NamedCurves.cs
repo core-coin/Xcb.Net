@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1.Rosstandart;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
+using Org.BouncyCastle.Extended.Asn1.Rosstandart;
+using Org.BouncyCastle.Extended.Asn1.X9;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Math.EC;
+using Org.BouncyCastle.Extended.Math.EC.Multiplier;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
 
-namespace Org.BouncyCastle.Asn1.CryptoPro
+namespace Org.BouncyCastle.Extended.Asn1.CryptoPro
 {
     /// <summary>
     /// Table of the available named parameters for GOST 3410-2001 / 2012.

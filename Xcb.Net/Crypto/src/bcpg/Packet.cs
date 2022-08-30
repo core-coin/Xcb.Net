@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
     public class Packet
         //: PacketTag

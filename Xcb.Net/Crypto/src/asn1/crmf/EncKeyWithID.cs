@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Asn1.X509;
 
-namespace Org.BouncyCastle.Asn1.Crmf
+namespace Org.BouncyCastle.Extended.Asn1.Crmf
 {
     public class EncKeyWithID
         : Asn1Encodable

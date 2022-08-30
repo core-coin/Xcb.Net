@@ -1,5 +1,5 @@
 using System;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 using Xcb.Net.Signer;
 
 namespace Xcb.Net.HDWallet

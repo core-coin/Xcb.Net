@@ -1,11 +1,11 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Agreement.JPake
+namespace Org.BouncyCastle.Extended.Crypto.Agreement.JPake
 {
     /// <summary>
     /// A participant in a Password Authenticated Key Exchange by Juggling (J-PAKE) exchange.

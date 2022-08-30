@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
 	public class AeadParameters
 		: ICipherParameters

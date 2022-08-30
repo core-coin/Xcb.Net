@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Math.EC
+namespace Org.BouncyCastle.Extended.Math.EC
 {
     public interface ECLookupTable
     {

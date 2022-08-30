@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Security.Certificates;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Security.Certificates;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.X509.Extension
+namespace Org.BouncyCastle.Extended.X509.Extension
 {
 	public class X509ExtensionUtilities
 	{

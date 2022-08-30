@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Math.Raw;
+using Org.BouncyCastle.Extended.Math.Raw;
 
-namespace Org.BouncyCastle.Math.EC.Rfc7748
+namespace Org.BouncyCastle.Extended.Math.EC.Rfc7748
 {
     public abstract class X25519Field
     {

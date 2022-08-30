@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Crmf;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Crmf;
 
-namespace Org.BouncyCastle.Crmf
+namespace Org.BouncyCastle.Extended.Crmf
 {
     public class RegTokenControl
         : IControl

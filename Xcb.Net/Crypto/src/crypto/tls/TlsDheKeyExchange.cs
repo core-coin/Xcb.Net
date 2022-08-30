@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities.IO;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities.IO;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public class TlsDheKeyExchange
         :   TlsDHKeyExchange

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Asn1.Rosstandart
+namespace Org.BouncyCastle.Extended.Asn1.Rosstandart
 {
 	public abstract class RosstandartObjectIdentifiers
     {

@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Utilities.Zlib;
+using Org.BouncyCastle.Extended.Utilities.Zlib;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public class TlsDeflateCompression : TlsCompression
     {

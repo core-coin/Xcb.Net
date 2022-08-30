@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
     public class X448KeyGenerationParameters
         : KeyGenerationParameters

@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Crypto.Prng.Drbg
+namespace Org.BouncyCastle.Extended.Crypto.Prng.Drbg
 {
 	/**
 	 * Interface to SP800-90A deterministic random bit generators.

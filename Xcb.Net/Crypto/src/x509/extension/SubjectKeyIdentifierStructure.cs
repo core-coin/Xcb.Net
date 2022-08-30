@@ -1,11 +1,11 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security.Certificates;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Security.Certificates;
 
-namespace Org.BouncyCastle.X509.Extension
+namespace Org.BouncyCastle.Extended.X509.Extension
 {
 	/**
 	 * A high level subject key identifier.

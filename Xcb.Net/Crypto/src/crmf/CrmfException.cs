@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Crmf
+namespace Org.BouncyCastle.Extended.Crmf
 {
     public class CrmfException
         : Exception

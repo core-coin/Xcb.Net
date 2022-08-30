@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Prng.Drbg;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto.Prng.Drbg;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Prng
+namespace Org.BouncyCastle.Extended.Crypto.Prng
 {
     public class SP800SecureRandom
         :   SecureRandom

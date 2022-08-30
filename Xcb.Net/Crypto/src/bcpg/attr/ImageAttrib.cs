@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Bcpg.Attr
+namespace Org.BouncyCastle.Extended.Bcpg.Attr
 {
     /// <remarks>Basic type for a image attribute packet.</remarks>
     public class ImageAttrib

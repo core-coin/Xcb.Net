@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>
 	/// Often a PGP key ring file is made up of a succession of master/sub-key key rings.

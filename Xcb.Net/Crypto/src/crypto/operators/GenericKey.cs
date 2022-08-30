@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.X509;
 
-namespace Org.BouncyCastle.Crypto.Operators
+namespace Org.BouncyCastle.Extended.Crypto.Operators
 {
     public class GenericKey
     {

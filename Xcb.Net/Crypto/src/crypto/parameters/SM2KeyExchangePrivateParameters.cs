@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Math.EC.Multiplier;
+using Org.BouncyCastle.Extended.Math.EC;
+using Org.BouncyCastle.Extended.Math.EC.Multiplier;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
     /// <summary>Private parameters for an SM2 key exchange.</summary>
     /// <remarks>The ephemeralPrivateKey is used to calculate the random point used in the algorithm.</remarks>

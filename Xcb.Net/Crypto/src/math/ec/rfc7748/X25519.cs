@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Math.EC.Rfc8032;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Math.EC.Rfc8032;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Math.EC.Rfc7748
+namespace Org.BouncyCastle.Extended.Math.EC.Rfc7748
 {
     public abstract class X25519
     {

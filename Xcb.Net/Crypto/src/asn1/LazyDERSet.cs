@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
 	internal class LazyDerSet
 		: DerSet

@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>Generic exception class for PGP encoding/decoding problems.</remarks>
 #if !(NETCF_1_0 || NETCF_2_0 || SILVERLIGHT || PORTABLE)

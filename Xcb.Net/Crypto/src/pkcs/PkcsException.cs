@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Pkcs
+namespace Org.BouncyCastle.Extended.Pkcs
 {
     /// <summary>
     /// Base exception for PKCS related issues.

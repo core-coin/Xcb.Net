@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
     /**
     * this does your basic RSA algorithm.

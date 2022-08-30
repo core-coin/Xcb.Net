@@ -1,17 +1,17 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Math.EC.Endo;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X9;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Math.EC;
+using Org.BouncyCastle.Extended.Math.EC.Endo;
+using Org.BouncyCastle.Extended.Math.EC.Multiplier;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Asn1.Sec
+namespace Org.BouncyCastle.Extended.Asn1.Sec
 {
     public sealed class SecNamedCurves
     {

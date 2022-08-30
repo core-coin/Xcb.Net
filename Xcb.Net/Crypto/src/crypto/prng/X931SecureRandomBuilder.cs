@@ -1,11 +1,11 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities.Date;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities.Date;
 
-namespace Org.BouncyCastle.Crypto.Prng
+namespace Org.BouncyCastle.Extended.Crypto.Prng
 {
     public class X931SecureRandomBuilder
     {

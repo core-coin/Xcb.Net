@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1.X500;
+using Org.BouncyCastle.Extended.Asn1.X500;
 
-namespace Org.BouncyCastle.Asn1.Esf
+namespace Org.BouncyCastle.Extended.Asn1.Esf
 {
 	/**
 	* Signer-Location attribute (RFC3126).

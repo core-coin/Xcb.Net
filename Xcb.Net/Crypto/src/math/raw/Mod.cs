@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Math.Raw
+namespace Org.BouncyCastle.Extended.Math.Raw
 {
     /*
      * Modular inversion as implemented in this class is based on the paper "Fast constant-time gcd

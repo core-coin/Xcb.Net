@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
 	/// <remarks>
 	/// An implementation of the SEED key wrapper based on RFC 4010/RFC 3394.

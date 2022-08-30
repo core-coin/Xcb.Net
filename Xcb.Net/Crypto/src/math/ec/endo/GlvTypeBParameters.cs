@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Math.EC.Endo
+namespace Org.BouncyCastle.Extended.Math.EC.Endo
 {
     public class GlvTypeBParameters
     {

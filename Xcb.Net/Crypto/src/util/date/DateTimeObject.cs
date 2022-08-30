@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Utilities.Date
+namespace Org.BouncyCastle.Extended.Utilities.Date
 {
 	public sealed class DateTimeObject
 	{

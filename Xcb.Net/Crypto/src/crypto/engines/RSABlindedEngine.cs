@@ -1,11 +1,11 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
     /**
      * this does your basic RSA algorithm with blinding
@@ -135,7 +135,7 @@ namespace Org.BouncyCastle.Crypto.Engines
                     BigInteger rInv = BigIntegers.ModOddInverse(m, r);
                     result = blindedResult.Multiply(rInv).Mod(m);
 
-                    // defence against Arjen Lenstra’s CRT attack
+                    // defence against Arjen Lenstraï¿½s CRT attack
                     if (!input.Equals(result.ModPow(e, m)))
                         throw new InvalidOperationException("RSA engine faulty decryption/signing detected");
                 }

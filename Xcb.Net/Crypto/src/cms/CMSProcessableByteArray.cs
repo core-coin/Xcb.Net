@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Cms;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Cms;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	/**
 	* a holding class for a byte array of data to be processed.

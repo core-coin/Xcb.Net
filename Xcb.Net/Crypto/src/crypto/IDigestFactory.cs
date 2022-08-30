@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Crypto
+namespace Org.BouncyCastle.Extended.Crypto
 {
     /// <summary>
     /// Base interface for operator factories that create stream-based digest calculators.

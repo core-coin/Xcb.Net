@@ -2,9 +2,9 @@ using System;
 using Xcb.Net.Signer;
 using Xunit;
 using Xcb.Net.Extensions;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 using System.Threading.Tasks;
-using Org.BouncyCastle.Math.EC.Rfc8032;
+using Org.BouncyCastle.Extended.Math.EC.Rfc8032;
 
 namespace Xcb.Net.Test
 {

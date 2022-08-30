@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public interface TlsClientContext
         :   TlsContext

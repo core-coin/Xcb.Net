@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Asn1.Ntt
+namespace Org.BouncyCastle.Extended.Asn1.Ntt
 {
 	/// <summary>From RFC 3657</summary>
 	public abstract class NttObjectIdentifiers

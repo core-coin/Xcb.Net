@@ -34,7 +34,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * and contributors of zlib.
  */
 
-namespace Org.BouncyCastle.Utilities.Zlib {
+namespace Org.BouncyCastle.Extended.Utilities.Zlib {
 
     internal sealed class InfBlocks{
         private const int MANY=1440;

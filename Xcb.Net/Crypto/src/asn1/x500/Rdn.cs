@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Asn1.X500
+namespace Org.BouncyCastle.Extended.Asn1.X500
 {
     /**
      * Holding class for a single Relative Distinguished Name (RDN).

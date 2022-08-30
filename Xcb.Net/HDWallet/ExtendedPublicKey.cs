@@ -1,5 +1,5 @@
 using System;
-using Org.BouncyCastle.Math.EC.Rfc8032;
+using Org.BouncyCastle.Extended.Math.EC.Rfc8032;
 using Xcb.Net.Extensions;
 using Xcb.Net.Signer;
 

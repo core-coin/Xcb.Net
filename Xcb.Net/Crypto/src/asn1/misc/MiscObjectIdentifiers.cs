@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Asn1.Misc
+namespace Org.BouncyCastle.Extended.Asn1.Misc
 {
     public abstract class MiscObjectIdentifiers
     {

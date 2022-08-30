@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Modes
+namespace Org.BouncyCastle.Extended.Crypto.Modes
 {
     /**
      * An implementation of <a href="http://tools.ietf.org/html/rfc7253">RFC 7253 on The OCB

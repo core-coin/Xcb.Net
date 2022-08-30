@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.X509.Store
+namespace Org.BouncyCastle.Extended.X509.Store
 {
 	/**
 	 * A simple collection backed store.

@@ -1,14 +1,14 @@
 using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
     public class DerInteger
         : Asn1Object
     {
-        public const string AllowUnsafeProperty = "Org.BouncyCastle.Asn1.AllowUnsafeInteger";
+        public const string AllowUnsafeProperty = "Org.BouncyCastle.Extended.Asn1.AllowUnsafeInteger";
 
         internal static bool AllowUnsafe()
         {

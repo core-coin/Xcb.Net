@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Crypto.Operators
+namespace Org.BouncyCastle.Extended.Crypto.Operators
 {
     public class DefaultSignatureResult
         : IBlockResult

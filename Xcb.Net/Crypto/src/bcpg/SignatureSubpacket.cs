@@ -1,8 +1,8 @@
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>Basic type for a PGP Signature sub-packet.</remarks>
     public class SignatureSubpacket

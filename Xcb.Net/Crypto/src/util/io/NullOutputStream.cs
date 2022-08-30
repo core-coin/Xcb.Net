@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Utilities.IO
+namespace Org.BouncyCastle.Extended.Utilities.IO
 {
 	internal class NullOutputStream
 		: BaseOutputStream

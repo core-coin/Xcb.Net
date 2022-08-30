@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Crypto
+namespace Org.BouncyCastle.Extended.Crypto
 {
 	/// <remarks>Base interface for a symmetric key block cipher.</remarks>
     public interface IBlockCipher

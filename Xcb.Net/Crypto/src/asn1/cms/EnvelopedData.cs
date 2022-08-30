@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Extended.Asn1;
 
-namespace Org.BouncyCastle.Asn1.Cms
+namespace Org.BouncyCastle.Extended.Asn1.Cms
 {
     public class EnvelopedData
         : Asn1Encodable

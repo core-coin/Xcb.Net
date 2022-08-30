@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Extended.Asn1;
 
-namespace Org.BouncyCastle.Asn1.Eac
+namespace Org.BouncyCastle.Extended.Asn1.Eac
 {
 	public abstract class EacObjectIdentifiers
 	{

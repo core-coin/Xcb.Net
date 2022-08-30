@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
 	// TODO Make Obsolete in favour of Asn1OutputStream?
     public class BerOutputStream

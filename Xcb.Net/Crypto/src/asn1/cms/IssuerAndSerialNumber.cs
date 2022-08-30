@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Asn1.Cms
+namespace Org.BouncyCastle.Extended.Asn1.Cms
 {
     public class IssuerAndSerialNumber
         : Asn1Encodable

@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	internal interface IDigestCalculator
 	{

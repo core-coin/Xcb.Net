@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Asn1.Utilities;
+using Org.BouncyCastle.Extended.Asn1.Utilities;
 
-namespace Org.BouncyCastle.Utilities.IO
+namespace Org.BouncyCastle.Extended.Utilities.IO
 {
 	public class PushbackStream
 		: FilterStream

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     class DtlsReassembler
     {

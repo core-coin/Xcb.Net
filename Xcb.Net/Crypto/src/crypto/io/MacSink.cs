@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Utilities.IO;
+using Org.BouncyCastle.Extended.Utilities.IO;
 
-namespace Org.BouncyCastle.Crypto.IO
+namespace Org.BouncyCastle.Extended.Crypto.IO
 {
     public class MacSink
         : BaseOutputStream

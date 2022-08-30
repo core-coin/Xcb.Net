@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Asn1.Crmf;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1.Crmf;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Cmp
+namespace Org.BouncyCastle.Extended.Asn1.Cmp
 {
     public class PkiBody
         : Asn1Encodable, IAsn1Choice

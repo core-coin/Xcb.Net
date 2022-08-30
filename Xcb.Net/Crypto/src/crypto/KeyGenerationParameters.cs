@@ -1,7 +1,7 @@
 using System;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto
+namespace Org.BouncyCastle.Extended.Crypto
 {
     /**
      * The base class for parameters to key generators.

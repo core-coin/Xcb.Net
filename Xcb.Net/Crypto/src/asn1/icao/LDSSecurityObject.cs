@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Asn1.Icao
+namespace Org.BouncyCastle.Extended.Asn1.Icao
 {
 	/**
 	 * The LDSSecurityObject object (V1.8).

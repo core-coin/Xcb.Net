@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
 	/// <remarks>Parameters for mask derivation functions.</remarks>
     public class MgfParameters

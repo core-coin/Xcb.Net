@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X500;
-using Org.BouncyCastle.Asn1.X500.Style;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X500;
+using Org.BouncyCastle.Extended.Asn1.X500.Style;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Collections;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Pkix
+namespace Org.BouncyCastle.Extended.Pkix
 {
     public class PkixNameConstraintValidator
     {
@@ -1663,11 +1663,11 @@ namespace Org.BouncyCastle.Pkix
          */
         private static int CompareTo(byte[] ip1, byte[] ip2)
         {
-            if (Org.BouncyCastle.Utilities.Arrays.AreEqual(ip1, ip2))
+            if (Org.BouncyCastle.Extended.Utilities.Arrays.AreEqual(ip1, ip2))
             {
                 return 0;
             }
-            if (Org.BouncyCastle.Utilities.Arrays.AreEqual(Max(ip1, ip2), ip1))
+            if (Org.BouncyCastle.Extended.Utilities.Arrays.AreEqual(Max(ip1, ip2), ip1))
             {
                 return 1;
             }

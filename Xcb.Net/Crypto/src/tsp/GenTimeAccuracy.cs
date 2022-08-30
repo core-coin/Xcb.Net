@@ -1,7 +1,7 @@
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Tsp;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Tsp;
 
-namespace Org.BouncyCastle.Tsp
+namespace Org.BouncyCastle.Extended.Tsp
 {
 	public class GenTimeAccuracy
 	{

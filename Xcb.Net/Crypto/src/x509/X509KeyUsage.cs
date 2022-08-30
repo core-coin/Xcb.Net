@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X509;
 
-namespace Org.BouncyCastle.X509
+namespace Org.BouncyCastle.Extended.X509
 {
 	/**
 	 * A holding class for constructing an X509 Key Usage extension.

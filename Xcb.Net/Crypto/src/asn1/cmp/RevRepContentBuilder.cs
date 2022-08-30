@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1.Crmf;
-using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.Crmf;
+using Org.BouncyCastle.Extended.Asn1.X509;
 
-namespace Org.BouncyCastle.Asn1.Cmp
+namespace Org.BouncyCastle.Extended.Asn1.Cmp
 {
 	public class RevRepContentBuilder
 	{

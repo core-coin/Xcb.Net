@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Asn1.Gnu
+namespace Org.BouncyCastle.Extended.Asn1.Gnu
 {
 	public abstract class GnuObjectIdentifiers
 	{

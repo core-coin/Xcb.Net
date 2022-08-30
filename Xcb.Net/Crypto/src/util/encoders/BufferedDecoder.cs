@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Utilities.Encoders
+namespace Org.BouncyCastle.Extended.Utilities.Encoders
 {
     /// <summary>
     ///  A buffering class to allow translation from one format to another to

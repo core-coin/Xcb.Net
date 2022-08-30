@@ -1,6 +1,6 @@
-﻿using Org.BouncyCastle.Math;
+﻿using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Crypto.Agreement.JPake
+namespace Org.BouncyCastle.Extended.Crypto.Agreement.JPake
 {
     /// <summary>
     /// Standard pre-computed prime order groups for use by J-PAKE.

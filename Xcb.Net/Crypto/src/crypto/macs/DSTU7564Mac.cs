@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Macs
+namespace Org.BouncyCastle.Extended.Crypto.Macs
 {
     /// <summary>
     /// Implementation of DSTU7564 mac mode

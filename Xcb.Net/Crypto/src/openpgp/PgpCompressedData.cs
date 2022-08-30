@@ -1,9 +1,9 @@
 using System.IO;
 
-using Org.BouncyCastle.Apache.Bzip2;
-using Org.BouncyCastle.Utilities.Zlib;
+using Org.BouncyCastle.Extended.Apache.Bzip2;
+using Org.BouncyCastle.Extended.Utilities.Zlib;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>Compressed data objects</remarks>
     public class PgpCompressedData

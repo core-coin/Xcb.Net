@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Math.EC.Multiplier
+namespace Org.BouncyCastle.Extended.Math.EC.Multiplier
 {
     [Obsolete("Will be removed")]
     public class ZSignedDigitL2RMultiplier 

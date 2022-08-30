@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Org.BouncyCastle.Bcpg.Sig
+namespace Org.BouncyCastle.Extended.Bcpg.Sig
 {
 	/**
 	* Class provided a NotationData object according to

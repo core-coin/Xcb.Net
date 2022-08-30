@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Math.Raw;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Math.Raw;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Math.EC.Custom.GM
+namespace Org.BouncyCastle.Extended.Math.EC.Custom.GM
 {
     internal class SM2P256V1Field
     {

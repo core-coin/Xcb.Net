@@ -2,7 +2,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Org.BouncyCastle.Crypto.Prng
+namespace Org.BouncyCastle.Extended.Crypto.Prng
 {
     public class CryptoApiEntropySourceProvider
         :   IEntropySourceProvider

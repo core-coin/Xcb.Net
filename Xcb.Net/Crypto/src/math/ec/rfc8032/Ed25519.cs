@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Math.EC.Rfc7748;
-using Org.BouncyCastle.Math.Raw;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Digests;
+using Org.BouncyCastle.Extended.Math.EC.Rfc7748;
+using Org.BouncyCastle.Extended.Math.Raw;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Math.EC.Rfc8032
+namespace Org.BouncyCastle.Extended.Math.EC.Rfc8032
 {
     public abstract class Ed25519
     {

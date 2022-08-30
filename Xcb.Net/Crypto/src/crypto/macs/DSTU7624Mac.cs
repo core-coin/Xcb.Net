@@ -1,12 +1,12 @@
 ﻿using System;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Engines;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
 
 
-namespace Org.BouncyCastle.Crypto.Macs
+namespace Org.BouncyCastle.Extended.Crypto.Macs
 {
      /**
      * implementation of DSTU 7624 MAC

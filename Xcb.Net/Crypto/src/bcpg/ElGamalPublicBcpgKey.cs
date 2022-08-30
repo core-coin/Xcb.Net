@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>Base class for an ElGamal public key.</remarks>
 	public class ElGamalPublicBcpgKey

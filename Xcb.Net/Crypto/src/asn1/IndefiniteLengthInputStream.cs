@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
 	class IndefiniteLengthInputStream
 		: LimitedInputStream
@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Asn1
 //using System;
 //using System.IO;
 
-//namespace Org.BouncyCastle.Asn1
+//namespace Org.BouncyCastle.Extended.Asn1
 //{
 //    class IndefiniteLengthInputStream
 //        : LimitedInputStream

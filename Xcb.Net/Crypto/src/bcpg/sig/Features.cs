@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Bcpg.Sig
+namespace Org.BouncyCastle.Extended.Bcpg.Sig
 {
     /**
     * packet giving signature expiration time.

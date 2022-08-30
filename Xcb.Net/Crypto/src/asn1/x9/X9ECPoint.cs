@@ -1,8 +1,8 @@
-using Org.BouncyCastle.Math.EC;
+using Org.BouncyCastle.Extended.Math.EC;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.X9
+namespace Org.BouncyCastle.Extended.Asn1.X9
 {
     /**
      * class for describing an ECPoint as a Der object.

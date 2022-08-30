@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X9;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X9;
 
-namespace Org.BouncyCastle.Asn1.Sec
+namespace Org.BouncyCastle.Extended.Asn1.Sec
 {
 	public abstract class SecObjectIdentifiers
 	{

@@ -2,10 +2,10 @@
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Modes
+namespace Org.BouncyCastle.Extended.Crypto.Modes
 {
     public class KCcmBlockCipher: IAeadBlockCipher
     {

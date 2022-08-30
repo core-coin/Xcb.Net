@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.CryptoPro
+namespace Org.BouncyCastle.Extended.Asn1.CryptoPro
 {
     public class Gost28147Parameters
         : Asn1Encodable

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Org.BouncyCastle.Utilities
+namespace Org.BouncyCastle.Extended.Utilities
 {
     /// <summary> General string utilities.</summary>
     public abstract class Strings

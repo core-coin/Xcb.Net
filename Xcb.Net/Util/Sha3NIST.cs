@@ -22,7 +22,7 @@ namespace Xcb.Net.Util
 
         public byte[] CalculateHash(byte[] value)
         {
-            var digest = new Org.BouncyCastle.Crypto.Digests.Sha3Digest(256);
+            var digest = new Org.BouncyCastle.Extended.Crypto.Digests.Sha3Digest(256);
             var output = new byte[digest.GetDigestSize()];
             digest.BlockUpdate(value, 0, value.Length);
             digest.DoFinal(output, 0);

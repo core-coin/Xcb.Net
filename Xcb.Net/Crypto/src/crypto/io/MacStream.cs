@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.IO
+namespace Org.BouncyCastle.Extended.Crypto.IO
 {
 	public class MacStream
 		: Stream

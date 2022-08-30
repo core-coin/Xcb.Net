@@ -25,9 +25,9 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Apache.Bzip2
+namespace Org.BouncyCastle.Extended.Apache.Bzip2
 {
 	/**
     * An output stream that compresses into the BZip2 format (with the file

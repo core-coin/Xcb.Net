@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Extended.Asn1.X509;
 
-namespace Org.BouncyCastle.Asn1.BC
+namespace Org.BouncyCastle.Extended.Asn1.BC
 {
     /**
      * Extension to tie an alternate certificate to the containing certificate.

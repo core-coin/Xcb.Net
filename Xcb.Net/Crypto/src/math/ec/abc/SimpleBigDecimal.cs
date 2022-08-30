@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Org.BouncyCastle.Math.EC.Abc
+namespace Org.BouncyCastle.Extended.Math.EC.Abc
 {
 	/**
 	* Class representing a simple version of a big decimal. A

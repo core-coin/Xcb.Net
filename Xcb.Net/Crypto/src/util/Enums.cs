@@ -6,9 +6,9 @@ using System.Collections;
 using System.Reflection;
 #endif
 
-using Org.BouncyCastle.Utilities.Date;
+using Org.BouncyCastle.Extended.Utilities.Date;
 
-namespace Org.BouncyCastle.Utilities
+namespace Org.BouncyCastle.Extended.Utilities
 {
     internal abstract class Enums
     {

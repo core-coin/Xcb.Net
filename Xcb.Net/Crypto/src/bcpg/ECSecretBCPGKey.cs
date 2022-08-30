@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>Base class for an EC Secret Key.</remarks>
     public class ECSecretBcpgKey

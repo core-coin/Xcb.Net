@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
     /**
      * basic interface for Der string objects.

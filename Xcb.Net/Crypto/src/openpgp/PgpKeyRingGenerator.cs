@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>
 	/// Generator for a PGP master and subkey ring.
@@ -331,7 +331,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         /// <param name="hashedPackets">Hashed packet values to be included in certification.</param>
         /// <param name="unhashedPackets">Unhashed packets values to be included in certification.</param>
         /// <param name="hashAlgorithm">The hash algorithm.</param>
-        /// <exception cref="Org.BouncyCastle.Bcpg.OpenPgp.PgpException">exception adding subkey: </exception>
+        /// <exception cref="Org.BouncyCastle.Extended.Bcpg.OpenPgp.PgpException">exception adding subkey: </exception>
         /// <exception cref="PgpException"></exception>
         public void AddSubKey(
             PgpKeyPair keyPair,

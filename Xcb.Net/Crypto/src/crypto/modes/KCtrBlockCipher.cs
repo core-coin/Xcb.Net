@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
 
-namespace Org.BouncyCastle.Crypto.Modes
+namespace Org.BouncyCastle.Extended.Crypto.Modes
 {
     /**
     * Implements a Gamming or Counter (CTR) mode on top of a DSTU 7624 block cipher.

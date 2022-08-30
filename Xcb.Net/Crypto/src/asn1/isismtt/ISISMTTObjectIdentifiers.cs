@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Asn1.IsisMtt
+namespace Org.BouncyCastle.Extended.Asn1.IsisMtt
 {
 	public abstract class IsisMttObjectIdentifiers
 	{
@@ -83,7 +83,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt
 		 *		RestrictionSyntax ::= DirectoryString (SIZE(1..1024))
 		 * </pre>
 		 * 
-		 * @see Org.BouncyCastle.Asn1.IsisMtt.X509.Restriction
+		 * @see Org.BouncyCastle.Extended.Asn1.IsisMtt.X509.Restriction
 		 */
 		public static readonly DerObjectIdentifier IdIsisMttATRestriction = new DerObjectIdentifier(IdIsisMttAT + ".8");
 
@@ -107,7 +107,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt
 		 * inserting the RetrieveIfAllowed extension in the request, will be
 		 * returned in this extension.
 		 * 
-		 * @see Org.BouncyCastle.Asn1.IsisMtt.Ocsp.RequestedCertificate
+		 * @see Org.BouncyCastle.Extended.Asn1.IsisMtt.Ocsp.RequestedCertificate
 		 */
 		public static readonly DerObjectIdentifier IdIsisMttATRequestedCertificate = new DerObjectIdentifier(IdIsisMttAT + ".10");
 
@@ -131,7 +131,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt
 		/**
 		 * Hash of a certificate in OCSP.
 		 *
-		 * @see Org.BouncyCastle.Asn1.IsisMtt.Ocsp.CertHash
+		 * @see Org.BouncyCastle.Extended.Asn1.IsisMtt.Ocsp.CertHash
 		 */
 		public static readonly DerObjectIdentifier IdIsisMttATCertHash = new DerObjectIdentifier(IdIsisMttAT + ".13");
 
@@ -141,7 +141,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt
 		 * </pre>
 		 * 
 		 * Used in
-		 * {@link Org.BouncyCastle.Asn1.X509.SubjectDirectoryAttributes SubjectDirectoryAttributes}
+		 * {@link Org.BouncyCastle.Extended.Asn1.X509.SubjectDirectoryAttributes SubjectDirectoryAttributes}
 		 */
 		public static readonly DerObjectIdentifier IdIsisMttATNameAtBirth = new DerObjectIdentifier(IdIsisMttAT + ".14");
 
@@ -154,7 +154,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt
 		 *               AdditionalInformationSyntax ::= DirectoryString (SIZE(1..2048))
 		 * </pre>
 		 * 
-		 * @see Org.BouncyCastle.Asn1.IsisMtt.X509.AdditionalInformationSyntax
+		 * @see Org.BouncyCastle.Extended.Asn1.IsisMtt.X509.AdditionalInformationSyntax
 		 */
 		public static readonly DerObjectIdentifier IdIsisMttATAdditionalInformation = new DerObjectIdentifier(IdIsisMttAT + ".15");
 

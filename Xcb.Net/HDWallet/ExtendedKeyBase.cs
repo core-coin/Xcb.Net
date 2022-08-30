@@ -1,7 +1,7 @@
 using System;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math.EC.Rfc8032;
+using Org.BouncyCastle.Extended.Crypto.Generators;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Math.EC.Rfc8032;
 using Xcb.Net.Signer;
 
 namespace Xcb.Net.HDWallet
@@ -25,7 +25,7 @@ namespace Xcb.Net.HDWallet
 
         private static byte[] Pbkdf2Sha3512(byte[] password, byte[] salt, int iterations, int hashByteSize)
         {
-            var pdb = new Pkcs5S2ParametersGenerator(new Org.BouncyCastle.Crypto.Digests.Sha3Digest(512));
+            var pdb = new Pkcs5S2ParametersGenerator(new Org.BouncyCastle.Extended.Crypto.Digests.Sha3Digest(512));
             pdb.Init(password, salt,
                          iterations);
             var key = (KeyParameter)pdb.GenerateDerivedMacParameters(hashByteSize * 8);

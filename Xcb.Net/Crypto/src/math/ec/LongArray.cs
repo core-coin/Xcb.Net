@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Math.EC
+namespace Org.BouncyCastle.Extended.Math.EC
 {
     internal class LongArray
     {

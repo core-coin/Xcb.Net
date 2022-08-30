@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
     public class Dstu7624WrapEngine
         : IWrapper
@@ -57,11 +57,11 @@ namespace Org.BouncyCastle.Crypto.Engines
 
             byte[] buffer = new byte[length + blockSize];
             Array.Copy(input, inOff, buffer, 0, length);
-            //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+            //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
 
             byte[] B = new byte[blockSize / 2];
             Array.Copy(buffer, 0, B, 0, blockSize / 2);
-            //Console.WriteLine("B0: "+ Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(B));
+            //Console.WriteLine("B0: "+ Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(B));
 
             IList bTemp = Platform.CreateArrayList();
             int bHalfBlocksLen = buffer.Length - blockSize / 2;
@@ -70,9 +70,9 @@ namespace Org.BouncyCastle.Crypto.Engines
             {
                 byte[] temp = new byte[blockSize / 2];
                 Array.Copy(buffer, bufOff, temp, 0, blockSize / 2);
-                //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+                //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
                 //Console.WriteLine(buffer.Length);
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(temp));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(temp));
 
                 bTemp.Add(temp);
 
@@ -102,12 +102,12 @@ namespace Org.BouncyCastle.Crypto.Engines
 
                 Array.Copy(buffer, 0, (byte[])bTemp[n - 2], 0, blockSize / 2);
 
-                //Console.WriteLine("B" + j.ToString() + ": " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(B));
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(bTemp[0]));
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(bTemp[1]));
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(bTemp[2]));
+                //Console.WriteLine("B" + j.ToString() + ": " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(B));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(bTemp[0]));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(bTemp[1]));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(bTemp[2]));
 
-                //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+                //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
             }
 
             Array.Copy(B, 0, buffer, 0, blockSize / 2);
@@ -138,7 +138,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 
             byte[] B = new byte[blockSize / 2];
             Array.Copy(buffer, 0, B, 0, blockSize / 2);
-            //Console.WriteLine("B18: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(B));
+            //Console.WriteLine("B18: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(B));
 
             IList bTemp = Platform.CreateArrayList();
 
@@ -148,9 +148,9 @@ namespace Org.BouncyCastle.Crypto.Engines
             {
                 byte[] temp = new byte[blockSize / 2];
                 Array.Copy(buffer, bufOff, temp, 0, blockSize / 2);
-                //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+                //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
                 //Console.WriteLine(buffer.Length);
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(temp));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(temp));
 
                 bTemp.Add(temp);
 
@@ -169,11 +169,11 @@ namespace Org.BouncyCastle.Crypto.Engines
                     buffer[byteNum + blockSize / 2] ^= intArray[byteNum];
                 }
 
-                //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+                //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
 
                 engine.ProcessBlock(buffer, 0, buffer, 0);
 
-                //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+                //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
 
                 Array.Copy(buffer, 0, B, 0, blockSize / 2);
 
@@ -184,12 +184,12 @@ namespace Org.BouncyCastle.Crypto.Engines
 
                 Array.Copy(buffer, blockSize / 2, (byte[])bTemp[0], 0, blockSize / 2);
 
-                //Console.WriteLine("B" + (V - j - 1).ToString() + ": " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(B));
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(bTemp[0]));
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(bTemp[1]));
-                //Console.WriteLine("b: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(bTemp[2]));
+                //Console.WriteLine("B" + (V - j - 1).ToString() + ": " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(B));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(bTemp[0]));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(bTemp[1]));
+                //Console.WriteLine("b: " + Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(bTemp[2]));
 
-                //Console.WriteLine(Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(buffer));
+                //Console.WriteLine(Org.BouncyCastle.Extended.Utilities.Encoders.Hex.ToHexString(buffer));
             }
 
             Array.Copy(B, 0, buffer, 0, blockSize / 2);

@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
 
-namespace Org.BouncyCastle.Crypto.Modes
+namespace Org.BouncyCastle.Extended.Crypto.Modes
 {
     /// <summary>
     /// A cipher mode that includes authenticated encryption with a streaming mode and optional

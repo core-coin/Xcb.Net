@@ -3,10 +3,10 @@ using System.Collections;
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Asn1.X500.Style
+namespace Org.BouncyCastle.Extended.Asn1.X500.Style
 {
     public abstract class IetfUtilities
     {

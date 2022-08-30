@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Utilities.Encoders
+namespace Org.BouncyCastle.Extended.Utilities.Encoders
 {
     /// <summary>
     /// Translator interface.

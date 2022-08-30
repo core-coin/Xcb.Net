@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Asn1.X500;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1.X500;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.IsisMtt.X509
+namespace Org.BouncyCastle.Extended.Asn1.IsisMtt.X509
 {
 	/**
 	* Some other information of non-restrictive nature regarding the usage of this

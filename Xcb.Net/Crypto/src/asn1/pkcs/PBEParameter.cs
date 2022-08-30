@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Pkcs
+namespace Org.BouncyCastle.Extended.Asn1.Pkcs
 {
 	public class PbeParameter
 		: Asn1Encodable

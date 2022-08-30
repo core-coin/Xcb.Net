@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>Key flag values for the KeyFlags subpacket.</remarks>
     public abstract class PgpKeyFlags

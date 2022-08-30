@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Asn1.Nist;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Ess
+namespace Org.BouncyCastle.Extended.Asn1.Ess
 {
     public class EssCertIDv2
         : Asn1Encodable

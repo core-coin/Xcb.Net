@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Crypto.Signers
+namespace Org.BouncyCastle.Extended.Crypto.Signers
 {
     public class RandomDsaKCalculator
         :   IDsaKCalculator

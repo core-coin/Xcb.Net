@@ -1,9 +1,9 @@
 using System;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Security;
 
 
-namespace Org.BouncyCastle.Crypto.Paddings
+namespace Org.BouncyCastle.Extended.Crypto.Paddings
 {
     /**
      * Block cipher padders are expected to conform to this interface

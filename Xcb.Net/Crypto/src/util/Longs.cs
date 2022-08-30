@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.Raw;
+using Org.BouncyCastle.Extended.Math.Raw;
 
-namespace Org.BouncyCastle.Utilities
+namespace Org.BouncyCastle.Extended.Utilities
 {
     public abstract class Longs
     {

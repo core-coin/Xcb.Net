@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Extended.Asn1;
 
-namespace Org.BouncyCastle.Asn1.X9
+namespace Org.BouncyCastle.Extended.Asn1.X9
 {
     public class X962Parameters
         : Asn1Encodable, IAsn1Choice

@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.Raw;
+using Org.BouncyCastle.Extended.Math.Raw;
 
-namespace Org.BouncyCastle.Math.EC.Custom.GM
+namespace Org.BouncyCastle.Extended.Math.EC.Custom.GM
 {
     internal class SM2P256V1Point
         : AbstractFpPoint

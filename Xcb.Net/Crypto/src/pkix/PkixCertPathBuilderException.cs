@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Pkix
+namespace Org.BouncyCastle.Extended.Pkix
 {
 	/// <summary>
 	/// Summary description for PkixCertPathBuilderException.

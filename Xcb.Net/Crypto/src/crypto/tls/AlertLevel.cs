@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     /// <summary>
     /// RFC 5246 7.2

@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Prng
+namespace Org.BouncyCastle.Extended.Crypto.Prng
 {
     public class VmpcRandomGenerator
         : IRandomGenerator 

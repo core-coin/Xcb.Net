@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Cmp;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Cmp;
 
-namespace Org.BouncyCastle.Cmp
+namespace Org.BouncyCastle.Extended.Cmp
 {
     public class GeneralPkiMessage
     {

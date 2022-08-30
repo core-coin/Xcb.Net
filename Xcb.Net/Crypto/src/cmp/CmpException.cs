@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Cmp
+namespace Org.BouncyCastle.Extended.Cmp
 {
     public class CmpException
         : Exception

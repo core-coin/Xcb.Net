@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.Raw;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Math.Raw;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Utilities
+namespace Org.BouncyCastle.Extended.Utilities
 {
     /**
      * BigInteger utilities.

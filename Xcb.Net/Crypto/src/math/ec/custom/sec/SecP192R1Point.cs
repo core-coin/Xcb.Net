@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.Raw;
+using Org.BouncyCastle.Extended.Math.Raw;
 
-namespace Org.BouncyCastle.Math.EC.Custom.Sec
+namespace Org.BouncyCastle.Extended.Math.EC.Custom.Sec
 {
     internal class SecP192R1Point
         : AbstractFpPoint

@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Engines;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace Org.BouncyCastle.Extended.Crypto.Digests
 {
 
 	/// <summary>
 	/// Implementation of the Skein parameterised hash function in 256, 512 and 1024 bit block sizes,
-	/// based on the <see cref="Org.BouncyCastle.Crypto.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
+	/// based on the <see cref="Org.BouncyCastle.Extended.Crypto.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
 	/// </summary>
 	/// <remarks>
 	/// This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
@@ -19,8 +19,8 @@ namespace Org.BouncyCastle.Crypto.Digests
 	/// Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
 	/// Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
 	/// </remarks>
-	/// <seealso cref="Org.BouncyCastle.Crypto.Digests.SkeinEngine"/>
-	/// <seealso cref="Org.BouncyCastle.Crypto.Parameters.SkeinParameters"/>
+	/// <seealso cref="Org.BouncyCastle.Extended.Crypto.Digests.SkeinEngine"/>
+	/// <seealso cref="Org.BouncyCastle.Extended.Crypto.Parameters.SkeinParameters"/>
 	public class SkeinDigest
 		: IDigest, IMemoable
 	{
@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Crypto.Digests
 		/// <summary>
 		/// Optionally initialises the Skein digest with the provided parameters.
 		/// </summary>
-		/// See <see cref="Org.BouncyCastle.Crypto.Parameters.SkeinParameters"></see> for details on the parameterisation of the Skein hash function.
+		/// See <see cref="Org.BouncyCastle.Extended.Crypto.Parameters.SkeinParameters"></see> for details on the parameterisation of the Skein hash function.
 		/// <param name="parameters">the parameters to apply to this engine, or <code>null</code> to use no parameters.</param>
 		public void Init(SkeinParameters parameters)
 		{

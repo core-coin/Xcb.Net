@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace Org.BouncyCastle.Extended.Asn1.X509
 {
 	/**
 	 * Target information extension for attributes certificates according to RFC
@@ -113,7 +113,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		 * According to RFC 3281 only one targets element must be produced. If
 		 * multiple targets are given in the constructor they are merged into one
 		 * targets element. If this was produced from a
-		 * {@link Org.BouncyCastle.Asn1.Asn1Sequence} the encoding is kept.</p>
+		 * {@link Org.BouncyCastle.Extended.Asn1.Asn1Sequence} the encoding is kept.</p>
 		 * 
 		 * @return an Asn1Object
 		 */

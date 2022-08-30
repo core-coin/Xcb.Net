@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Asn1.Pkcs
+namespace Org.BouncyCastle.Extended.Asn1.Pkcs
 {
     public class CertBag
         : Asn1Encodable

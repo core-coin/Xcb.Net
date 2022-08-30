@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Pkcs
+namespace Org.BouncyCastle.Extended.Pkcs
 {
     public class AsymmetricKeyEntry
         : Pkcs12Entry

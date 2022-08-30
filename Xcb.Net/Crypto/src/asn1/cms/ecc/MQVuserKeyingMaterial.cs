@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Cms.Ecc
+namespace Org.BouncyCastle.Extended.Asn1.Cms.Ecc
 {
 	public class MQVuserKeyingMaterial
 		: Asn1Encodable

@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Math.EC.Abc
+namespace Org.BouncyCastle.Extended.Math.EC.Abc
 {
     /**
     * Class holding methods for point multiplication based on the window

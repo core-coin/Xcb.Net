@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Modes;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Crypto.Modes;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Macs
+namespace Org.BouncyCastle.Extended.Crypto.Macs
 {
     /// <summary>
     /// The GMAC specialisation of Galois/Counter mode (GCM) detailed in NIST Special Publication
@@ -50,8 +50,8 @@ namespace Org.BouncyCastle.Crypto.Macs
         }
 
         /// <summary>
-        /// Initialises the GMAC - requires a <see cref="Org.BouncyCastle.Crypto.Parameters.ParametersWithIV"/> 
-        /// providing a <see cref="Org.BouncyCastle.Crypto.Parameters.KeyParameter"/> and a nonce.
+        /// Initialises the GMAC - requires a <see cref="Org.BouncyCastle.Extended.Crypto.Parameters.ParametersWithIV"/> 
+        /// providing a <see cref="Org.BouncyCastle.Extended.Crypto.Parameters.KeyParameter"/> and a nonce.
         /// </summary>
         public void Init(ICipherParameters parameters)
         {

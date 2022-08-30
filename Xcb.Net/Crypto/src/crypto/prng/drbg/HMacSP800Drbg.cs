@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Prng.Drbg
+namespace Org.BouncyCastle.Extended.Crypto.Prng.Drbg
 {
 	/**
 	 * A SP800-90A HMAC DRBG.

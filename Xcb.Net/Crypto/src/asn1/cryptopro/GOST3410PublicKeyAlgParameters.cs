@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.CryptoPro
+namespace Org.BouncyCastle.Extended.Asn1.CryptoPro
 {
     public class Gost3410PublicKeyAlgParameters
         : Asn1Encodable

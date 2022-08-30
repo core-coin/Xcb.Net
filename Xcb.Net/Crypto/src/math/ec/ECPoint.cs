@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Text;
 
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Extended.Math.EC.Multiplier;
+using Org.BouncyCastle.Extended.Security;
 
-namespace Org.BouncyCastle.Math.EC
+namespace Org.BouncyCastle.Extended.Math.EC
 {
     /**
      * base class for points on elliptic curves.
@@ -1952,7 +1952,7 @@ namespace Org.BouncyCastle.Math.EC
         }
 
         /* (non-Javadoc)
-         * @see Org.BouncyCastle.Math.EC.ECPoint#twice()
+         * @see Org.BouncyCastle.Extended.Math.EC.ECPoint#twice()
          */
         public override ECPoint Twice()
         {

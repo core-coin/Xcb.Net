@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Modes.Gcm
+namespace Org.BouncyCastle.Extended.Crypto.Modes.Gcm
 {
     public class Tables4kGcmMultiplier
         : IGcmMultiplier

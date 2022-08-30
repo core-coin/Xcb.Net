@@ -1,10 +1,10 @@
 using System;
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Asn1.Pkcs;
+using Org.BouncyCastle.Extended.Crypto;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Asn1.Pkcs;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
     public class RsaPrivateCrtKeyParameters
         : RsaKeyParameters

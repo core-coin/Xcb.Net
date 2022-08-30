@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Utilities.Collections;
-using Org.BouncyCastle.Utilities.Date;
-using Org.BouncyCastle.X509.Extension;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.X509;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Utilities.Collections;
+using Org.BouncyCastle.Extended.Utilities.Date;
+using Org.BouncyCastle.Extended.X509.Extension;
 
-namespace Org.BouncyCastle.X509.Store
+namespace Org.BouncyCastle.Extended.X509.Store
 {
 	/**
 	* This class is an <code>Selector</code> like implementation to select

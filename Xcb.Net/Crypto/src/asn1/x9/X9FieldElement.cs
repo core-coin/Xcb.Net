@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
+using Org.BouncyCastle.Extended.Math;
+using Org.BouncyCastle.Extended.Math.EC;
 
-namespace Org.BouncyCastle.Asn1.X9
+namespace Org.BouncyCastle.Extended.Asn1.X9
 {
     /**
      * Class for processing an ECFieldElement as a DER object.

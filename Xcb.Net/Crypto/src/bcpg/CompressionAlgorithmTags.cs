@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Bcpg
+namespace Org.BouncyCastle.Extended.Bcpg
 {
 	/// <remarks>Basic tags for compression algorithms.</remarks>
 	public enum CompressionAlgorithmTag

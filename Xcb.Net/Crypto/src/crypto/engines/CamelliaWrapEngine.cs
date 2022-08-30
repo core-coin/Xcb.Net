@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Crypto.Engines
+namespace Org.BouncyCastle.Extended.Crypto.Engines
 {
 	/// <remarks>
 	/// An implementation of the Camellia key wrapper based on RFC 3657/RFC 3394.

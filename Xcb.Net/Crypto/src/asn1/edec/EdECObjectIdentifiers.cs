@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Asn1.EdEC
+namespace Org.BouncyCastle.Extended.Asn1.EdEC
 {
     /**
      * Edwards Elliptic Curve Object Identifiers (RFC 8410)

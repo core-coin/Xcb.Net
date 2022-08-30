@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
 
-namespace Org.BouncyCastle.Crypto.Agreement
+namespace Org.BouncyCastle.Extended.Crypto.Agreement
 {
     public sealed class X25519Agreement
         : IRawAgreement

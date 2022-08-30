@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Prng.Drbg
+namespace Org.BouncyCastle.Extended.Crypto.Prng.Drbg
 {
 	/**
 	 * A SP800-90A Hash DRBG.

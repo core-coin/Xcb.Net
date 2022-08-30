@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Asn1
+namespace Org.BouncyCastle.Extended.Asn1
 {
 	/**
 	 * DER TaggedObject - in ASN.1 notation this is any object preceded by

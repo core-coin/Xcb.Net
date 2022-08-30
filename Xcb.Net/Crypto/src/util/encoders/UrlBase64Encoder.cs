@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Utilities.Encoders
+namespace Org.BouncyCastle.Extended.Utilities.Encoders
 {
 	/**
 	* Convert binary data to and from UrlBase64 encoding.  This is identical to

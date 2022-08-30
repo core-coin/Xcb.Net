@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Bcpg.Attr;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Bcpg.Attr;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	public class PgpUserAttributeSubpacketVectorGenerator
 	{

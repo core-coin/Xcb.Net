@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.X509;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.X509;
 
-namespace Org.BouncyCastle.Pkcs
+namespace Org.BouncyCastle.Extended.Pkcs
 {
     public class X509CertificateEntry
         : Pkcs12Entry

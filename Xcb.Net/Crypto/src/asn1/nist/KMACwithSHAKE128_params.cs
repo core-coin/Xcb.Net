@@ -1,8 +1,8 @@
-﻿using Org.BouncyCastle.Utilities;
+﻿using Org.BouncyCastle.Extended.Utilities;
 using System;
 
 
-namespace Org.BouncyCastle.Asn1.Nist
+namespace Org.BouncyCastle.Extended.Asn1.Nist
 {
     /// <summary>
     /// KMACwithSHAKE128-params ::= SEQUENCE {

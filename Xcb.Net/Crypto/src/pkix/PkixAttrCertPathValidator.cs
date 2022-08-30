@@ -1,9 +1,9 @@
 using System;
 
-using Org.BouncyCastle.X509;
-using Org.BouncyCastle.X509.Store;
+using Org.BouncyCastle.Extended.X509;
+using Org.BouncyCastle.Extended.X509.Store;
 
-namespace Org.BouncyCastle.Pkix
+namespace Org.BouncyCastle.Extended.Pkix
 {
 	/**
 	* CertPathValidatorSpi implementation for X.509 Attribute Certificates la RFC 3281.

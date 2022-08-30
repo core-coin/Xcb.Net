@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Tsp
+namespace Org.BouncyCastle.Extended.Tsp
 {
 	/**
 	 * Exception thrown if a TSP request or response fails to validate.

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 
-using Org.BouncyCastle.Math.EC.Rfc7748;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.IO;
+using Org.BouncyCastle.Extended.Math.EC.Rfc7748;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.IO;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace Org.BouncyCastle.Extended.Crypto.Parameters
 {
     public sealed class X448PrivateKeyParameters
         : AsymmetricKeyParameter

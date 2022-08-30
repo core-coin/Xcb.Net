@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Utilities.IO.Pem
+namespace Org.BouncyCastle.Extended.Utilities.IO.Pem
 {
 	public class PemHeader
 	{

@@ -4,10 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
-using NetUtils = Org.BouncyCastle.Utilities.Net;
+using Org.BouncyCastle.Extended.Utilities;
+using NetUtils = Org.BouncyCastle.Extended.Utilities.Net;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace Org.BouncyCastle.Extended.Asn1.X509
 {
     /**
      * The GeneralName object.

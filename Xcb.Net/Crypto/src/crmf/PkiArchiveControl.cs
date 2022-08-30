@@ -1,11 +1,11 @@
 ﻿using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Cms;
-using Org.BouncyCastle.Asn1.Crmf;
-using Org.BouncyCastle.Cms;
+using Org.BouncyCastle.Extended.Asn1;
+using Org.BouncyCastle.Extended.Asn1.Cms;
+using Org.BouncyCastle.Extended.Asn1.Crmf;
+using Org.BouncyCastle.Extended.Cms;
 
-namespace Org.BouncyCastle.Crmf
+namespace Org.BouncyCastle.Extended.Crmf
 {
     public class PkiArchiveControl
         : IControl
@@ -77,7 +77,7 @@ namespace Org.BouncyCastle.Crmf
             try
             {
                 EncryptedKey encKey = EncryptedKey.GetInstance(pkiArchiveOptions.Value);
-                EnvelopedData data = Org.BouncyCastle.Asn1.Cms.EnvelopedData.GetInstance(encKey.Value);
+                EnvelopedData data = Org.BouncyCastle.Extended.Asn1.Cms.EnvelopedData.GetInstance(encKey.Value);
 
                 return new CmsEnvelopedData(new ContentInfo(CmsObjectIdentifiers.EnvelopedData, data));
             }

@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Asn1.GM
+namespace Org.BouncyCastle.Extended.Asn1.GM
 {
 	public abstract class GMObjectIdentifiers
 	{

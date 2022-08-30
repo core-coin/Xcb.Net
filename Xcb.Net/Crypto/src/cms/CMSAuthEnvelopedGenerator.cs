@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Asn1.Nist;
+using Org.BouncyCastle.Extended.Asn1.Nist;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	internal class CmsAuthEnvelopedGenerator
 	{

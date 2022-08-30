@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Asn1.Bsi
+namespace Org.BouncyCastle.Extended.Asn1.Bsi
 {
     /// <remarks>See https://www.bsi.bund.de/cae/servlet/contentblob/471398/publicationFile/30615/BSI-TR-03111_pdf.pdf</remarks>
     public abstract class BsiObjectIdentifiers

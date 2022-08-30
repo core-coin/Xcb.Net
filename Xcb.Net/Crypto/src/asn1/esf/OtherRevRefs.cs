@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Esf
+namespace Org.BouncyCastle.Extended.Asn1.Esf
 {
 	/// <remarks>
 	/// RFC 3126: 4.2.2 Complete Revocation Refs Attribute Definition

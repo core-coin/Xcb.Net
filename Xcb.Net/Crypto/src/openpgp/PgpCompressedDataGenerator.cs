@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Apache.Bzip2;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Zlib;
+using Org.BouncyCastle.Extended.Apache.Bzip2;
+using Org.BouncyCastle.Extended.Utilities;
+using Org.BouncyCastle.Extended.Utilities.Zlib;
 
-namespace Org.BouncyCastle.Bcpg.OpenPgp
+namespace Org.BouncyCastle.Extended.Bcpg.OpenPgp
 {
 	/// <remarks>Class for producing compressed data packets.</remarks>
 	public class PgpCompressedDataGenerator

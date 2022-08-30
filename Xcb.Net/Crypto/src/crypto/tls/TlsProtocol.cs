@@ -2,11 +2,11 @@
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.Prng;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Crypto.Prng;
+using Org.BouncyCastle.Extended.Security;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace Org.BouncyCastle.Extended.Crypto.Tls
 {
     public abstract class TlsProtocol
         : TlsCloseable

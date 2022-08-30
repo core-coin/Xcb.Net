@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Org.BouncyCastle.Math.Field
+namespace Org.BouncyCastle.Extended.Math.Field
 {
     public interface IFiniteField
     {

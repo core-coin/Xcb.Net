@@ -1,8 +1,8 @@
 using System;
 
-using Org.BouncyCastle.Utilities;
+using Org.BouncyCastle.Extended.Utilities;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace Org.BouncyCastle.Extended.Asn1.X509
 {
     /**
      * The TbsCertificate object.
@@ -212,7 +212,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 		public override Asn1Object ToAsn1Object()
         {
-            string property = Platform.GetEnvironmentVariable("Org.BouncyCastle.X509.Allow_Non-DER_TBSCert");
+            string property = Platform.GetEnvironmentVariable("Org.BouncyCastle.Extended.X509.Allow_Non-DER_TBSCert");
             if (null == property || Platform.EqualsIgnoreCase("true", property))
                 return seq;
 

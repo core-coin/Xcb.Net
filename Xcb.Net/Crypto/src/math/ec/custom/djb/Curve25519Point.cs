@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.Raw;
+using Org.BouncyCastle.Extended.Math.Raw;
 
-namespace Org.BouncyCastle.Math.EC.Custom.Djb
+namespace Org.BouncyCastle.Extended.Math.EC.Custom.Djb
 {
     internal class Curve25519Point
         : AbstractFpPoint

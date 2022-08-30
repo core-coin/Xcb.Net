@@ -1,6 +1,6 @@
-using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Extended.Asn1;
 
-namespace Org.BouncyCastle.Asn1.Ocsp
+namespace Org.BouncyCastle.Extended.Asn1.Ocsp
 {
     public abstract class OcspObjectIdentifiers
     {

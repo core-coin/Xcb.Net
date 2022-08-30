@@ -1,4 +1,4 @@
-namespace Org.BouncyCastle.Asn1.TeleTrust
+namespace Org.BouncyCastle.Extended.Asn1.TeleTrust
 {
 	public sealed class TeleTrusTObjectIdentifiers
 	{

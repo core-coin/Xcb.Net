@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1.Cms;
+using Org.BouncyCastle.Extended.Asn1.Cms;
 
-namespace Org.BouncyCastle.Cms
+namespace Org.BouncyCastle.Extended.Cms
 {
 	/**
 	 * Basic generator that just returns a preconstructed attribute table

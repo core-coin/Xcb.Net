@@ -1,8 +1,8 @@
 using System;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extended.Crypto.Generators;
+using Org.BouncyCastle.Extended.Crypto.Parameters;
 using Xcb.Net.Signer;
-using Org.BouncyCastle.Math.EC.Rfc8032;
+using Org.BouncyCastle.Extended.Math.EC.Rfc8032;
 
 namespace Xcb.Net.HDWallet
 {

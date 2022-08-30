@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math.EC.Multiplier;
+using Org.BouncyCastle.Extended.Math.EC.Multiplier;
 
-namespace Org.BouncyCastle.Math.EC.Endo
+namespace Org.BouncyCastle.Extended.Math.EC.Endo
 {
     public abstract class EndoUtilities
     {

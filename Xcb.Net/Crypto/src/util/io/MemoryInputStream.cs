@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Utilities.IO
+namespace Org.BouncyCastle.Extended.Utilities.IO
 {
     public class MemoryInputStream
         : MemoryStream

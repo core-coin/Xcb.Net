@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Extended.Math;
 
-namespace Org.BouncyCastle.Math.EC.Endo
+namespace Org.BouncyCastle.Extended.Math.EC.Endo
 {
     public class ScalarSplitParameters
     {

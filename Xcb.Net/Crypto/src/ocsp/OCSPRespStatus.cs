@@ -1,6 +1,6 @@
 using System;
 
-namespace Org.BouncyCastle.Ocsp
+namespace Org.BouncyCastle.Extended.Ocsp
 {
 	[Obsolete("Use version with correct spelling 'OcspRespStatus'")]
 	public abstract class OcscpRespStatus : OcspRespStatus
