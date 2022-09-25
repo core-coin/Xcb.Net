@@ -187,5 +187,19 @@ namespace Xcb.Net.Signer
         {
             return GetAddressBytesFromPublicKey(publicKey, networkId).ToHex();
         }
+
+        public static string RecoverFromSignature(byte[] signature, byte[] hash, int networkId)
+        {
+            var publicKeyBytes = GetPublicKeyFromSignature(signature);
+            var pureSignatureBytes = new byte[114];
+
+            Array.Copy(signature, pureSignatureBytes, 114);
+            var isVerified = Ed448.Verify(pureSignatureBytes, 0, publicKeyBytes, 0, Array.Empty<byte>(), hash, 0, hash.Length);
+
+            if (!isVerified)
+                throw new ArgumentException("signature is invalid");
+
+            return GetAddressFromPublicKey(publicKeyBytes, networkId);
+        }
     }
 }

@@ -59,6 +59,54 @@ namespace Xcb.Net.Test
 
         [Theory]
         [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", "666f6f",
+            "ec1b749ebdc4884f4d6bd75f6f7ba0833f4caee116ed5088447f7522a05c4d24f07922ec69fc30dbf286fe9b5d0fa91bd26290f0b4d7b14100b1b5012c68da75b1385aa981b4b4d0d8fe1d754d76ca8f44e723f964d041ceca3a36a651755afe168e45cb5a063b12ea8301bba26afbbf0e00315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
+        public void SignMessageTest(string privateKey, string message, string expectedSignature)
+        {
+            var key = new XcbECKey(privateKey, 1);
+            var expectedBytes = expectedSignature.HexToByteArray();
+            var signatureBytes = key.SignMessage(message.HexToByteArray());
+            Assert.Equal(expectedBytes, signatureBytes);
+
+        }
+
+        [Theory]
+        [InlineData("666f6f",
+            "ec1b749ebdc4884f4d6bd75f6f7ba0833f4caee116ed5088447f7522a05c4d24f07922ec69fc30dbf286fe9b5d0fa91bd26290f0b4d7b14100b1b5012c68da75b1385aa981b4b4d0d8fe1d754d76ca8f44e723f964d041ceca3a36a651755afe168e45cb5a063b12ea8301bba26afbbf0e00315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
+        public void Verify_Valid_Signature(string message, string signature)
+        {
+            var signatureBytes = signature.HexToByteArray();
+
+            var pureSignatureBytes = new byte[114];
+
+            Array.Copy(signatureBytes, pureSignatureBytes, 114);
+            Assert.True(Ed448.Verify(pureSignatureBytes, 0, signatureBytes, 114, Array.Empty<byte>(), message.HexToByteArray(), 0, message.HexToByteArray().Length));
+        }
+
+        [Theory]
+        [InlineData("aaaf6f",
+            "ec1b749ebdc4884f4d6bd75f6f7ba0833f4caee116ed5088447f7522a05c4d24f07922ec69fc30dbf286fe9b5d0fa91bd26290f0b4d7b14100b1b5012c68da75b1385aa981b4b4d0d8fe1d754d76ca8f44e723f964d041ceca3a36a651755afe168e45cb5a063b12ea8301bba26afbbf0e00315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
+        public void Verify_Invalid_Signature(string message, string signature)
+        {
+            var signatureBytes = signature.HexToByteArray();
+
+            var pureSignatureBytes = new byte[114];
+
+            Array.Copy(signatureBytes, pureSignatureBytes, 114);
+            Assert.False(Ed448.Verify(pureSignatureBytes, 0, signatureBytes, 114, Array.Empty<byte>(), message.HexToByteArray(), 0, message.HexToByteArray().Length));
+        }
+
+        [Theory]
+        [InlineData("666f6f",
+            "ec1b749ebdc4884f4d6bd75f6f7ba0833f4caee116ed5088447f7522a05c4d24f07922ec69fc30dbf286fe9b5d0fa91bd26290f0b4d7b14100b1b5012c68da75b1385aa981b4b4d0d8fe1d754d76ca8f44e723f964d041ceca3a36a651755afe168e45cb5a063b12ea8301bba26afbbf0e00315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600",
+            "cb82a5fd22b9bee8b8ab877c86e0a2c21765e1d5bfc5", 1)]
+        public void RecoverFromSignature(string message, string signature, string expectedAddress, int networkId)
+        {
+            var address = XcbECKey.RecoverFromSignature(signature.HexToByteArray(), message.HexToByteArray(), networkId);
+            Assert.Equal(expectedAddress, address);
+        }
+
+        [Theory]
+        [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", "666f6f",
             "9db1a4fd159ec8449cc970e3c1e1848445997fb988f0c3aa1edf91ddb84dd873eb8c43bf052e0a56b49911d9981892811a9e28f02fd7472680388dd2f617f46c67501aea757c5fca981b749f4c6f08b2d480f66c44eaf1df9c7d02b934d45e31ffa8a6c07a54773f5dc1c0e2975b98792200315484db568379ce94f9c894e3e6e4c7ee216676b713ca892d9b26746ae902a772e217a6a8bb493ce2bb313cf0cb66e76765d4c45ec6b68600")]
         public void SignHashOfMessageTest(string privateKey, string message, string expectedSignature)
         {
@@ -76,6 +124,7 @@ namespace Xcb.Net.Test
             var signatureBytes = signature.HexToByteArray();
 
             var publicKey = XcbECKey.GetPublicKeyFromSignature(signatureBytes).ToHex();
+
 
             Assert.Equal(expectedPublicKey, publicKey);
         }
