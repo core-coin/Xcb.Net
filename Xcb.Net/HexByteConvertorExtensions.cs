@@ -68,6 +68,7 @@ namespace Xcb.Net.Extensions
             return ToHex(value).TrimStart('0');
         }
 
+
         private static byte[] HexToByteArrayInternal(string value)
         {
             byte[] bytes = null;
@@ -104,7 +105,7 @@ namespace Xcb.Net.Extensions
                     var upper = FromCharacterToByte(value[read_index], read_index, 4);
                     var lower = FromCharacterToByte(value[read_index + 1], read_index + 1);
 
-                    bytes[write_index++] = (byte) (upper | lower);
+                    bytes[write_index++] = (byte)(upper | lower);
                 }
             }
 
@@ -113,7 +114,8 @@ namespace Xcb.Net.Extensions
 
         public static byte[] HexToByteArray(this string value)
         {
-            try {
+            try
+            {
                 return HexToByteArrayInternal(value);
             }
             catch (FormatException ex)
@@ -125,18 +127,18 @@ namespace Xcb.Net.Extensions
 
         private static byte FromCharacterToByte(char character, int index, int shift = 0)
         {
-            var value = (byte) character;
+            var value = (byte)character;
             if (0x40 < value && 0x47 > value || 0x60 < value && 0x67 > value)
             {
                 if (0x40 == (0x40 & value))
                     if (0x20 == (0x20 & value))
-                        value = (byte) ((value + 0xA - 0x61) << shift);
+                        value = (byte)((value + 0xA - 0x61) << shift);
                     else
-                        value = (byte) ((value + 0xA - 0x41) << shift);
+                        value = (byte)((value + 0xA - 0x41) << shift);
             }
             else if (0x29 < value && 0x40 > value)
             {
-                value = (byte) ((value - 0x30) << shift);
+                value = (byte)((value - 0x30) << shift);
             }
             else
             {

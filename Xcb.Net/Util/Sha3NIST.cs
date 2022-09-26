@@ -28,5 +28,6 @@ namespace Xcb.Net.Util
             digest.DoFinal(output, 0);
             return output;
         }
+        
     }
 }
