@@ -25,7 +25,7 @@ namespace Xcb.Net.ABI.Encoders
             for (var i = 0; i < 10; i++)
             {
                 if ((addr[i] != 0) && (addr[i] != 0xFF))
-                    throw new Exception("Invalid address (should be 20 bytes length): " + addr.ToHex());
+                    throw new Exception("Invalid address (should be 22 bytes length): " + addr.ToHex());
 
                 if (addr[i] == 0xFF) addr[i] = 0;
             }
@@ -44,7 +44,7 @@ namespace Xcb.Net.ABI.Encoders
 
             if (strValue.Length == 44) return strValue.HexToByteArray();
 
-            throw new Exception("Invalid address (should be 20 bytes length): " + strValue);
+            throw new Exception("Invalid address (should be 22 bytes length): " + strValue);
         }
     }
 }
