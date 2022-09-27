@@ -1,6 +1,6 @@
 using System;
 
-namespace Nethereum.ABI.Encoders
+namespace Xcb.Net.ABI.Encoders
 {
     public class BoolTypeEncoder : ITypeEncoder
     {

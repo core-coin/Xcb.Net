@@ -1,7 +1,7 @@
 using System.Linq;
-using Nethereum.ABI.Decoders;
+using Xcb.Net.ABI.Decoders;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class EncoderDecoderHelpers
     {

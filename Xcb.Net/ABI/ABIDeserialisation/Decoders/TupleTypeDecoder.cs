@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nethereum.ABI.Decoders;
-using Nethereum.ABI.FunctionEncoding;
-using Nethereum.ABI.FunctionEncoding.Attributes;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Decoders;
+using Xcb.Net.ABI.FunctionEncoding;
+using Xcb.Net.ABI.FunctionEncoding.Attributes;
+using Xcb.Net.ABI.Model;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class TupleTypeDecoder : TypeDecoder
     {

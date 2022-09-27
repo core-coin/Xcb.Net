@@ -1,4 +1,4 @@
-namespace Nethereum.ABI.FunctionEncoding.Attributes
+namespace Xcb.Net.ABI.FunctionEncoding.Attributes
 {
     /// <summary>
     /// Interface to decorate a class as Event to enable the related extensions

@@ -1,8 +1,8 @@
 using System;
-using Nethereum.ABI.Decoders;
-using Nethereum.ABI.Encoders;
+using Xcb.Net.ABI.Decoders;
+using Xcb.Net.ABI.Encoders;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     /// <summary>
     ///     Generic ABI type

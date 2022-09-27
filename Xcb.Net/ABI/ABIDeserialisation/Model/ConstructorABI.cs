@@ -1,4 +1,4 @@
-namespace Nethereum.ABI.Model
+namespace Xcb.Net.ABI.Model
 {
     public class ConstructorABI
     {

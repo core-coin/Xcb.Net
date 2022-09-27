@@ -1,10 +1,10 @@
-﻿using Nethereum.ABI.FunctionEncoding.Attributes;
+﻿using Xcb.Net.ABI.FunctionEncoding.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
-namespace Nethereum.ABI.EIP712.EIP2612
+namespace Xcb.Net.ABI.EIP712.EIP2612
 {
     /// <summary>
     /// The type factory creates a new TypeDefinition to work with EIP2612.

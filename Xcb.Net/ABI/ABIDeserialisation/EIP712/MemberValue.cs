@@ -1,4 +1,4 @@
-﻿namespace Nethereum.ABI.EIP712
+﻿namespace Xcb.Net.ABI.EIP712
 {
 
     public class MemberValue

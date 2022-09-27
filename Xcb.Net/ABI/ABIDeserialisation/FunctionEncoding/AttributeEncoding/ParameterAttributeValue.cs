@@ -1,7 +1,7 @@
 using System.Reflection;
-using Nethereum.ABI.FunctionEncoding.Attributes;
+using Xcb.Net.ABI.FunctionEncoding.Attributes;
 
-namespace Nethereum.ABI.FunctionEncoding.AttributeEncoding
+namespace Xcb.Net.ABI.FunctionEncoding.AttributeEncoding
 {
     public class ParameterAttributeValue
     {

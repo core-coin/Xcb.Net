@@ -1,11 +1,11 @@
-﻿using Nethereum.ABI;
-using Nethereum.ABI.FunctionEncoding;
-using Nethereum.ABI.Model;
+﻿using Xcb.Net.ABI;
+using Xcb.Net.ABI.FunctionEncoding;
+using Xcb.Net.ABI.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nethereum.ABI.EIP712
+namespace Xcb.Net.ABI.EIP712
 {
     public class MemberValueFactory
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Nethereum.ABI.Decoders;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Decoders;
+using Xcb.Net.ABI.Model;
 
-namespace Nethereum.ABI.FunctionEncoding.Attributes
+namespace Xcb.Net.ABI.FunctionEncoding.Attributes
 {
     public class AttributesToABIExtractor
     {

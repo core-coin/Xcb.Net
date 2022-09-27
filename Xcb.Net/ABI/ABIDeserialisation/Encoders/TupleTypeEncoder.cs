@@ -1,9 +1,9 @@
 using System;
-using Nethereum.ABI.Encoders;
-using Nethereum.ABI.FunctionEncoding;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Encoders;
+using Xcb.Net.ABI.FunctionEncoding;
+using Xcb.Net.ABI.Model;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class TupleTypeEncoder : ITypeEncoder
     {

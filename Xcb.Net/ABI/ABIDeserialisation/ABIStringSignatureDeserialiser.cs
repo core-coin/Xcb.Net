@@ -1,10 +1,10 @@
-﻿using Nethereum.ABI.Model;
+﻿using Xcb.Net.ABI.Model;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 
-namespace Nethereum.ABI.ABIDeserialisation
+namespace Xcb.Net.ABI.ABIDeserialisation
 {
 
     public class ABIStringSignatureDeserialiser

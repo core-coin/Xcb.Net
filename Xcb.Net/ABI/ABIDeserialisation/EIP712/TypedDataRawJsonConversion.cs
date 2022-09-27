@@ -2,9 +2,9 @@
 using System.Collections;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Nethereum.ABI.ABIDeserialisation;
+using Xcb.Net.ABI.ABIDeserialisation;
 
-namespace Nethereum.ABI.EIP712
+namespace Xcb.Net.ABI.EIP712
 {
     public static class TypedDataRawJsonConversion
     {

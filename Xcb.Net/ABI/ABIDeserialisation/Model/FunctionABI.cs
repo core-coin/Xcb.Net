@@ -1,6 +1,6 @@
-using Nethereum.ABI.FunctionEncoding;
+using Xcb.Net.ABI.FunctionEncoding;
 
-namespace Nethereum.ABI.Model
+namespace Xcb.Net.ABI.Model
 {
     public class FunctionABI
     {

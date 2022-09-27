@@ -4,7 +4,7 @@ using System.Numerics;
 using System.Reflection;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.Decoders
+namespace Xcb.Net.ABI.Decoders
 {
     public class IntTypeDecoder : TypeDecoder
     {

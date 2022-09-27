@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Nethereum.ABI.FunctionEncoding.Attributes;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.FunctionEncoding.Attributes;
+using Xcb.Net.ABI.Model;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public class EventTopicDecoder : ParameterDecoder
     {

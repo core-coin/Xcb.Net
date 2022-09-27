@@ -1,9 +1,9 @@
 using System;
 using System.Numerics;
-using Nethereum.ABI.Decoders;
-using Nethereum.ABI.Encoders;
+using Xcb.Net.ABI.Decoders;
+using Xcb.Net.ABI.Encoders;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class IntType : ABIType
     {

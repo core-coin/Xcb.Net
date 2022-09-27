@@ -1,6 +1,6 @@
 using System;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public abstract class ArrayType : ABIType
     {

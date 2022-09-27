@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nethereum.ABI.ABIDeserialisation
+namespace Xcb.Net.ABI.ABIDeserialisation
 {
     public class ABIJsonDeserialiser
     {

@@ -3,13 +3,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Nethereum.ABI;
-using Nethereum.ABI.FunctionEncoding;
+using Xcb.Net.ABI;
+using Xcb.Net.ABI.FunctionEncoding;
 using Xcb.Net.Util;
 using System.Collections;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.EIP712
+namespace Xcb.Net.ABI.EIP712
 {
     public class Eip712TypedDataEncoder
     {
@@ -29,7 +29,7 @@ namespace Nethereum.ABI.EIP712
 
         /// <summary>
         /// Encodes data according to EIP-712.
-        /// Infers types of message fields from <see cref="Nethereum.ABI.FunctionEncoding.Attributes.ParameterAttribute"/>. 
+        /// Infers types of message fields from <see cref="Xcb.Net.ABI.FunctionEncoding.Attributes.ParameterAttribute"/>. 
         /// For flat messages only, for complex messages with reference type fields use "EncodeTypedData(TypedData typedData).
         /// </summary>
         public byte[] EncodeTypedData<T, TDomain>(T data, TDomain domain, string primaryTypeName)

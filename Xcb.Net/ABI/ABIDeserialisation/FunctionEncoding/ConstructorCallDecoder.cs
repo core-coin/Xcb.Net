@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using Nethereum.ABI.FunctionEncoding.Attributes;
+using Xcb.Net.ABI.FunctionEncoding.Attributes;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public class ConstructorCallDecoder : ParameterDecoder
     {

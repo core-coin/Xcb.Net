@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public static class ParameterOutputExtensions
     {

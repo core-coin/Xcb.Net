@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nethereum.Util
+namespace Xcb.Net.Util
 {
     public static class ByteUtil
     {

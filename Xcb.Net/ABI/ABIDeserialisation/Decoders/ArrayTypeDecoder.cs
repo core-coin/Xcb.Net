@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Nethereum.ABI.FunctionEncoding;
-using Nethereum.ABI.FunctionEncoding.Attributes;
+using Xcb.Net.ABI.FunctionEncoding;
+using Xcb.Net.ABI.FunctionEncoding.Attributes;
 
-namespace Nethereum.ABI.Decoders
+namespace Xcb.Net.ABI.Decoders
 {
     public class ArrayTypeDecoder : TypeDecoder
     {

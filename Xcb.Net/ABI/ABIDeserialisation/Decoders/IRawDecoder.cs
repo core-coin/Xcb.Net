@@ -1,4 +1,4 @@
-﻿namespace Nethereum.ABI.Decoders
+﻿namespace Xcb.Net.ABI.Decoders
 {
     public interface ICustomRawDecoder<T>
     {

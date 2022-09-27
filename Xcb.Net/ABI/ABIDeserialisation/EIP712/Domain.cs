@@ -1,7 +1,7 @@
-﻿using Nethereum.ABI.FunctionEncoding.Attributes;
+﻿using Xcb.Net.ABI.FunctionEncoding.Attributes;
 using System.Numerics;
 
-namespace Nethereum.ABI.EIP712
+namespace Xcb.Net.ABI.EIP712
 {
     //Interface placeholder for any domain type including any optional fields
     public interface IDomain

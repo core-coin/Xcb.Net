@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Nethereum.ABI.FunctionEncoding.AttributeEncoding
+namespace Xcb.Net.ABI.FunctionEncoding.AttributeEncoding
 {
     public class ParameterOutputProperty : ParameterOutput
     {

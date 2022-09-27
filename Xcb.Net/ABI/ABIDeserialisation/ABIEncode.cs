@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Nethereum.ABI.FunctionEncoding;
-using Nethereum.ABI.Model;
-using Nethereum.ABI.Util;
+using Xcb.Net.ABI.FunctionEncoding;
+using Xcb.Net.ABI.Model;
+using Xcb.Net.ABI.Util;
 using Xcb.Net.Util;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class ABIEncode
     {

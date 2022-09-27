@@ -1,4 +1,4 @@
-﻿using Nethereum.ABI.Model;
+﻿using Xcb.Net.ABI.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public static class JsonParameterObjectConvertor
     {

@@ -1,8 +1,8 @@
 using System;
 using Xcb.Net.Extensions;
-using Nethereum.Util;
+using Xcb.Net.Util;
 
-namespace Nethereum.ABI.Decoders
+namespace Xcb.Net.ABI.Decoders
 {
     public class AddressTypeDecoder : TypeDecoder
     {

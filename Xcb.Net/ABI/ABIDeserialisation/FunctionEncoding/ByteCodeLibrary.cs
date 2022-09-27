@@ -1,5 +1,5 @@
 ﻿using Xcb.Net.Util;
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public class ByteCodeLibrary
     {

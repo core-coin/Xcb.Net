@@ -1,8 +1,8 @@
 using System.Reflection;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Model;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public class ConstructorCallEncoder : ParametersEncoder
     {

@@ -1,4 +1,4 @@
-﻿using Nethereum.ABI.EIP712;
+﻿using Xcb.Net.ABI.EIP712;
 using Xcb.Net.Extensions;
 using Xcb.Net.Signer;
 using Xcb.Net.Signer.EIP712;
@@ -20,7 +20,7 @@ namespace Xcb.Net.EIP712
 
         /// <summary>
         /// Encodes data according to EIP-712, hashes it and signs with <paramref name="key"/>.
-        /// Infers types of message fields from <see cref="Nethereum.ABI.FunctionEncoding.Attributes.ParameterAttribute"/>.
+        /// Infers types of message fields from <see cref="Xcb.Net.ABI.FunctionEncoding.Attributes.ParameterAttribute"/>.
         /// For flat messages only, for complex messages with reference type fields use "SignTypedData(TypedData typedData, XcbECKey key)" method.
         /// </summary>
         public string SignTypedData<T, TDomain>(T data, TDomain domain, string primaryTypeName, XcbECKey key)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Nethereum.ABI.FunctionEncoding.Attributes
+namespace Xcb.Net.ABI.FunctionEncoding.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ErrorAttribute : Attribute

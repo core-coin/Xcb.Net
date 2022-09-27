@@ -1,7 +1,7 @@
-using Nethereum.ABI.FunctionEncoding;
+using Xcb.Net.ABI.FunctionEncoding;
 using System.Linq;
 
-namespace Nethereum.ABI.Model
+namespace Xcb.Net.ABI.Model
 {
     public class EventABI
     {

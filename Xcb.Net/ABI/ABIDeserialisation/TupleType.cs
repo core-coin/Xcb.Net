@@ -1,8 +1,8 @@
 using System.Linq;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Model;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class TupleType : ABIType
     {

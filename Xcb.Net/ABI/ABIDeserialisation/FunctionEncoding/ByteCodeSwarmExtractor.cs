@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public class ByteCodeSwarmExtractor
     {

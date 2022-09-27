@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Nethereum.ABI.FunctionEncoding.AttributeEncoding;
+using Xcb.Net.ABI.FunctionEncoding.AttributeEncoding;
 
-namespace Nethereum.ABI.FunctionEncoding.Attributes
+namespace Xcb.Net.ABI.FunctionEncoding.Attributes
 {
     public static class ParameterIndexedTopicExtractor
     {

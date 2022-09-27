@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Nethereum.ABI.Encoders;
-using Nethereum.ABI.FunctionEncoding.AttributeEncoding;
-using Nethereum.ABI.FunctionEncoding.Attributes;
-using Nethereum.ABI.Model;
-using Nethereum.ABI.Util;
-using Nethereum.Util;
+using Xcb.Net.ABI.Encoders;
+using Xcb.Net.ABI.FunctionEncoding.AttributeEncoding;
+using Xcb.Net.ABI.FunctionEncoding.Attributes;
+using Xcb.Net.ABI.Model;
+using Xcb.Net.ABI.Util;
+using Xcb.Net.Util;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
 
     public class ParametersEncoder

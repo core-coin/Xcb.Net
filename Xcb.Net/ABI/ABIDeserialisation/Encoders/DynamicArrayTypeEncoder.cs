@@ -1,9 +1,9 @@
 using System.Collections;
-using Nethereum.ABI.FunctionEncoding;
-using Nethereum.ABI.Util;
-using Nethereum.Util;
+using Xcb.Net.ABI.FunctionEncoding;
+using Xcb.Net.ABI.Util;
+using Xcb.Net.Util;
 
-namespace Nethereum.ABI.Encoders
+namespace Xcb.Net.ABI.Encoders
 {
     public class DynamicArrayTypeEncoder : ArrayTypeEncoder
     {

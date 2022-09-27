@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Nethereum.ABI.Decoders
+namespace Xcb.Net.ABI.Decoders
 {
     public class BytesElementaryTypeDecoder : TypeDecoder
     {

@@ -1,4 +1,4 @@
-namespace Nethereum.ABI
+namespace Xcb.Net.ABI
 {
     public class ABIValue
     {

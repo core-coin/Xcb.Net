@@ -1,9 +1,9 @@
 using System;
 using System.Numerics;
 using System.Text;
-using Nethereum.ABI.Util;
+using Xcb.Net.ABI.Util;
 
-namespace Nethereum.ABI.Encoders
+namespace Xcb.Net.ABI.Encoders
 {
     public class Bytes32TypeEncoder : ITypeEncoder
     {

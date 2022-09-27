@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Nethereum.ABI.EIP712
+namespace Xcb.Net.ABI.EIP712
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class TypedData<TDomain>: TypedDataRaw

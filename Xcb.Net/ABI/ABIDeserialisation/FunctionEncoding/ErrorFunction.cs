@@ -1,6 +1,6 @@
-﻿using Nethereum.ABI.FunctionEncoding.Attributes;
+﻿using Xcb.Net.ABI.FunctionEncoding.Attributes;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     [Function("Error")]
     public class ErrorFunction

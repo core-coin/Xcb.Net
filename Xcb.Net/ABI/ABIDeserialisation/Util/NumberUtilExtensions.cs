@@ -1,4 +1,4 @@
-namespace Nethereum.ABI.Util
+namespace Xcb.Net.ABI.Util
 {
     public static class NumberExtensions
     {

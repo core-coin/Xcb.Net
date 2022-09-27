@@ -1,8 +1,8 @@
-﻿using Nethereum.ABI.Model;
+﻿using Xcb.Net.ABI.Model;
 using System;
 
 
-namespace Nethereum.ABI.ABIDeserialisation
+namespace Xcb.Net.ABI.ABIDeserialisation
 {
     public class ABIDeserialiserFactory
     {

@@ -1,7 +1,7 @@
 using System;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.Decoders
+namespace Xcb.Net.ABI.Decoders
 {
     public abstract class TypeDecoder : ITypeDecoder
     {

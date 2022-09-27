@@ -1,4 +1,4 @@
-﻿namespace Nethereum.ABI.Encoders
+﻿namespace Xcb.Net.ABI.Encoders
 {
     public interface ITypeEncoder
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nethereum.ABI.FunctionEncoding
+namespace Xcb.Net.ABI.FunctionEncoding
 {
     public class AbiEncodingException:Exception
     {

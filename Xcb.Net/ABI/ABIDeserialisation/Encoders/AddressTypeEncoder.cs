@@ -1,7 +1,7 @@
 using System;
 using Xcb.Net.Extensions;
 
-namespace Nethereum.ABI.Encoders
+namespace Xcb.Net.ABI.Encoders
 {
     public class AddressTypeEncoder : ITypeEncoder
     {

@@ -1,7 +1,7 @@
 using System;
-using Nethereum.ABI.Model;
+using Xcb.Net.ABI.Model;
 
-namespace Nethereum.ABI.FunctionEncoding.Attributes
+namespace Xcb.Net.ABI.FunctionEncoding.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class ParameterAttribute : Attribute
