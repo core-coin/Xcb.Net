@@ -16,8 +16,8 @@ namespace Nethereum.ABI.Decoders
         public override object Decode(byte[] encoded, Type type)
         {
             if (!IsSupportedType(type)) throw new NotSupportedException(type + " is not supported");
-            var output = new byte[20];
-            Array.Copy(encoded, 12, output, 0, 20);
+            var output = new byte[22];
+            Array.Copy(encoded, 10, output, 0, 22);
             return output.ToHex();
         }
 
