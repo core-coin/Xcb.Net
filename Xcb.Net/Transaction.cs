@@ -105,7 +105,7 @@ namespace Xcb.Net.Signer
         {
 
             byte[] hash = Util.Sha3NIST.Current.CalculateHash(GetRlpEncoding());
-            return hash.ToHex();
+            return hash.ToHex(true);
         }
 
         public void Sign(XcbECKey key, int chainId = 0)
