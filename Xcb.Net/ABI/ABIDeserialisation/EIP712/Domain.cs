@@ -19,7 +19,7 @@ namespace Xcb.Net.ABI.EIP712
     }
 
     [Struct("EIP712Domain")]
-    public class DomainWithNameVersionAndChainId: IDomain
+    public class DomainWithNameVersionAndNetworkId: IDomain
     {
         [Parameter("string", "name", 1)]
         public virtual string Name { get; set; }
@@ -27,18 +27,18 @@ namespace Xcb.Net.ABI.EIP712
         [Parameter("string", "version", 2)]
         public virtual string Version { get; set; }
 
-        [Parameter("uint256", "chainId", 3)]
-        public virtual BigInteger? ChainId { get; set; }
+        [Parameter("uint256", "networkId", 3)]
+        public virtual BigInteger? NetworkId { get; set; }
 
     }
 
 
 
     [Struct("EIP712Domain")]
-    public class DomainWithChainIdAndVerifyingContract : IDomain
+    public class DomainWithNetworkIdAndVerifyingContract : IDomain
     {
-        [Parameter("uint256", "chainId", 1)]
-        public virtual BigInteger? ChainId { get; set; }
+        [Parameter("uint256", "networkId", 1)]
+        public virtual BigInteger? NetworkId { get; set; }
 
         [Parameter("address", "verifyingContract", 2)]
         public virtual string VerifyingContract { get; set; }
@@ -55,8 +55,8 @@ namespace Xcb.Net.ABI.EIP712
         [Parameter("string", "version", 2)]
         public virtual string Version { get; set; }
 
-        [Parameter("uint256", "chainId", 3)]
-        public virtual BigInteger? ChainId { get; set; }
+        [Parameter("uint256", "networkId", 3)]
+        public virtual BigInteger? NetworkId { get; set; }
 
         [Parameter("address", "verifyingContract", 4)]
         public virtual string VerifyingContract { get; set; }

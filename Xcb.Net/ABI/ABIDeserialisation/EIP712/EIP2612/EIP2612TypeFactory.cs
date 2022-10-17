@@ -23,7 +23,7 @@ namespace Xcb.Net.ABI.EIP712.EIP2612
                 {
                     Name = null,
                     Version = "1",
-                    ChainId = 1,
+                    NetworkId = 1,
                     VerifyingContract = null
                 },
                 Types = MemberDescriptionFactory.GetTypesMemberDescription(typeof(Domain), typeof(Permit)),

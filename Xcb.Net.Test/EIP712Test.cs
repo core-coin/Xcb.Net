@@ -71,7 +71,7 @@ namespace Xcb.Net.Test
             {
                 Name = "Ping",
                 Version = "1.0.0",
-                ChainId = 1337,
+                NetworkId = 1,
                 VerifyingContract = "cb868a301d28f082e1ea79f0f1e0038aff7f47564b0e"
             });
 
