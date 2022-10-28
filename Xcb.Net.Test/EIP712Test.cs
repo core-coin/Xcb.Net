@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xcb.Net.ABI.EIP712;
 using Xcb.Net.ABI.FunctionEncoding.Attributes;
 using Xcb.Net.EIP712;
@@ -60,6 +61,32 @@ namespace Xcb.Net.Test
         }
 
         [Fact]
+        public void TypedDataSerializationTest()
+        {
+            // Given
+            var typedData = getTypedData(new Domain
+            {
+                Name = "Ping",
+                Version = "1.0.0",
+                NetworkId = 1,
+                VerifyingContract = "cb868a301d28f082e1ea79f0f1e0038aff7f47564b0e"
+            });
+
+            // When
+            var json = JsonConvert.SerializeObject(typedData);
+            var recoveredTypedData = JsonConvert.DeserializeObject<TypedData<Domain>>(json);
+
+            // Then
+            Assert.Equal(typedData.PrimaryType, recoveredTypedData.PrimaryType);
+            Assert.Equal(typedData.Types.Count, recoveredTypedData.Types.Count);
+            Assert.Equal(typedData.Domain.Name, recoveredTypedData.Domain.Name);
+            Assert.Equal(typedData.Domain.VerifyingContract, recoveredTypedData.Domain.VerifyingContract);
+            Assert.Equal(typedData.Domain.Version, recoveredTypedData.Domain.Version);
+            Assert.Equal(typedData.Domain.NetworkId, recoveredTypedData.Domain.NetworkId);
+            Assert.Equal(typedData.DomainRawValues, recoveredTypedData.DomainRawValues);
+        }
+
+        [Fact]
         public void PingExchange2FATest()
         {
             // Given
@@ -96,7 +123,7 @@ namespace Xcb.Net.Test
             // Then
             Assert.Equal(corepassId, address);
             Assert.Equal(addressRecovered, addressRecovered2);
-            Assert.Equal(corepassId,addressRecovered);
+            Assert.Equal(corepassId, addressRecovered);
         }
     }
 }
