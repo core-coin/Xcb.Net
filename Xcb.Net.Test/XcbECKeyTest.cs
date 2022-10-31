@@ -50,6 +50,7 @@ namespace Xcb.Net.Test
 
         [Theory]
         [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", 1, "cb82a5fd22b9bee8b8ab877c86e0a2c21765e1d5bfc5")]
+        [InlineData("7afee5e526a00a4cabd1fa8a1099435cf4dcd98f869f60415164e5781f615b27ffa6c79eac60ace73afc06e5ba91a5f3303015ab3cc7433e3d", 3, "ab97477b0c90acd3b48f8ca93164c5f648764a741ada")]
         [InlineData("69bb68c3a00a0cd9cbf2cab316476228c758329bbfe0b1759e8634694a9497afea05bcbf24e2aa0627eac4240484bb71de646a9296872a3c0e", 11, "ce73a5fd22b9bee8b8ab877c86e0a2c21765e1d5bfc5")]
         public void AddressGeneration(string privateKey, int networkId, string expectedAddress)
         {
