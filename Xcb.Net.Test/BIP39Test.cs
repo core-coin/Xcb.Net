@@ -33,5 +33,17 @@ namespace Xcb.Net.Test
             // When
             Assert.Throws<ArgumentException>(() => new BIP39.Mnemonic24(validMnemonic));
         }
+
+        [Fact]
+        public void GenerateMnemonic()
+        {
+            // Given
+        
+            // When
+            var mnemonic = BIP39.Mnemonic24.GenerateMnemonic();
+        
+            // Then
+            Assert.NotNull(mnemonic);
+        }
     }
 }

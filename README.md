@@ -96,6 +96,10 @@ Assert.Equal("0xf8ce800a830f423f8096ce276773ac97d16855a3c8faa45399136b56d4194860
 // suppose you have 24 mnemonic phrase
 var mnemonic = new BIP39.Mnemonic24("urge genuine pelican eagle blouse emotion refuse fringe flock salute space climb marriage empower feature inform ostrich endless fault barely chronic shy couple wonder");
 
+// or you can generate 24 words Mnemonic
+var mnemonic = BIP39.Mnemonic24.GenerateMnemonic();
+Console.WriteLine(mnemonic.Words);
+
 var masterExtPrivateKey = mnemonic.ToExtedtedPrivateKey();
 
 

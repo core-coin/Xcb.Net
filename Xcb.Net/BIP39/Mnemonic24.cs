@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Org.BouncyCastle.Extended.Security;
 using Xcb.Net.HDWallet;
 using Xcb.Net.Util;
 
@@ -10,19 +11,30 @@ namespace Xcb.Net.BIP39
     public class Mnemonic24
     {
         const string INVALID_MNEMONIC = "INVALID MNEMONIC";
-        private readonly string _words;
-        private readonly string _passphrase;
+        public string Words { get; }
+        public string Passphrase { get; }
+
+        private static readonly SecureRandom _secureRandom = new SecureRandom();
 
         public Mnemonic24(string words, string passphrase = "")
         {
-            _ = MnemonicToEntropy(words);
-            _words = words;
-            _passphrase = passphrase;
+            ValidateMnemonicWords(words);
+            Words = words;
+            Passphrase = passphrase;
+        }
+
+        public static Mnemonic24 GenerateMnemonic()
+        {
+            var randomEntropy = _secureRandom.GenerateSeed(32);
+
+            var words = EntropyToMnemonic(randomEntropy);
+
+            return new Mnemonic24(words);
         }
 
         private static string ByteToBinaryString(byte b)
         {
-            return Convert.ToString(b, 2);
+            return Convert.ToString(b, 2).PadLeft(8,'0');
         }
 
         private static string DecimalTo11LengthStringBinary(int decimalNumber)
@@ -35,15 +47,45 @@ namespace Xcb.Net.BIP39
             return Convert.ToByte(str, 2);
         }
 
-        private byte DeriveCheckSumByte(byte[] entroyp)
+        private static int BinaryStringToInteger(string str)
         {
-            var hash = Sha256.Current.CalculateHash(entroyp);
+            return Convert.ToInt32(str, 2);
+        }
+
+        private static byte DeriveCheckSumByte(byte[] entropy)
+        {
+            var hash = Sha256.Current.CalculateHash(entropy);
             var checksum = hash.First();
 
             return checksum;
         }
 
-        byte[] MnemonicToEntropy(string mnemonic)
+        private static string EntropyToMnemonic(byte[] entropy)
+        {
+            var checksum = DeriveCheckSumByte(entropy);
+
+            var entropyWithChecksum = entropy.Append(checksum);
+
+            var binaryString = string.Join("", entropyWithChecksum.Select(a => ByteToBinaryString(a)));
+
+            var regex = new Regex(".{1,11}");
+
+            var wordList = WordList.ENGLISH_WORD_LIST;
+
+            var words = regex.Matches(binaryString)
+                            .Select(a => a.Value)
+                            .Select(a => BinaryStringToInteger(a))
+                            .Select(a => wordList[a]);
+
+            return string.Join(" ", words);
+        }
+
+        private static void ValidateMnemonicWords(string mnemonic)
+        {
+            var _ = MnemonicToEntropy(mnemonic);
+        }
+
+        private static byte[] MnemonicToEntropy(string mnemonic)
         {
             var words = mnemonic.Split(' ');
 
@@ -98,7 +140,7 @@ namespace Xcb.Net.BIP39
 
         public ExtendedPrivateKey ToExtendedPrivateKey()
         {
-            var mnemonic = _words + _passphrase;
+            var mnemonic = Words + Passphrase;
 
             var seed1 = PBKDF2(mnemonic, "mnemonicforthekey", 57);
             var seed2 = PBKDF2(mnemonic, "mnemonicforthechain", 57);
