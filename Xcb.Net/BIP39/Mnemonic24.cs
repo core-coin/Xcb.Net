@@ -1,20 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Xcb.Net.HDWallet;
 using Xcb.Net.Util;
 
 namespace Xcb.Net.BIP39
 {
-    public class Mnemoic
+    public class Mnemonic24
     {
-        const string INVALID_MNEMONIC= "INVALID MNEMONIC";
+        const string INVALID_MNEMONIC = "INVALID MNEMONIC";
         private readonly string _words;
         private readonly string _passphrase;
 
-        public Mnemoic(string words, string passphrase = "")
+        public Mnemonic24(string words, string passphrase = "")
         {
             _ = MnemonicToEntropy(words);
             _words = words;
@@ -28,7 +30,7 @@ namespace Xcb.Net.BIP39
 
         private static string DecimalTo11LengthStringBinary(int decimalNumber)
         {
-            return Convert.ToString(decimalNumber, 2).PadLeft(11,'0');
+            return Convert.ToString(decimalNumber, 2).PadLeft(11, '0');
         }
 
         private static byte BinaryStringToByte(string str)
@@ -90,6 +92,33 @@ namespace Xcb.Net.BIP39
                 throw new ArgumentException(INVALID_MNEMONIC);
 
             return bytes;
+        }
+
+        private static byte[] PBKDF2(string mnemonic, string salt, int numBytes)
+        {
+            // Convert the salt to a byte array using UTF-8 encoding
+            byte[] saltBytes = Encoding.UTF8.GetBytes(salt);
+
+            // Use PBKDF2 with HMAC-SHA512 to derive the seed from the salt and mnemonic
+            Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(mnemonic, saltBytes, 2048, HashAlgorithmName.SHA512);
+            byte[] seed = pbkdf2.GetBytes(numBytes);
+
+            return seed;
+        }
+
+        public ExtendedPrivateKey ToExtendedPrivateKey()
+        {
+            var mnemonic = _words + _passphrase;
+
+            var seed1 = PBKDF2(mnemonic, "mnemonicforthekey", 57);
+            var seed2 = PBKDF2(mnemonic, "mnemonicforthechain", 57);
+
+            var seed = new byte[seed1.Length + seed2.Length];
+
+            Array.Copy(seed1, seed, seed1.Length);
+            Array.Copy(seed2, 0, seed, seed2.Length, seed2.Length);
+
+            return new ExtendedPrivateKey(seed);
         }
     }
 }

@@ -15,10 +15,12 @@ namespace Xcb.Net.Test
             var validMnemonic = "urge genuine pelican eagle blouse emotion refuse fringe flock salute space climb marriage empower feature inform ostrich endless fault barely chronic shy couple wonder";
 
             // When
-            var mnemonic = new BIP39.Mnemoic(validMnemonic);
+            var mnemonic = new BIP39.Mnemonic24(validMnemonic);
+            var extPrivKey = mnemonic.ToExtendedPrivateKey();
 
             // Then
             Assert.NotNull(mnemonic);
+            Assert.NotNull(extPrivKey);
         }
 
         [Fact]
@@ -29,8 +31,7 @@ namespace Xcb.Net.Test
 
 
             // When
-            Assert.Throws<ArgumentException>(() => new BIP39.Mnemoic(validMnemonic));
-
+            Assert.Throws<ArgumentException>(() => new BIP39.Mnemonic24(validMnemonic));
         }
     }
 }
