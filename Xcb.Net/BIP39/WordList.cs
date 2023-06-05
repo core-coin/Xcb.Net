@@ -7,7 +7,7 @@ namespace Xcb.Net.BIP39
 {
     public class WordList
     {
-        public static string[] ENGLISH_WORD_LIST = new string[]{
+        public static List<string> ENGLISH_WORD_LIST = new List<string>{
             "abandon",
             "ability",
             "able",
