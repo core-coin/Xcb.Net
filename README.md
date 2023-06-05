@@ -100,7 +100,7 @@ var mnemonic = new BIP39.Mnemonic24("urge genuine pelican eagle blouse emotion r
 var mnemonic = BIP39.Mnemonic24.GenerateMnemonic();
 Console.WriteLine(mnemonic.Words);
 
-var masterExtPrivateKey = mnemonic.ToExtedtedPrivateKey();
+var masterExtPrivateKey = mnemonic.ToExtendedPrivateKey();
 
 
 // suppose you have an master extended private key
