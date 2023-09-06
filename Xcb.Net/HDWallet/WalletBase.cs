@@ -39,7 +39,7 @@ namespace Xcb.Net.HDWallet
         }
         protected static K GetKeyAtDerivePath<K>(K masertKey, string derivationpath, Func<ExtendedKeyBase, uint, ExtendedKeyBase> derive) where K : ExtendedKeyBase
         {
-            Queue<string> pathQueue = new Queue<string>(derivationpath.Split('/'));
+            Queue<string> pathQueue = new Queue<string>(derivationpath.Split('/', StringSplitOptions.RemoveEmptyEntries));
 
             K key = masertKey;
 
