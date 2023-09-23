@@ -68,7 +68,7 @@ data: "");
 //When
 
 // signing the transaction with XcbECKey
-transaction.Sign(key, 0);
+transaction.Sign(key);
 
 // getting the rlp encoding of the signed trasnaction
 var encoded = transaction.GetRlpEncoding();
