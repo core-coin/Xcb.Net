@@ -150,6 +150,10 @@ namespace Xcb.Net.BIP39
             Array.Copy(seed1, seed, seed1.Length);
             Array.Copy(seed2, 0, seed, seed2.Length, seed2.Length);
 
+            seed[113] |= 0x80; // Set key type identifier
+            seed[112] |= 0x80; // EdDSA standard
+            seed[112] &= 0xbf; // Set to keep previous =1 during generation new accounts
+            
             return new ExtendedPrivateKey(seed);
         }
     }

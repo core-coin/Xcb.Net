@@ -102,7 +102,7 @@ namespace Xcb.Net.HDWallet
 
         public override byte[] GetPublicKey()
         {
-            return ToXcbECKey(1).GetPrivateKey();
+            return ToXcbECKey(1).GetPublicKey();
         }
 
         public override string GetAddress(int networkId)
